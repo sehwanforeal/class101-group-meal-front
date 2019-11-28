@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Signin from "Components/Signin";
-import AdminPage from "Components/AdminPage";
-import Employeetable from "Components/Employeetable";
-import Roulette from "Components/Roulette";
+import Signin from "Pages/Signin";
+import AdminPage from "Pages/AdminPage";
+import Employeetable from "Pages/Employeetable";
+import Roulette from "Pages/Roulette";
 
 class Routes extends React.Component {
   render() {
