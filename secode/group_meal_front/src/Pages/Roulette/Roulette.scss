@@ -4,6 +4,88 @@
   .rl-empty {
     height: 80px;
   }
+  .rl-result {
+    background-color: #a9b4ff;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    opacity: 1;
+    animation: handleList 3s;
+    @keyframes handleList {
+      0% {
+        opacity: 0.2;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+    .rl-uppercontainer {
+      width: 100%;
+      display: flex;
+      margin-bottom: 20px;
+      justify-content: space-between;
+      .rl-title {
+        font-size: 35px;
+        margin-left: 50px;
+        font-weight: 450;
+      }
+
+      button {
+        width: 100px;
+        height: 40px;
+        margin-right: 40px;
+        border-radius: 5px;
+        outline: none;
+        background-color: #5a78b1;
+        color: white;
+        font-weight: 500;
+        font-size: 14px;
+        &:hover {
+          background-color: #003ba8;
+        }
+      }
+    }
+    .rl-inputs-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 600px;
+      flex-wrap: wrap;
+      width: 100%;
+      justify-content: center;
+      margin: auto;
+      background-color: #a9b4ff;
+
+      input {
+        text-align: center;
+        outline: none;
+        border: none;
+        font-size: 17px;
+        width: 150px;
+        display: block;
+        justify-content: center;
+        background-color: #5b66b1;
+        color: white;
+        &:hover {
+          background-color: #2161d8;
+        }
+      }
+      .input-leader {
+        font-weight: 700;
+        height: 24px;
+        margin-top: 5px;
+        padding-top: 2px;
+        font-size: 18px;
+        background-color: #4d5799;
+        &:hover {
+          background-color: #5700a8;
+        }
+      }
+
+      .input-normal {
+        color: rgb(226, 226, 226);
+      }
+    }
+  }
 
   .rl-result-container {
     padding: 25px;
