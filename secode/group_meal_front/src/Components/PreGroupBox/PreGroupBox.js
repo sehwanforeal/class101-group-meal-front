@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import "./GroupBox.scss";
+import "./PreGroupBox.scss";
 
-export class GroupBox extends Component {
+export class PreGroupBox extends Component {
   render() {
     return (
-      <div className="gb-body">
+      <div className="pre-gb-body">
         {this.props.index + 1}
         <div className="gb-leader">{this.props.info[0]}</div>
         <div className="gb-member">{this.props.info[1]}</div>
@@ -16,4 +16,4 @@ export class GroupBox extends Component {
   }
 }
 
-export default GroupBox;
+export default PreGroupBox;
