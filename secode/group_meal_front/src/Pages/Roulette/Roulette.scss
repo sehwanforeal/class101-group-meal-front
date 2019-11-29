@@ -1,0 +1,91 @@
+.roulette-body {
+  margin-left: 316px;
+  background-color: #d3d8ff;
+  .rl-empty {
+    height: 80px;
+  }
+
+  .rl-result-container {
+    padding: 25px;
+    background-color: #a9b4ff;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    opacity: 1;
+    animation: handleList 3s;
+    @keyframes handleList {
+      0% {
+        opacity: 0.2;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+    .rl-uppercontainer {
+      width: 100%;
+      display: flex;
+      margin-bottom: 20px;
+      justify-content: space-between;
+      .rl-title {
+        font-size: 35px;
+        margin-left: 50px;
+        font-weight: 450;
+      }
+
+      button {
+        width: 100px;
+        height: 40px;
+        margin-right: 16px;
+        border-radius: 5px;
+        outline: none;
+        background-color: #5a66b1;
+        color: white;
+        font-weight: 500;
+        font-size: 14px;
+      }
+    }
+  }
+  .rl-runsection {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    .runsection-title {
+      font-size: 45px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .runsection-gif {
+      border-radius: 50%;
+      width: 200px;
+    }
+  }
+  .history-container {
+    width: 95%;
+    margin: auto;
+    margin-top: 30px;
+    border-radius: 10px;
+    margin-bottom: 100px;
+    border: 1px solid rgb(156, 110, 255);
+    background-color: rgb(208, 186, 255);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    padding-bottom: 10px;
+    .rl-uppercontainer {
+      width: 100%;
+      display: flex;
+      margin-bottom: 20px;
+      justify-content: space-between;
+      padding-top: 30px;
+      .rl-title {
+        font-size: 35px;
+        margin-left: 30px;
+        font-weight: 450;
+      }
+    }
+    .rl-groupcontainer {
+      width: 97%;
+      margin: auto;
+    }
+  }
+}

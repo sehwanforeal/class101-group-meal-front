@@ -1,5 +1,5 @@
-import React, { Component } from "./node_modules/react";
-import "./node_modules/Signin.scss";
+import React, { Component } from "react";
+import "./Signin.scss";
 
 export class Signin extends Component {
   render() {
