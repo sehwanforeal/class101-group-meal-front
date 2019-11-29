@@ -31,3 +31,12 @@ const roulettemock = {
 };
 
 export default roulettemock;
+
+// const roulettemock = {
+//   groupMeals: [
+//     ["그리니", "샘봉"],
+//     ["니모", "라이언"]
+//   ]
+// };
+
+// export default roulettemock;

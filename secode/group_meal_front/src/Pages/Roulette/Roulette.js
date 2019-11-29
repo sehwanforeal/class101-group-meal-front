@@ -13,31 +13,36 @@ export class Roulette extends Component {
     this.state = {
       rouletteMockOriginal: roulettemock,
       rouletteMockForUpdate: roulettemock,
+      rouletteMock: roulettemock.groupMeals,
       isClicked: true
     };
   }
-  identifierMethod = e => {
-    const currentInput = e.target.name;
-    console.log(currentInput);
+  identifierMethod = (e, i, j) => {
+    console.log(e.target.value);
+    const routtleMockArr = this.state.rouletteMock.slice();
+    routtleMockArr[i][j] = e.target.value;
+    this.setState({ rouletteMock: routtleMockArr });
   };
 
   render() {
-    console.log(roulettemock.groupMeals[2].length);
+    const { rouletteMock } = this.state;
 
     let allInputs = [];
-    if (this.state.rouletteMockForUpdate) {
-      for (let i = 0; i < roulettemock.groupMeals.length; i++) {
-        for (let j = 0; j < roulettemock.groupMeals[i].length; j++) {
+    if (rouletteMock) {
+      for (let i = 0; i < rouletteMock.length; i++) {
+        for (let j = 0; j < rouletteMock[i].length; j++) {
           allInputs.push(
             <input
               name={`${i},${j}`}
-              value={roulettemock.groupMeals[i][j]}
-              onChange={this.identifierMethod}
+              value={rouletteMock[i][j]}
+              onChange={e => this.identifierMethod(e, i, j)}
+              className="rl-inputs"
             />
           );
         }
       }
     }
+    console.log(allInputs);
     return (
       <div>
         <Nav />
