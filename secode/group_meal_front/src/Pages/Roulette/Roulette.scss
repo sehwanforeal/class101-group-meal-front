@@ -1,11 +1,9 @@
 .roulette-body {
   margin-left: 316px;
-  background-color: #d3d8ff;
   .rl-empty {
-    height: 80px;
+    height: 60px;
   }
   .rl-result {
-    background-color: #a9b4ff;
     padding-top: 20px;
     padding-bottom: 20px;
     opacity: 1;
@@ -19,28 +17,35 @@
       }
     }
     .rl-uppercontainer {
-      width: 100%;
+      margin: auto;
+      width: 85%;
       display: flex;
-      margin-bottom: 20px;
-      justify-content: space-between;
-      .rl-title {
-        font-size: 35px;
-        margin-left: 50px;
-        font-weight: 450;
-      }
 
+      justify-content: center;
+
+      .rl-title {
+        font-size: 30px;
+        font-weight: 500;
+      }
+    }
+    .rl-buttoncontainer {
+      margin: auto;
+      width: 85%;
+      display: flex;
+
+      justify-content: flex-end;
       button {
-        width: 100px;
+        width: 70px;
         height: 40px;
-        margin-right: 40px;
-        border-radius: 5px;
         outline: none;
-        background-color: #5a78b1;
+        margin-right: 20px;
+        background-color: rgb(122, 122, 122);
         color: white;
         font-weight: 500;
         font-size: 14px;
+        margin-bottom: 10px;
         &:hover {
-          background-color: #003ba8;
+          background-color: rgb(59, 59, 59);
         }
       }
     }
@@ -48,41 +53,58 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      height: 600px;
+      height: 670px;
       flex-wrap: wrap;
-      width: 100%;
+      width: 85%;
       justify-content: center;
       margin: auto;
-      background-color: #a9b4ff;
 
       input {
         text-align: center;
         outline: none;
         border: none;
-        font-size: 17px;
-        width: 150px;
+        font-size: 14px;
+        width: 17%;
         display: block;
         justify-content: center;
-        background-color: #5b66b1;
-        color: white;
+        background-color: #f0f0f0;
+        height: 20px;
+        color: rgb(104, 104, 104);
         &:hover {
-          background-color: #2161d8;
+          background-color: #e7e7e7;
+          width: 18.1%;
         }
       }
+      .input-second {
+        padding-top: 6px;
+        &:hover {
+          background-color: #d6d6d6;
+        }
+      }
+      .input-last {
+        height: 6px;
+      }
+      // .input-last {
+      //   height: 1px;
+      //   margin-top: 5px;
+      //   padding-top: 2px;
+      //   padding-top: 3px;
+      //   font-size: 16px;
+      //   background-color: #e6e6e6;
+      //   &:hover {
+      //     background-color: #d6d6d6;
+      //   }
+      // }
       .input-leader {
-        font-weight: 700;
         height: 24px;
         margin-top: 5px;
         padding-top: 2px;
-        font-size: 18px;
-        background-color: #4d5799;
+        font-size: 16px;
+        background-color: #e6e6e6;
+        color: black;
         &:hover {
-          background-color: #5700a8;
+          background-color: #d6d6d6;
         }
-      }
-
-      .input-normal {
-        color: rgb(226, 226, 226);
       }
     }
   }

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Roulette.scss";
 import Nav from "Components/Nav";
 import roulettemock from "Data/roulettemock.js";
-import GroupBox from "Components/GroupBox";
+import roulettemock2 from "Data/roulettemock2.js";
 import PreGroupBox from "Components/PreGroupBox";
 import roulettegif from "Img/roulette.gif";
 
@@ -10,24 +10,100 @@ export class Roulette extends Component {
   constructor() {
     super();
     this.state = {
+      isClicked: true,
       rouletteMock: roulettemock.groupMeals,
-      isClicked: false
+      rouletteMockList: roulettemock2.groupMeals.flat(),
+      previousData: roulettemock2.groupMeals,
+      isAvailable: true,
+      unAvailableName: ""
     };
   }
+
+  // componentDidMount = () => {
+  //   fetch("이전돌림판기록", {
+  //     method: "get"
+  //   })
+  //     .then(function(res) {
+  //       return res.json();
+  //     })
+  //     .then(res => {
+  //       //console.log(res.data);
+  //       let previousdata = res.data;
+  //       this.setState({ previousData: previousdata });
+  //     });
+  // };
+  runRoulette = () => {
+    // fetch("로직돌린점술판", {
+    //   method: "get"
+    // })
+    //   .then(function(res) {
+    //     return res.json();
+    //   })
+    //   .then(res => {
+    //     //console.log(res.data);
+    //     let roulettemockReal = res.data;
+    //     this.setState({ isClicked: true, rouletteMock: roulettemockReal });
+    //   });
+    this.setState({ isClicked: true });
+  };
+
+  sendAndretrun = () => {
+    // fetch("수정끝난거", {
+    //   method: "post",
+    //   body: JSON.stringify({
+    //     email: this.state.idValue,
+    //     password: this.state.pwValue,
+    //     summoner_name: this.state.nameValue
+    //   })
+    // })
+    //   .then(function(res) {
+    //     return res.json();
+    //   })
+    //   .then(res => {
+    //     this.setState({
+    //       previousData: this.state.rouletteMock,
+    //       isClicked: false
+    //     });
+    //     alert("점술판이 반영되었습니다");
+    //   });
+    if (this.state.isAvailable === true) {
+      this.setState({
+        isClicked: false,
+        previousData: this.state.rouletteMock,
+        isAvailable: true
+      });
+    } else {
+      alert("(" + this.state.unAvailableName + ")는 없는 이름입니다!!");
+    }
+  };
+
   identifierMethod = (e, i, j) => {
     console.log(e.target.value);
-    const routtleMockArr = this.state.rouletteMock.slice();
-    routtleMockArr[i][j] = e.target.value;
-    this.setState({ rouletteMock: routtleMockArr });
+    const rouletteMockArr = this.state.rouletteMock.slice();
+    const rl = this.state.rouletteMockList.slice();
+    rouletteMockArr[i][j] = e.target.value;
+    this.setState({ rouletteMock: rouletteMockArr });
+    if (rl.indexOf(e.target.value) === -1) {
+      this.setState({ isAvailable: false, unAvailableName: e.target.value });
+    } else {
+      this.setState({ isAvailable: true });
+    }
   };
-  sendAndretrun = () => {
-    this.setState({ isClicked: false });
-    alert("점술판이 컨펌되었습니다");
+
+  classNameFinder = j => {
+    if (j === 0) {
+      return "input-leader";
+    } else if (j === 1) {
+      return "input-second";
+    } else if (j === 4) {
+      return "input-last";
+    } else {
+      return "input-normal";
+    }
   };
 
   render() {
     const { rouletteMock } = this.state;
-
     let allInputs = [];
     if (rouletteMock) {
       for (let i = 0; i < rouletteMock.length; i++) {
@@ -37,12 +113,14 @@ export class Roulette extends Component {
               name={`${i},${j}`}
               value={rouletteMock[i][j]}
               onChange={e => this.identifierMethod(e, i, j)}
-              className={j === 0 ? "input-leader" : "input-normal"}
+              // className={j === 0 ? "input-leader" : "input-normal"}
+              className={this.classNameFinder(j)}
             />
           );
         }
       }
     }
+    console.log(this.state.isAvailable);
     return (
       <div>
         <Nav />
@@ -52,13 +130,12 @@ export class Roulette extends Component {
           {this.state.isClicked ? (
             <div className="rl-result">
               <div className="rl-uppercontainer">
-                <div className="rl-title">점술판 결과!! </div>
-
-                <div calssName="rl-buttoncontainer">
-                  <button onClick={this.sendAndretrun} className="rl-confirm">
-                    컨펌하기
-                  </button>
-                </div>
+                <div className="rl-title">점술판 결과</div>
+              </div>
+              <div className="rl-buttoncontainer">
+                <button onClick={this.sendAndretrun} className="rl-confirm">
+                  확인
+                </button>
               </div>
               <div className="rl-inputs-container">
                 <div className="inputs-title"></div>
@@ -72,9 +149,7 @@ export class Roulette extends Component {
                 src={roulettegif}
                 alt="noimage"
                 className="runsection-gif"
-                onClick={() => {
-                  this.setState({ isClicked: true });
-                }}
+                onClick={this.runRoulette}
               ></img>
             </div>
           )}
@@ -85,7 +160,7 @@ export class Roulette extends Component {
               <div className="rl-title">이전 점술판</div>
             </div>
             <div className="rl-groupcontainer">
-              {roulettemock.groupMeals.map((el, idx) => {
+              {this.state.previousData.map((el, idx) => {
                 return <PreGroupBox info={el} index={idx} />;
               })}
             </div>
