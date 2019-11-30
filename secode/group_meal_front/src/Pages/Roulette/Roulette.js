@@ -20,6 +20,10 @@ export class Roulette extends Component {
     routtleMockArr[i][j] = e.target.value;
     this.setState({ rouletteMock: routtleMockArr });
   };
+  sendAndretrun = () => {
+    this.setState({ isClicked: false });
+    alert("점술판이 컨펌되었습니다");
+  };
 
   render() {
     const { rouletteMock } = this.state;
@@ -48,9 +52,12 @@ export class Roulette extends Component {
           {this.state.isClicked ? (
             <div className="rl-result">
               <div className="rl-uppercontainer">
-                <div className="rl-title">점술판 결과!!</div>
+                <div className="rl-title">점술판 결과!! </div>
+
                 <div calssName="rl-buttoncontainer">
-                  <button className="rl-confirm">컨펌하기</button>
+                  <button onClick={this.sendAndretrun} className="rl-confirm">
+                    컨펌하기
+                  </button>
                 </div>
               </div>
               <div className="rl-inputs-container">

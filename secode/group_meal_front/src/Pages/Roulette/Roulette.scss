@@ -9,10 +9,10 @@
     padding-top: 20px;
     padding-bottom: 20px;
     opacity: 1;
-    animation: handleList 3s;
+    animation: handleList 2.5s;
     @keyframes handleList {
       0% {
-        opacity: 0.2;
+        opacity: 0;
       }
       100% {
         opacity: 1;
