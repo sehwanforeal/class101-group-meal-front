@@ -1,4 +1,4 @@
-const roulettemock = {
+const roulettemock2 = {
   groupMeals: [
     ["그리니", "샘봉", "로사", "다다", ""],
     ["니모", "라이언", "조", "라마", ""],
@@ -29,7 +29,7 @@ const roulettemock = {
   ]
 };
 
-export default roulettemock;
+export default roulettemock2;
 
 // const roulettemock = {
 //   groupMeals: [
