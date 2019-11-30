@@ -53,6 +53,14 @@ export class Nav extends Component {
     return (
       <div className="navigation-bigger-wrapper">
         <div className="navigation-wrapper">
+          <div className="navigation-logocontainer">
+            <div className="logo-class">
+              <span>CLASS</span>
+            </div>
+            <div className="logo-101">
+              <span>IOI</span>
+            </div>
+          </div>
           <div className="navigation">
             <div
               onClick={this.handleRoulette}
@@ -83,7 +91,7 @@ export class Nav extends Component {
                   : "navigation-text-wrap"
               }
             >
-              <div className="navigation-text">어드민페이지</div>
+              <div className="navigation-text">관리자</div>
             </div>
           </div>
         </div>

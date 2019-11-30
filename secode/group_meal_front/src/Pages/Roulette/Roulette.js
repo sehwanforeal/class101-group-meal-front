@@ -12,10 +12,12 @@ export class Roulette extends Component {
     this.state = {
       isClicked: true,
       rouletteMock: roulettemock.groupMeals,
-      rouletteMockList: roulettemock2.groupMeals.flat(),
+      rouletteMockList: roulettemock.groupMeals.flat(),
       previousData: roulettemock2.groupMeals,
       isAvailable: true,
-      unAvailableName: ""
+      unAvailableName: "",
+      isOverlapped: false,
+      OverlappedName: ""
     };
   }
 
@@ -66,12 +68,13 @@ export class Roulette extends Component {
     //     });
     //     alert("점술판이 반영되었습니다");
     //   });
-    if (this.state.isAvailable === true) {
+    if (this.state.isAvailable && !this.state.isOverlapped) {
       this.setState({
         isClicked: false,
-        previousData: this.state.rouletteMock,
-        isAvailable: true
+        previousData: this.state.rouletteMock
       });
+    } else if (this.state.isOverlapped) {
+      alert("(" + this.state.OverlappedName + ")가 중복되었습니다!!");
     } else {
       alert("(" + this.state.unAvailableName + ")는 없는 이름입니다!!");
     }
@@ -113,7 +116,6 @@ export class Roulette extends Component {
               name={`${i},${j}`}
               value={rouletteMock[i][j]}
               onChange={e => this.identifierMethod(e, i, j)}
-              // className={j === 0 ? "input-leader" : "input-normal"}
               className={this.classNameFinder(j)}
             />
           );
@@ -155,7 +157,6 @@ export class Roulette extends Component {
           )}
 
           <div className="history-container">
-            {" "}
             <div className="rl-uppercontainer">
               <div className="rl-title">이전 점술판</div>
             </div>

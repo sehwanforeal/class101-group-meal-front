@@ -84,17 +84,7 @@
       .input-last {
         height: 6px;
       }
-      // .input-last {
-      //   height: 1px;
-      //   margin-top: 5px;
-      //   padding-top: 2px;
-      //   padding-top: 3px;
-      //   font-size: 16px;
-      //   background-color: #e6e6e6;
-      //   &:hover {
-      //     background-color: #d6d6d6;
-      //   }
-      // }
+
       .input-leader {
         height: 24px;
         margin-top: 5px;
@@ -109,46 +99,6 @@
     }
   }
 
-  .rl-result-container {
-    padding: 25px;
-    background-color: #a9b4ff;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    opacity: 1;
-    animation: handleList 3s;
-    @keyframes handleList {
-      0% {
-        opacity: 0.2;
-      }
-      100% {
-        opacity: 1;
-      }
-    }
-    .rl-uppercontainer {
-      width: 100%;
-      display: flex;
-      margin-bottom: 20px;
-      justify-content: space-between;
-      .rl-title {
-        font-size: 35px;
-        margin-left: 50px;
-        font-weight: 450;
-      }
-
-      button {
-        width: 100px;
-        height: 40px;
-        margin-right: 16px;
-        border-radius: 5px;
-        outline: none;
-        background-color: #5a66b1;
-        color: white;
-        font-weight: 500;
-        font-size: 14px;
-      }
-    }
-  }
   .rl-runsection {
     display: flex;
     align-items: center;
@@ -164,25 +114,20 @@
     }
   }
   .history-container {
-    width: 95%;
     margin: auto;
     margin-top: 30px;
-    border-radius: 10px;
     margin-bottom: 100px;
-    border: 1px solid rgb(156, 110, 255);
-    background-color: rgb(208, 186, 255);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
+    width: 84.5%;
     padding-bottom: 10px;
+    background-color: rgb(246, 246, 246);
     .rl-uppercontainer {
       width: 100%;
       display: flex;
       margin-bottom: 20px;
-      justify-content: space-between;
-      padding-top: 30px;
+      justify-content: center;
+      padding-top: 10px;
       .rl-title {
-        font-size: 35px;
+        font-size: 30px;
         margin-left: 30px;
         font-weight: 450;
       }
@@ -190,6 +135,9 @@
     .rl-groupcontainer {
       width: 97%;
       margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
     }
   }
 }
