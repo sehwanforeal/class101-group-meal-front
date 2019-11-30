@@ -5,34 +5,39 @@ import roulettemock from "Data/roulettemock.js";
 import GroupBox from "Components/GroupBox";
 import PreGroupBox from "Components/PreGroupBox";
 import roulettegif from "Img/roulette.gif";
-import { thisExpression } from "@babel/types";
 
 export class Roulette extends Component {
   constructor() {
     super();
     this.state = {
-      rouletteMockOriginal: roulettemock,
-      rouletteMockForUpdate: roulettemock,
-      isClicked: true
+      rouletteMock: roulettemock.groupMeals,
+      isClicked: false
     };
   }
-  identifierMethod = e => {
-    const currentInput = e.target.name;
-    console.log(currentInput);
+  identifierMethod = (e, i, j) => {
+    console.log(e.target.value);
+    const routtleMockArr = this.state.rouletteMock.slice();
+    routtleMockArr[i][j] = e.target.value;
+    this.setState({ rouletteMock: routtleMockArr });
+  };
+  sendAndretrun = () => {
+    this.setState({ isClicked: false });
+    alert("점술판이 컨펌되었습니다");
   };
 
   render() {
-    console.log(roulettemock.groupMeals[2].length);
+    const { rouletteMock } = this.state;
 
     let allInputs = [];
-    if (this.state.rouletteMockForUpdate) {
-      for (let i = 0; i < roulettemock.groupMeals.length; i++) {
-        for (let j = 0; j < roulettemock.groupMeals[i].length; j++) {
+    if (rouletteMock) {
+      for (let i = 0; i < rouletteMock.length; i++) {
+        for (let j = 0; j < rouletteMock[i].length; j++) {
           allInputs.push(
             <input
               name={`${i},${j}`}
-              value={roulettemock.groupMeals[i][j]}
-              onChange={this.identifierMethod}
+              value={rouletteMock[i][j]}
+              onChange={e => this.identifierMethod(e, i, j)}
+              className={j === 0 ? "input-leader" : "input-normal"}
             />
           );
         }
@@ -44,35 +49,21 @@ export class Roulette extends Component {
         <div className="roulette-body">
           <div className="rl-empty"></div>
 
-          {/* {() => {
-            for (let i = 0; i < roulettemock.groupMeals.length; i++) {
-              for (let j = 0; j < roulettemock.groupMeals[i].length; j++) {
-                return (
-                  <input name={`${i}${j}`} onChange={this.identifierMethod} />
-                );
-              }
-            }
-          }} */}
-          {allInputs}
-
-          {/* {roulettemock.groupMeals.map((el1, idx1) => {
-            el1.map((el2, idx2) => {
-              return <input name={(idx1, idx2)} value={el2} />;
-            });
-          })} */}
-
           {this.state.isClicked ? (
-            <div className="rl-result-container">
+            <div className="rl-result">
               <div className="rl-uppercontainer">
-                <div className="rl-title">점술판 결과!!</div>
+                <div className="rl-title">점술판 결과!! </div>
+
                 <div calssName="rl-buttoncontainer">
-                  <button className="rl-change">수정하기</button>
-                  <button className="rl-confirm">컨펌하기</button>
+                  <button onClick={this.sendAndretrun} className="rl-confirm">
+                    컨펌하기
+                  </button>
                 </div>
               </div>
-              {roulettemock.groupMeals.map((el, idx) => {
-                return <GroupBox info={el} index={idx} />;
-              })}
+              <div className="rl-inputs-container">
+                <div className="inputs-title"></div>
+                {allInputs}
+              </div>
             </div>
           ) : (
             <div className="rl-runsection">

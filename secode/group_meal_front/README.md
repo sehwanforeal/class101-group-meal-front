@@ -1,68 +1,22 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+돌려돌려 점술판
 
-## Available Scripts
+### 점술판 요구사항
 
-In the project directory, you can run:
+1. 점술판은 2주에 1번씩 최신화 한다.
+2. 신규 입사자는 처음 2주동안 기관사에서 제외한다.
+3. 저번 점술판 기관사였던 사람은 이번주 기관사에서 제외한다.
+4. 지금까지 진행된 점술판 히스토리는 무시하고 새로 히스토리를 쌓는다.
+5. 점술판 기존의 로직을 참고하여 새로 로직을 만든다.
+6. 이번에 새로 만든 로직부터 점술조 히스토리를 쌓고 이를 반영하여 다음 새로운 점술조를 생성한다.
+7. 셀이 바뀌는 경우는 고려하지 않는다.
+8. 신규 개발자는 1달동안 Dev Chapter에 넣는다.
+9. 신규 입사자가 들어왔을 경우 웹 대시보드에서 명단에 추가하고 이를 반영하여 점술조를 생성한다.
+10. 퇴사자는 웹 대시보드에서 전체 직원 명단에서 뺼 수 있도록 구성한다.
+    11 특정 사람에 대한 상세 정보 업데이트 할 수 있도록 구성한다. (ex)셀변경)
 
-### `yarn start`
+### 점술판 구현방법
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+1. 존, 알렉스가 사용할 수 있는 웹 대시보드 구축
+2. 슬랙 로그인 api로 인증, 인가
+3. 대시보드에서 점술판 생성 및 업데이트 할 수 있도록 구축
+4. 기술 스택 (react, nodejs, mongodb), 배포환경 aws ec2, amazon documentDB
