@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./Employeetable.scss";
+import "./EmployeeTable.scss";
 import Nav from "Components/Nav";
 import SideBar from "./SideBar";
 import Tables from "./Tables";
