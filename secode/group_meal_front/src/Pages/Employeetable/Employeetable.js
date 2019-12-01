@@ -61,7 +61,7 @@ class EmployeeTable extends Component {
           />
         )}
         <div className="page">
-          <SideBar />
+          <Nav />
           <main>
             <div className="title">
               <span>클둥이 목록</span>
@@ -70,7 +70,6 @@ class EmployeeTable extends Component {
               <Tables onClick={this.handleClick} memberList={members} />
             </div>
           </main>
-          {/* <Nav /> */}
         </div>
       </>
     );
