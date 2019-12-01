@@ -1,11 +1,13 @@
+@import "../../Styles/index.scss";
+
 .navigation-bigger-wrapper {
   .navigation-wrapper {
-    width: 250px;
-    height: 100%;
+    width: $nav-width;
+    height: 100vh;
     background-color: #e6e6e6;
     position: fixed;
-    left: 0px;
-    padding: 26px 12px 26px 24px;
+    padding: 50px 12px 0 12px;
+
     .navigation-logocontainer {
       display: flex;
       justify-content: center;
@@ -14,11 +16,13 @@
       font-size: 22px;
       font-weight: 700;
       letter-spacing: 2px;
+
       .logo-class {
         color: #e6e6e6;
         background-color: rgb(85, 85, 85);
         padding: 1px 7px 2px 8px;
       }
+
       .logo-101 {
         color: #e6e6e6;
         background-color: rgb(85, 85, 85);

@@ -95,34 +95,45 @@ export class Roulette extends Component {
 
   classNameFinder = j => {
     if (j === 0) {
-      return "input-leader";
-    } else if (j === 1) {
-      return "input-second";
-    } else if (j === 4) {
-      return "input-last";
-    } else {
-      return "input-normal";
+      return "driver";
     }
+  };
+
+  renderTables = list => {
+    return list.map((group, i) => {
+      const members = group.map((member, j) => {
+        return (
+          <input
+            value={list[i][j]}
+            onChange={e => this.identifierMethod(e, i, j)}
+            className={this.classNameFinder(j)}
+          />
+        );
+      });
+
+      return <div className="group">{members}</div>;
+    });
+    // let allInputs = [];
+    // if (list) {
+    //   for (let i = 0; i < list.length; i++) {
+    //     for (let j = 0; j < list[i].length; j++) {
+    //       allInputs.push(
+    //         <input
+    //           name={`${i},${j}`}
+    //           value={list[i][j]}
+    //           onChange={e => this.identifierMethod(e, i, j)}
+    //           className={this.classNameFinder(j)}
+    //         />
+    //       );
+    //     }
+    //   }
+    // }
+    // return allInputs;
   };
 
   render() {
     const { rouletteMock } = this.state;
-    let allInputs = [];
-    if (rouletteMock) {
-      for (let i = 0; i < rouletteMock.length; i++) {
-        for (let j = 0; j < rouletteMock[i].length; j++) {
-          allInputs.push(
-            <input
-              name={`${i},${j}`}
-              value={rouletteMock[i][j]}
-              onChange={e => this.identifierMethod(e, i, j)}
-              className={this.classNameFinder(j)}
-            />
-          );
-        }
-      }
-    }
-    console.log(this.state.isAvailable);
+
     return (
       <div>
         <Nav />
@@ -141,7 +152,7 @@ export class Roulette extends Component {
               </div>
               <div className="rl-inputs-container">
                 <div className="inputs-title"></div>
-                {allInputs}
+                {this.renderTables(rouletteMock)}
               </div>
             </div>
           ) : (
