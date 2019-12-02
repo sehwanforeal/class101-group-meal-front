@@ -36,6 +36,7 @@ export class Roulette extends Component {
   //       this.setState({ previousData: previousdata });
   //     });
   // };
+
   runRoulette = () => {
     // fetch("로직돌린점술판", {
     //   method: "get"
@@ -52,24 +53,24 @@ export class Roulette extends Component {
   };
 
   sendAndReturn = () => {
-    // fetch("수정끝난거", {
-    //   method: "post",
-    //   body: JSON.stringify({
-    //     email: this.state.idValue,
-    //     password: this.state.pwValue,
-    //     summoner_name: this.state.nameValue
-    //   })
-    // })
-    //   .then(function(res) {
-    //     return res.json();
-    //   })
-    //   .then(res => {
-    //     this.setState({
-    //       previousData: this.state.rouletteMock,
-    //       isClicked: false
-    //     });
-    //     alert("점술판이 반영되었습니다");
-    //   });
+    fetch("수정끝난거", {
+      method: "post",
+      body: JSON.stringify({
+        email: this.state.idValue,
+        password: this.state.pwValue,
+        summoner_name: this.state.nameValue
+      })
+    })
+      .then(function(res) {
+        return res.json();
+      })
+      .then(res => {
+        this.setState({
+          previousData: this.state.rouletteMock,
+          isClicked: false
+        });
+        alert("점술판이 반영되었습니다");
+      });
 
     const {
       isAvailable,

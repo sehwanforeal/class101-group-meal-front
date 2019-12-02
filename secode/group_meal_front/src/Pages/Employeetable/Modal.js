@@ -5,7 +5,6 @@ class Modal extends Component {
     super();
     const { _id, cell, enrolledIn: date, nickName } = props.memberInfo;
     const enrolledIn = this.renderDate(date);
-    this.card = React.createRef();
 
     this.state = {
       nickName,
@@ -16,6 +15,8 @@ class Modal extends Component {
       isWrongDate: false,
       cells: props.cells
     };
+
+    this.card = React.createRef();
   }
 
   renderDate = datetime => {
@@ -65,17 +66,18 @@ class Modal extends Component {
       },
       body: data
     }).then(res => res.json());
+
     isWrongCell === false && isWrongDate === false && window.location.reload();
   };
 
   handleClickDelete = async () => {
     const { _id } = this.state;
 
-    const response = await fetch(`http://localhost:3030/member/${_id}`, {
+    await fetch(`http://localhost:3030/member/${_id}`, {
       method: "DELETE"
     }).then(res => res.json());
 
-    console.log(response);
+    window.location.reload();
   };
 
   handleClickCancel = () => {
@@ -103,8 +105,6 @@ class Modal extends Component {
       cells.forEach(cellData => {
         if (cellData.name === cell) {
           cellVerification = true;
-        } else {
-          cellVerification = false;
         }
       });
 

@@ -11,9 +11,9 @@ function Tables(props) {
 
   return (
     <>
-      {listData.map(member => {
+      {listData.map((member, i) => {
         return (
-          <span onClick={handleClick} className="table">
+          <span key={i} onClick={handleClick} className="table">
             {member}
           </span>
         );
