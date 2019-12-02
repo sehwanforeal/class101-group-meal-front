@@ -23,21 +23,23 @@
     }
 
     .rl-uppercontainer {
-      margin: auto;
       width: 85%;
       display: flex;
       justify-content: center;
+      margin-bottom: 100px;
+      margin-top: 100px;
 
       .rl-title {
         font-size: 30px;
         font-weight: 500;
       }
     }
+
     .rl-buttoncontainer {
-      margin: auto;
       width: 85%;
       display: flex;
       justify-content: flex-end;
+      margin-bottom: 50px;
 
       button {
         width: 70px;
@@ -47,7 +49,7 @@
         font-weight: 500;
         font-size: 14px;
         margin-bottom: 10px;
-        margin-right: 55px;
+        margin-right: 130px;
 
         &:hover {
           background-color: rgb(59, 59, 59);
@@ -58,12 +60,13 @@
     .rl-inputs-container {
       display: flex;
       flex-wrap: wrap;
-      height: 100vh;
+      height: 50vh;
       padding: 0 300px 0 300px;
 
       .group {
         display: flex;
         flex-direction: column;
+        height: 100px;
         margin-right: 10px;
         border-radius: 10px;
       }
@@ -108,34 +111,32 @@
       width: 200px;
     }
   }
+
   .history-container {
     margin: auto;
     margin-top: 30px;
-    margin-bottom: 100px;
-    width: 84.5%;
-    padding-bottom: 10px;
+    margin-bottom: 30px;
+    width: 70vw;
+    padding: 50px;
     background-color: rgb(246, 246, 246);
+    display: flex;
+    flex-direction: column;
+
+    .rl-groupcontainer {
+      display: flex;
+      flex-wrap: wrap;
+    }
 
     .rl-uppercontainer {
-      width: 100%;
-      display: flex;
-      margin-bottom: 20px;
-      justify-content: center;
+      margin-bottom: 40px;
       padding-top: 10px;
+      display: flex;
+      justify-content: center;
 
       .rl-title {
         font-size: 30px;
-        margin-left: 30px;
         font-weight: 450;
       }
-    }
-
-    .rl-groupcontainer {
-      width: 97%;
-      margin: auto;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
     }
   }
 }

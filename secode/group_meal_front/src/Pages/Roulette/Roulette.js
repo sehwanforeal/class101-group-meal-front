@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-import Tables from "./Tables";
 import Title from "./Title";
 import Nav from "Components/Nav";
 import PreGroupBox from "Components/PreGroupBox";
 import roulettemock from "Data/roulettemock.js";
 import roulettemock2 from "Data/roulettemock2.js";
-import roulettegif from "Img/roulette.gif";
 import "./Roulette.scss";
 import Result from "./Result";
+// import roulettegif from "Img/roulette.gif";
 
 export class Roulette extends Component {
   constructor() {
