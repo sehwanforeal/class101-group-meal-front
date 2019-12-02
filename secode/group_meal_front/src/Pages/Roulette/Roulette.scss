@@ -2,13 +2,32 @@
 
 .roulette-body {
   margin-left: $nav-width;
+  .loading-section {
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+    margin-bottom: 100px;
+    .loading-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .loading-img {
+        width: 60px;
+      }
+      .loading-description {
+        margin-top: 20px;
+        font-size: 15px;
+        font-weight: 600;
+      }
+    }
+  }
 
   .rl-empty {
     height: 60px;
   }
 
   .rl-result {
-    animation: handleList 0.5s;
+    animation: handleList 0.7s;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -50,11 +69,13 @@
         font-weight: 500;
         font-size: 14px;
         margin-bottom: 10px;
-        margin-right: 130px;
-
+        margin-right: 10px;
         &:hover {
           background-color: rgb(59, 59, 59);
         }
+      }
+      .button-left {
+        width: 120px;
       }
     }
 
@@ -100,11 +121,26 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    button {
+      width: 200px;
+      height: 70px;
+      background-color: #e6e6e6;
+      font-size: 20px;
+      font-weight: 600;
+      color: rgb(49, 49, 49);
+      border-radius: 6px;
+
+      &:hover {
+        background-color: #d6d6d6;
+        animation: handleList2 1s;
+      }
+    }
 
     .runsection-title {
-      font-size: 45px;
+      font-size: 30px;
       font-weight: 600;
       margin-bottom: 20px;
+      margin-top: 40px;
     }
 
     .runsection-gif {
