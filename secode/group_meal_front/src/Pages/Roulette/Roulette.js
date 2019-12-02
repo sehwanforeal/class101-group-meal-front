@@ -148,7 +148,7 @@ export class Roulette extends Component {
                   return <PreGroupBox info={el} index={idx} />;
                 })
               ) : (
-                <div>no!!</div>
+                <div>loading</div>
               )}
             </div>
           </div>
