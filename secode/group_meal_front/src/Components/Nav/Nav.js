@@ -14,9 +14,8 @@ export class Nav extends Component {
   componentDidMount() {
     this.setState({
       isRoulette: this.props.match.path === "/roulette" ? true : false,
-      isEmployeetable:
-        this.props.match.path === "/employeetable" ? true : false,
-      isAdminPage: this.props.match.path === "/adminpage" ? true : false
+      isEmployeetable: this.props.match.path === "/employees" ? true : false,
+      isAdminPage: this.props.match.path === "/admin" ? true : false
     });
   }
 
@@ -35,7 +34,7 @@ export class Nav extends Component {
       isRoulette: false,
       isAdminPage: false
     });
-    this.props.history.push("/employeetable");
+    this.props.history.push("/employees");
   };
 
   handleAdminPage = () => {
@@ -44,7 +43,7 @@ export class Nav extends Component {
       isEmployeetable: false,
       isRoulette: false
     });
-    this.props.history.push("/adminpage");
+    this.props.history.push("/admin");
   };
 
   render() {
