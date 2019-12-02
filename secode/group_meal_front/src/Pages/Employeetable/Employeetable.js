@@ -11,8 +11,7 @@ class EmployeeTable extends Component {
     memberInfo: {},
     cells: [],
     isModalOn: false,
-    newCell: false,
-    newMember: false
+    tool: false
   };
 
   componentDidMount() {
@@ -35,6 +34,7 @@ class EmployeeTable extends Component {
     const memberData = await fetch(
       `http://localhost:3030/member/${name}`
     ).then(res => res.json());
+
     const cellData = await fetch(`http://localhost:3030/cell`).then(res =>
       res.json()
     );
@@ -50,27 +50,14 @@ class EmployeeTable extends Component {
     this.setState({ isModalOn: false });
   };
 
-  handleClickCell = () => {
-    this.setState({ newCell: true });
-  };
+  handleClickTool = () => {
+    const { tool } = this.state;
 
-  handelClickMember = () => {
-    this.setState({ newMember: true });
-  };
-
-  cancelNewCell = () => {
-    this.setState({ newCell: false });
+    this.setState({ tool: !tool });
   };
 
   render() {
-    const {
-      members,
-      memberInfo,
-      isModalOn,
-      cells,
-      newCell,
-      newMember
-    } = this.state;
+    const { members, memberInfo, isModalOn, cells, tool } = this.state;
 
     return (
       <>
@@ -81,7 +68,7 @@ class EmployeeTable extends Component {
             memberInfo={memberInfo}
           />
         )}
-        {/* {newCell && <NewCell cancelNewCell={this.cancelNewCell} />} */}
+        {tool && <div></div>}
         <Nav />
         <div className="page">
           <main>
@@ -89,10 +76,7 @@ class EmployeeTable extends Component {
               <span>클둥이 목록</span>
             </div>
             <div className="tools">
-              <button onClick={this.handleClickCell}>
-                셀 추가, 변경 및 삭제
-              </button>
-              <button onclick={this.handelClickMember}>뉴비 추가</button>
+              <button onClick={this.handleClickTool}>셀 변경, 뉴비 추가</button>
             </div>
             <div className="tables">
               <Tables onClick={this.handleClick} memberList={members} />
