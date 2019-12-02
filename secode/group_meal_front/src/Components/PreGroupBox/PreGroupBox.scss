@@ -1,31 +1,17 @@
-.pre-gb-body {
-  width: 18%;
-  height: 120px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  font-size: 18px;
-  text-align: center;
-  display: inline-block;
+@import "../../Styles/index.scss";
 
-  color: white;
+.gb-wrapper {
+  margin: 10px;
+
+  div {
+    width: 130px;
+    text-align: center;
+    font-size: 13px;
+    background-color: $theme-color;
+    padding: 10px;
+  }
+
   .gb-leader {
-    height: 24px;
-    color: black;
-    padding-top: 2px;
-    font-size: 16px;
     background-color: #dddddd;
-  }
-  .gb-firstmember {
-    background-color: #e9e9e9;
-    height: 20px;
-    color: rgb(104, 104, 104);
-    font-size: 16px;
-    padding-top: 5px;
-  }
-  .gb-member {
-    background-color: #e9e9e9;
-    height: 20px;
-    color: rgb(104, 104, 104);
-    font-size: 16px;
   }
 }

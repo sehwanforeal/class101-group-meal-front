@@ -5,12 +5,10 @@ function PreGroupBox(props) {
   const { info } = props;
 
   return (
-    <div className="pre-gb-body">
-      <div className="gb-leader">{info[0]}</div>
-      <div className="gb-firstmember">{info[1]}</div>
-      <div className="gb-member">{info[2]}</div>
-      <div className="gb-member">{info[3]}</div>
-      <div className="gb-member">{info[4]}</div>
+    <div className="gb-wrapper">
+      {info.map((el, i) => {
+        return <div className={i === 0 ? "gb-leader" : "gb-member"}>{el}</div>;
+      })}
     </div>
   );
 }
