@@ -1,18 +1,18 @@
-import React, { Component } from "react";
+import React from "react";
 import "./PreGroupBox.scss";
 
-export class PreGroupBox extends Component {
-  render() {
-    return (
-      <div className="pre-gb-body">
-        <div className="gb-leader">{this.props.info[0]}</div>
-        <div className="gb-firstmember">{this.props.info[1]}</div>
-        <div className="gb-member">{this.props.info[2]}</div>
-        <div className="gb-member">{this.props.info[3]}</div>
-        <div className="gb-member">{this.props.info[4]}</div>
-      </div>
-    );
-  }
+function PreGroupBox(props) {
+  const { info } = props;
+
+  return (
+    <div className="pre-gb-body">
+      <div className="gb-leader">{info[0]}</div>
+      <div className="gb-firstmember">{info[1]}</div>
+      <div className="gb-member">{info[2]}</div>
+      <div className="gb-member">{info[3]}</div>
+      <div className="gb-member">{info[4]}</div>
+    </div>
+  );
 }
 
 export default PreGroupBox;
