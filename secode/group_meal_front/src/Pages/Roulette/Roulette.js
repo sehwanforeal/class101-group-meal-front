@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import "./Roulette.scss";
+import Tables from "./Tables";
+import Title from "./Title";
 import Nav from "Components/Nav";
+import PreGroupBox from "Components/PreGroupBox";
 import roulettemock from "Data/roulettemock.js";
 import roulettemock2 from "Data/roulettemock2.js";
-import PreGroupBox from "Components/PreGroupBox";
 import roulettegif from "Img/roulette.gif";
+import "./Roulette.scss";
+import Result from "./Result";
 
 export class Roulette extends Component {
   constructor() {
@@ -49,7 +52,7 @@ export class Roulette extends Component {
     this.setState({ isClicked: true });
   };
 
-  sendAndretrun = () => {
+  sendAndReturn = () => {
     // fetch("수정끝난거", {
     //   method: "post",
     //   body: JSON.stringify({
@@ -68,117 +71,68 @@ export class Roulette extends Component {
     //     });
     //     alert("점술판이 반영되었습니다");
     //   });
-    if (this.state.isAvailable && !this.state.isOverlapped) {
+
+    const {
+      isAvailable,
+      isOverlapped,
+      rouletteMock,
+      OverlappedName,
+      unAvailableName
+    } = this.state;
+
+    if (isAvailable && !isOverlapped) {
       this.setState({
         isClicked: false,
-        previousData: this.state.rouletteMock
+        previousData: rouletteMock
       });
-    } else if (this.state.isOverlapped) {
-      alert("(" + this.state.OverlappedName + ")가 중복되었습니다!!");
+    } else if (isOverlapped) {
+      alert("(" + OverlappedName + ")가 중복되었습니다!!");
     } else {
-      alert("(" + this.state.unAvailableName + ")는 없는 이름입니다!!");
+      alert("(" + unAvailableName + ")는 없는 이름입니다!!");
     }
   };
 
   identifierMethod = (e, i, j) => {
-    console.log(e.target.value);
-    const rouletteMockArr = this.state.rouletteMock.slice();
-    const rl = this.state.rouletteMockList.slice();
-    rouletteMockArr[i][j] = e.target.value;
+    const { rouletteMock, rouletteMockList } = this.state;
+
+    const value = e.target.value;
+    const rouletteMockArr = rouletteMock.slice();
+    const rl = rouletteMockList.slice();
+
+    rouletteMockArr[i][j] = value;
+
     this.setState({ rouletteMock: rouletteMockArr });
-    if (rl.indexOf(e.target.value) === -1) {
-      this.setState({ isAvailable: false, unAvailableName: e.target.value });
-    } else {
-      this.setState({ isAvailable: true });
-    }
-  };
 
-  classNameFinder = j => {
-    if (j === 0) {
-      return "driver";
-    }
-  };
-
-  renderTables = list => {
-    return list.map((group, i) => {
-      const members = group.map((member, j) => {
-        return (
-          <input
-            value={list[i][j]}
-            onChange={e => this.identifierMethod(e, i, j)}
-            className={this.classNameFinder(j)}
-          />
-        );
-      });
-
-      return <div className="group">{members}</div>;
-    });
-    // let allInputs = [];
-    // if (list) {
-    //   for (let i = 0; i < list.length; i++) {
-    //     for (let j = 0; j < list[i].length; j++) {
-    //       allInputs.push(
-    //         <input
-    //           name={`${i},${j}`}
-    //           value={list[i][j]}
-    //           onChange={e => this.identifierMethod(e, i, j)}
-    //           className={this.classNameFinder(j)}
-    //         />
-    //       );
-    //     }
-    //   }
-    // }
-    // return allInputs;
+    rl.indexOf(value) === -1
+      ? this.setState({
+          isAvailable: false,
+          unAvailableName: value
+        })
+      : this.setState({ isAvailable: true });
   };
 
   render() {
-    const { rouletteMock } = this.state;
+    const { rouletteMock, isClicked, previousData } = this.state;
 
     return (
-      <div>
+      <>
         <Nav />
         <div className="roulette-body">
-          <div className="rl-empty"></div>
-
-          {this.state.isClicked ? (
-            <div className="rl-result">
-              <div className="rl-uppercontainer">
-                <div className="rl-title">점술판 결과</div>
-              </div>
-              <div className="rl-buttoncontainer">
-                <button onClick={this.sendAndretrun} className="rl-confirm">
-                  확인
-                </button>
-              </div>
-              <div className="rl-inputs-container">
-                <div className="inputs-title"></div>
-                {this.renderTables(rouletteMock)}
-              </div>
-            </div>
-          ) : (
-            <div className="rl-runsection">
-              <div className="runsection-title">돌려돌려 점술판!!!</div>
-              <img
-                src={roulettegif}
-                alt="noimage"
-                className="runsection-gif"
-                onClick={this.runRoulette}
-              ></img>
-            </div>
-          )}
-
+          <Result
+            isClicked={isClicked}
+            rouletteMock={rouletteMock}
+            onClick={this.sendAndReturn}
+          />
           <div className="history-container">
-            <div className="rl-uppercontainer">
-              <div className="rl-title">이전 점술판</div>
-            </div>
+            <Title title={"이전 점술판"} />
             <div className="rl-groupcontainer">
-              {this.state.previousData.map((el, idx) => {
+              {previousData.map((el, idx) => {
                 return <PreGroupBox info={el} index={idx} />;
               })}
             </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }

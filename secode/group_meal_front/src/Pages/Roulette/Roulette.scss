@@ -8,10 +8,10 @@
   }
 
   .rl-result {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    opacity: 1;
-    animation: handleList 2.5s;
+    animation: handleList 0.5s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     @keyframes handleList {
       0% {
@@ -57,10 +57,9 @@
 
     .rl-inputs-container {
       display: flex;
-      align-items: center;
       flex-wrap: wrap;
-      height: 670px;
-      padding: 0 50px 0 50px;
+      height: 100vh;
+      padding: 0 300px 0 300px;
 
       .group {
         display: flex;
