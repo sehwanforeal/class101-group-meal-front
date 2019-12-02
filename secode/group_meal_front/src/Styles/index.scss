@@ -174,5 +174,10 @@ a {
     }
   }
 }
-
+$theme-color: rgba(
+  $color: #f1f1f1,
+  $alpha: 1
+);
 $nav-width: 200px;
+$table-height: 45px;
+$font-weight-thin: 300;

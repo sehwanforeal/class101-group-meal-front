@@ -1,16 +1,18 @@
 import React, { Component } from "react";
-import "./EmployeeTable.scss";
+import "./Employeetable.scss";
 import Nav from "Components/Nav";
-import SideBar from "./SideBar";
 import Tables from "./Tables";
 import Modal from "./Modal";
+// import NewCell from "./NewCell";
 
 class EmployeeTable extends Component {
   state = {
     members: [],
     memberInfo: {},
     cells: [],
-    isModalOn: false
+    isModalOn: false,
+    newCell: false,
+    newMember: false
   };
 
   componentDidMount() {
@@ -48,8 +50,27 @@ class EmployeeTable extends Component {
     this.setState({ isModalOn: false });
   };
 
+  handleClickCell = () => {
+    this.setState({ newCell: true });
+  };
+
+  handelClickMember = () => {
+    this.setState({ newMember: true });
+  };
+
+  cancelNewCell = () => {
+    this.setState({ newCell: false });
+  };
+
   render() {
-    const { members, memberInfo, isModalOn, cells } = this.state;
+    const {
+      members,
+      memberInfo,
+      isModalOn,
+      cells,
+      newCell,
+      newMember
+    } = this.state;
 
     return (
       <>
@@ -60,11 +81,18 @@ class EmployeeTable extends Component {
             memberInfo={memberInfo}
           />
         )}
+        {/* {newCell && <NewCell cancelNewCell={this.cancelNewCell} />} */}
+        <Nav />
         <div className="page">
-          <Nav />
           <main>
             <div className="title">
               <span>클둥이 목록</span>
+            </div>
+            <div className="tools">
+              <button onClick={this.handleClickCell}>
+                셀 추가, 변경 및 삭제
+              </button>
+              <button onclick={this.handelClickMember}>뉴비 추가</button>
             </div>
             <div className="tables">
               <Tables onClick={this.handleClick} memberList={members} />
