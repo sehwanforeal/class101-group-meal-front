@@ -1,97 +1,81 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import NavTemplate from "./NavTemplate";
+import Icon from "./Icon";
 import "./Nav.scss";
 
 export class Nav extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isRoulette: false,
-      isEmployeetable: false,
-      isAdminPage: false
+      roulette: false,
+      employees: false,
+      admin: false,
+      cell: false
     };
   }
+
   componentDidMount() {
+    const nav = this.props.match.path.slice(1);
+
     this.setState({
-      isRoulette: this.props.match.path === "/roulette" ? true : false,
-      isEmployeetable: this.props.match.path === "/employees" ? true : false,
-      isAdminPage: this.props.match.path === "/admin" ? true : false
+      [nav]: true
     });
   }
 
-  handleRoulette = () => {
-    this.setState({
-      isRoulette: this.state.isRoulette ? false : true,
-      isEmployeetable: false,
-      isAdminPage: false
-    });
-    this.props.history.push("/roulette");
-  };
+  handleNav = nav => {
+    const states = this.state;
+    let key;
 
-  handleEmployeetable = () => {
-    this.setState({
-      isEmployeetable: this.state.isEmployeetable ? false : true,
-      isRoulette: false,
-      isAdminPage: false
-    });
-    this.props.history.push("/employees");
-  };
+    for (const state in states) {
+      if (state === nav) {
+        key = nav;
+      }
+    }
 
-  handleAdminPage = () => {
     this.setState({
-      isAdminPage: this.state.isAdminPage ? false : true,
-      isEmployeetable: false,
-      isRoulette: false
+      [key]: true
     });
-    this.props.history.push("/admin");
+
+    this.props.history.push(`/${nav}`);
   };
 
   render() {
-    let { isRoulette, isEmployeetable, isAdminPage } = this.state;
+    const { roulette, employees, admin, cell } = this.state;
 
     return (
       <div className="navigation-bigger-wrapper">
         <div className="navigation-wrapper">
-          <div className="navigation-logocontainer">
-            <div className="logo-class">
-              <span>CLASS</span>
-            </div>
-            <div className="logo-101">
-              <span>IOI</span>
-            </div>
-          </div>
+          <Icon />
           <div className="navigation">
-            <div
-              onClick={this.handleRoulette}
-              className={
-                isRoulette === true
-                  ? "navigation-text-wrap-done"
-                  : "navigation-text-wrap"
-              }
-              name
-            >
-              <div className="navigation-text">점술판</div>
-            </div>
-            <div
-              onClick={this.handleEmployeetable}
-              className={
-                isEmployeetable === true
-                  ? "navigation-text-wrap-done"
-                  : "navigation-text-wrap"
-              }
-            >
-              <div className="navigation-text">클둥이목록</div>
-            </div>
-            <div
-              onClick={this.handleAdminPage}
-              className={
-                isAdminPage === true
-                  ? "navigation-text-wrap-done"
-                  : "navigation-text-wrap"
-              }
-            >
-              <div className="navigation-text">관리자</div>
-            </div>
+            <NavTemplate
+              text="점술판"
+              onClick={() => {
+                this.handleNav("roulette");
+              }}
+              isActive={roulette}
+            />
+            <NavTemplate
+              text="클둥이 목록"
+              onClick={() => {
+                this.handleNav("employees");
+              }}
+              isActive={employees}
+            />
+            <NavTemplate
+              text="관리자"
+              onClick={() => {
+                this.handleNav("admin");
+              }}
+              isActive={admin}
+            />
+            <NavTemplate
+              text="셀 관리"
+              onClick={() => {
+                this.handleNav("cell");
+              }}
+              isActive={cell}
+            />
           </div>
         </div>
       </div>
