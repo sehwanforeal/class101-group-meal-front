@@ -5,6 +5,7 @@ class Modal extends Component {
     super();
     const { _id, cell, enrolledIn: date, nickName } = props.memberInfo;
     const enrolledIn = this.renderDate(date);
+    this.card = React.createRef();
 
     this.state = {
       nickName,
@@ -19,13 +20,13 @@ class Modal extends Component {
 
   renderDate = datetime => {
     const fullDate = new Date(datetime);
+    const year = fullDate.getFullYear();
     const month =
-      fullDate.getMonth() < 10
+      fullDate.getMonth() + 1 < 10
         ? "0" + (fullDate.getMonth() + 1)
-        : fullDate.getMonth();
+        : fullDate.getMonth() + 1;
     const date =
       fullDate.getDate() < 10 ? "0" + fullDate.getDate() : fullDate.getDate();
-    const year = fullDate.getFullYear();
 
     return `${year}.${month}.${date}`;
   };
@@ -42,7 +43,7 @@ class Modal extends Component {
     window.removeEventListener("keypress", this.handleKeypress);
   }
 
-  handleClickConfirm = async () => {
+  handleClickConfirm = () => {
     const {
       _id,
       nickName,
@@ -56,7 +57,7 @@ class Modal extends Component {
 
     const data = JSON.stringify({ nickName, cell, enrolledIn });
 
-    await fetch(`http://localhost:3030/member/${_id}`, {
+    fetch(`http://localhost:3030/member/${_id}`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -64,10 +65,7 @@ class Modal extends Component {
       },
       body: data
     }).then(res => res.json());
-
-    if (isWrongCell === true && isWrongDate === true) {
-      window.location.reload();
-    }
+    isWrongCell === false && isWrongDate === false && window.location.reload();
   };
 
   handleClickDelete = async () => {
@@ -104,17 +102,11 @@ class Modal extends Component {
 
       cells.forEach(cellData => {
         if (cellData.name === cell) {
-          console.log(cellData.name);
-          console.log(cell);
           cellVerification = true;
         } else {
           cellVerification = false;
         }
       });
-
-      if (cellVerification === true && dateVerification === true) {
-        window.location.reload();
-      }
 
       if (!cellVerification) {
         this.setState({ isWrongCell: true });
@@ -130,12 +122,21 @@ class Modal extends Component {
     });
   };
 
+  handleClickBg = e => {
+    const { cancelModal } = this.props;
+    e.target.contains(this.card.current) && cancelModal();
+  };
+
   render() {
     const { nickName, enrolledIn, cell, isWrongCell, isWrongDate } = this.state;
 
     return (
       <div className="modal">
-        <div className="background">
+        <div
+          onClick={this.handleClickBg}
+          className="background"
+          ref={this.card}
+        >
           <div className="card">
             <span onClick={this.handleClickCancel} className="cancel"></span>
             <div className="row">
