@@ -1,0 +1,21 @@
+@import "../../Styles/index.scss";
+
+.tools {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 25px;
+  margin-bottom: 30px;
+
+  button {
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    background-color: $theme-color;
+    box-shadow: 0 2px 5px rgba($color: #000000, $alpha: 0.2);
+    margin-right: 20px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

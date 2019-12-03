@@ -1,12 +1,15 @@
 import React, { Component } from "react";
+import { renderDate } from "utils";
 
 class Tools extends Component {
   constructor() {
     super();
+    const defaultDate = renderDate(Date.now());
+
     this.state = {
       name: "",
       cell: "",
-      enrolledIn: ""
+      enrolledIn: defaultDate
     };
 
     this.card = React.createRef();

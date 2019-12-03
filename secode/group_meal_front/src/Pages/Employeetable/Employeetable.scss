@@ -48,13 +48,6 @@ $font-weight-thin: 300;
         justify-content: center;
         margin-bottom: 50px;
 
-        .title {
-          margin-top: 20px;
-          margin-bottom: 20px;
-          font-weight: $font-weight-thin;
-          font-size: 18px;
-        }
-
         select {
           margin-top: 10px;
           margin-left: 20px;
@@ -174,26 +167,6 @@ $font-weight-thin: 300;
 
       span {
         font-size: 30px;
-      }
-    }
-
-    .tools {
-      display: flex;
-      justify-content: flex-end;
-      padding-right: 25px;
-      margin-bottom: 30px;
-
-      button {
-        width: 150px;
-        height: 30px;
-        border-radius: 20px;
-        background-color: $theme-color;
-        box-shadow: 0 2px 5px rgba($color: #000000, $alpha: 0.2);
-        margin-right: 20px;
-
-        &:hover {
-          cursor: pointer;
-        }
       }
     }
 
