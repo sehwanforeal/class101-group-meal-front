@@ -1,36 +1,65 @@
 import React, { Component } from "react";
 import "./Signin.scss";
 import notfound from "Img/404.png";
+import axios from "axios";
+import { client_id, client_secret } from "config";
 
 export class Signin extends Component {
   constructor() {
     super();
     this.state = {};
   }
-  // componentDidMount = () => {
-  //   fetch(
-  //     "https://slack.com/oauth/authorize?scope=identity.basic,identity.email&client_id=854668779588.857346823878"
-  //     // { mode: "no-cors" }
-  //   )
-  //     .then(res => res.json())
-  //     .then(res => console.log(res))
-  //     .catch(e => console.error("에러임", e));
-  // };
+
+  getQueryString = url => {
+    const startIndex = url.indexOf("=") + 1;
+    const endIndex = url.indexOf("&");
+
+    const query =
+      startIndex && endIndex ? url.slice(startIndex, endIndex) : null;
+
+    return query;
+  };
+
+  //50ca812413faf339cd2848f42b8762dd
+  //client_id=854668779588.857346823878
+  componentDidMount() {
+    this.fetchAuth();
+  }
+
+  fetchAuth = async () => {
+    const code = this.getQueryString(window.location.href);
+    const response =
+      code &&
+      (await axios(
+        `http://10.0.6.43:3030/slack?code=${code}&${client_id}&${client_secret}`
+      ));
+
+    console.log("Im in fetch", response);
+  };
+
+  // componentDidMount() {
+  // axios(
+  //   "https://slack.com/oauth/authorize?scope=identity.basic,identity.email&client_id=854668779588.857346823878"
+  // ).then(res => console.log(res));
+  // }
+
   render() {
+    console.log(client_secret);
     return (
       <div className="signin-body">
-        <img className="signin-background" src={notfound} alt=""></img>
-        {/* <a
-          href={`https://slack.com/oauth/authorize?scope=identity.basic,identity.email&client_id=854668779588.857346823878`}
-        > */}
-        <img
-          alt="Sign in with Slack"
-          height="40"
-          width="172"
-          src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
-          srcSet="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x"
-        />
-        {/* </a> */}
+        <a
+          href={`https://slack.com/oauth/authorize?scope=identity.basic,identity.email&${client_id}`}
+        >
+          <img
+            alt="Sign in with Slack"
+            // height="40"
+            // width="172"
+            height="160"
+            width="600"
+            src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
+            srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x"
+          />
+        </a>
       </div>
     );
   }
