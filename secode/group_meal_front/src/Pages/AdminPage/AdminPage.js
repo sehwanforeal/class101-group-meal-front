@@ -7,6 +7,17 @@ export class AdminPage extends Component {
     return (
       <div>
         <Nav />
+        <div className="admin-page">
+          <div className="main">
+            <div className="title">관리자페이지</div>
+            <div className="body-container">
+              <div className="body-left">
+                <div className="user-row"></div>
+              </div>
+              <div className="body-right"></div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

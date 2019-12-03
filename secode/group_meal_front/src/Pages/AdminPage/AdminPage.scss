@@ -1,0 +1,35 @@
+@import "../../Styles/index.scss";
+$table-height: 45px;
+$font-weight-thin: 300;
+
+.admin-page {
+  display: flex;
+  padding-left: 200px;
+  width: 80vw;
+  margin: 0 auto;
+  flex-direction: column;
+  .main {
+    padding: 60px;
+    .title {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      font-size: 28px;
+      font-weight: 500;
+    }
+    .body-container {
+      margin-top: 60px;
+      height: 60vh;
+      border: 1px solid black;
+      display: flex;
+      .body-left {
+        width: 60%;
+        border: 1px solid black;
+      }
+      .body-right {
+        width: 40%;
+        border: 1px solid black;
+      }
+    }
+  }
+}

@@ -34,8 +34,10 @@ export class Signin extends Component {
         `http://10.0.6.43:3030/slack?code=${code}&${client_id}&${client_secret}`
       ));
 
-    console.log("Im in fetch", response);
+    console.log("Im in fetch", response.message === "success");
   };
+  //response.message === "success"{다음페이지로 푸쉬}
+  //response.message !== "success"{404로 푸쉬}
 
   // componentDidMount() {
   // axios(
