@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Signin from "Pages/Signin";
 import AdminPage from "Pages/AdminPage";
-import EmployeeTable from "Pages/Employeetable";
+import EmployeeTable from "Pages/EmployeeTable";
 import Roulette from "Pages/Roulette";
 import Cell from "Pages/Cell";
 
