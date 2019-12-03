@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import "./Employeetable.scss";
-import Nav from "Components/Nav";
 import Tables from "./Tables";
 import Modal from "./Modal";
-// import NewCell from "./NewCell";
+import Tools from "./Tools";
+import Nav from "Components/Nav";
+import Title from "Components/Title";
+import CreateButton from "Components/CreateButton";
+import "./Employeetable.scss";
+import config from "config.js";
 
 class EmployeeTable extends Component {
   state = {
@@ -11,53 +14,81 @@ class EmployeeTable extends Component {
     memberInfo: {},
     cells: [],
     isModalOn: false,
-    tool: false
+    createMember: false
   };
 
   componentDidMount() {
     this.fetchMembers();
+    this.fetchCells();
   }
 
   fetchMembers = async () => {
-    const { members } = this.state;
+    const url = config.url + "member";
 
-    const list = await fetch("http://localhost:3030/member").then(res =>
-      res.json()
-    );
+    const list = await fetch(url).then(res => res.json());
 
     this.setState({
-      members: members.concat(list)
+      members: list
     });
   };
 
-  handleClick = async name => {
-    const memberData = await fetch(
-      `http://localhost:3030/member/${name}`
-    ).then(res => res.json());
+  fetchCells = async () => {
+    const url = config.url + "cell";
 
-    const cellData = await fetch(`http://localhost:3030/cell`).then(res =>
-      res.json()
-    );
+    let cells = await fetch(url).then(res => res.json());
 
+    cells.unshift("셀을 선택해주세요");
+
+    this.setState({ cells });
+  };
+
+  handleClick = memberInfo => {
     this.setState({
-      memberInfo: memberData.member,
-      cells: cellData,
+      memberInfo: memberInfo,
       isModalOn: true
     });
   };
 
   cancelModal = () => {
-    this.setState({ isModalOn: false });
+    this.setState({
+      isModalOn: false,
+      createMember: false
+    });
   };
 
-  handleClickTool = () => {
-    const { tool } = this.state;
+  createMember = () => {
+    this.setState({ createMember: true });
+  };
 
-    this.setState({ tool: !tool });
+  verifyNewMember = memberData => {
+    const { nickName, cell, enrolledIn } = memberData;
+
+    if (nickName.length > 0 && cell.length > 0) {
+      return enrolledIn.toDateString() !== "Invalid Date";
+    } else {
+      return false;
+    }
+  };
+
+  handleConfirm = memberData => {
+    const url = config.url + "member";
+
+    if (this.verifyNewMember(memberData)) {
+      const data = JSON.stringify(memberData);
+
+      fetch(url, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        method: "POST",
+        body: data
+      }).then(res => window.location.reload());
+    }
   };
 
   render() {
-    const { members, memberInfo, isModalOn, cells, tool } = this.state;
+    const { members, memberInfo, isModalOn, cells, createMember } = this.state;
 
     return (
       <>
@@ -68,18 +99,20 @@ class EmployeeTable extends Component {
             memberInfo={memberInfo}
           />
         )}
-        {tool && <div></div>}
+        {createMember && (
+          <Tools
+            cells={cells}
+            cancelModal={this.cancelModal}
+            handleConfirm={this.handleConfirm}
+          />
+        )}
         <Nav />
         <div className="page">
           <main>
-            <div className="title">
-              <span>클둥이 목록</span>
-            </div>
-            <div className="tools">
-              <button onClick={this.handleClickTool}>셀 변경, 뉴비 추가</button>
-            </div>
+            <Title title="클둥이 목록" />
+            <CreateButton text="뉴비 추가" onClick={this.createMember} />
             <div className="tables">
-              <Tables onClick={this.handleClick} memberList={members} />
+              <Tables onClick={this.handleClick} listData={members} />
             </div>
           </main>
         </div>
