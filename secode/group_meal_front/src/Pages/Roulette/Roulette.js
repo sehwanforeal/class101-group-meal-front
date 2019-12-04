@@ -4,6 +4,7 @@ import Result from "./Result";
 import Nav from "Components/Nav";
 import PreGroupBox from "Components/PreGroupBox";
 import "./Roulette.scss";
+import { url } from "config";
 // import roulettemock from "Data/roulettemock.js";
 // import roulettemock2 from "Data/roulettemock2.js";
 // import roulettegif from "Img/roulette.gif";
@@ -30,7 +31,7 @@ class Roulette extends Component {
   }
 
   componentDidMount() {
-    fetch("http://10.0.0.247:3030/groupMeal/history", {
+    fetch(url + "groupMeal/history", {
       method: "get"
     })
       .then(function(res) {
@@ -44,7 +45,7 @@ class Roulette extends Component {
 
   runRoulette = () => {
     this.setState({ isLoading: true });
-    fetch("http://10.0.0.247:3030/groupMeal", {
+    fetch(url + "groupMeal", {
       method: "get"
     })
       .then(function(res) {
@@ -58,7 +59,7 @@ class Roulette extends Component {
   };
 
   sendAndReturn = () => {
-    fetch("http://10.0.0.247:3030/groupMeal", {
+    fetch(url + "groupMeal", {
       method: "post",
       headers: {
         "Content-Type": "application/json"
