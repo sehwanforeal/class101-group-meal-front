@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { renderDate } from "utils";
-
+import { url } from "config";
 class Modal extends Component {
   constructor(props) {
     super();
@@ -46,7 +46,7 @@ class Modal extends Component {
 
     const data = JSON.stringify({ nickName, cell, enrolledIn });
 
-    fetch(`http://localhost:3030/member/${_id}`, {
+    fetch(`${url}member/${_id}`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -61,7 +61,7 @@ class Modal extends Component {
   handleClickDelete = () => {
     const { _id } = this.state;
 
-    fetch(`http://localhost:3030/member/${_id}`, {
+    fetch(`${url}member/${_id}`, {
       method: "DELETE"
     }).then(res => window.location.reload());
   };
