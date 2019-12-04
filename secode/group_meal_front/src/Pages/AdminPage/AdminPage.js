@@ -24,7 +24,6 @@ export class AdminPage extends Component {
         return res.json();
       })
       .then(res => {
-        console.log(res);
         this.setState({ UserRows: res.admins });
       });
   }
@@ -61,7 +60,6 @@ export class AdminPage extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         if (res.error === "Bad Request") {
           alert("양식에 맞지 않습니다.");
         } else if (res.error === "Admin already exists") {
@@ -70,12 +68,6 @@ export class AdminPage extends Component {
           window.location.reload();
         }
       });
-    // .then(function(res) {
-    //   return res.json();
-    // })
-    // .then(res => {
-    //   console.log(res);
-    // });
   };
 
   render() {

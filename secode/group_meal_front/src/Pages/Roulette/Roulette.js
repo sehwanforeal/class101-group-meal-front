@@ -40,9 +40,7 @@ class Roulette extends Component {
         return res.json();
       })
       .then(res => {
-        console.log(res);
         this.setState({ historyData: res, isDataCame: true, isLoading: false });
-        console.log(this.state.historyData);
       });
   }
 
@@ -57,9 +55,7 @@ class Roulette extends Component {
         return res.json();
       })
       .then(res => {
-        console.log(res);
         this.setState({ isClicked: true, rouletteMock: res, isLoading: false });
-        console.log(this.state.rouletteMock);
       });
   };
 
@@ -79,12 +75,12 @@ class Roulette extends Component {
         return res.json();
       })
       .then(res => {
-        console.log("respons", res);
         alert("점술판이 반영되었습니다");
         this.setState({
           isClicked: false
           // historyData: this.state.rouletteMock
         });
+        window.location.reload();
       });
 
     // const {
@@ -135,7 +131,7 @@ class Roulette extends Component {
       isDataCame,
       isLoading
     } = this.state;
-    console.log(historyData);
+
     return (
       <>
         <Nav />
