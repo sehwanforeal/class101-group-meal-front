@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { renderDate } from "utils";
-
+import { url } from "config";
 class Modal extends Component {
   constructor(props) {
     super();
@@ -46,23 +46,33 @@ class Modal extends Component {
 
     const data = JSON.stringify({ nickName, cell, enrolledIn });
 
-    fetch(`http://localhost:3030/member/${_id}`, {
+    const access_token = sessionStorage.getItem("access_token");
+
+    fetch(`${url}member/${_id}`, {
       method: "POST",
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Authorization: access_token
       },
       body: data
-    }).then(res => res.json());
-
-    isWrongCell === false && isWrongDate === false && window.location.reload();
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+        if (res.message === "success") {
+          window.location.reload();
+        }
+      });
   };
 
   handleClickDelete = () => {
     const { _id } = this.state;
 
-    fetch(`http://localhost:3030/member/${_id}`, {
-      method: "DELETE"
+    const access_token = sessionStorage.getItem("access_token");
+
+    fetch(`${url}member/${_id}`, {
+      method: "DELETE",
+      headers: { authorization: access_token }
     }).then(res => window.location.reload());
   };
 

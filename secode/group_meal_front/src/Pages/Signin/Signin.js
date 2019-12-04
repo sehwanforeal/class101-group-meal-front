@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./Signin.scss";
-import notfound from "Img/404.png";
+import Icon from "Components/Nav/Icon";
 import axios from "axios";
-import { client_id, client_secret } from "config";
+import { url, client_id, client_secret } from "config";
 
 export class Signin extends Component {
   constructor() {
@@ -30,32 +30,26 @@ export class Signin extends Component {
     const code = this.getQueryString(window.location.href);
     const response =
       code &&
-      (await axios(
-        `http://10.0.6.43:3030/slack?code=${code}&${client_id}&${client_secret}`
-      ));
+      (await axios(`${url}slack?code=${code}&${client_id}&${client_secret}`));
 
-    console.log("Im in fetch", response);
+    const access_token = response && response.data.access_token;
+    sessionStorage.setItem("access_token", access_token);
+
+    if (sessionStorage.getItem("access_token").length > 10) {
+      this.props.history.push("/roulette");
+    }
   };
 
-  // componentDidMount() {
-  // axios(
-  //   "https://slack.com/oauth/authorize?scope=identity.basic,identity.email&client_id=854668779588.857346823878"
-  // ).then(res => console.log(res));
-  // }
-
   render() {
-    console.log(client_secret);
     return (
       <div className="signin-body">
+        <Icon />
+        <span className="signin-span">EX ADMIN</span>
         <a
           href={`https://slack.com/oauth/authorize?scope=identity.basic,identity.email&${client_id}`}
         >
           <img
             alt="Sign in with Slack"
-            // height="40"
-            // width="172"
-            height="160"
-            width="600"
             src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
             srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x"
           />
