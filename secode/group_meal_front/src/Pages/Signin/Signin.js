@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Signin.scss";
 import notfound from "Img/404.png";
 import axios from "axios";
-import { client_id, client_secret } from "config";
+import { client_id, client_secret, url } from "config";
 
 export class Signin extends Component {
   constructor() {
@@ -30,12 +30,10 @@ export class Signin extends Component {
     const code = this.getQueryString(window.location.href);
     const response =
       code &&
-      (await axios(
-        `http://10.0.6.43:3030/slack?code=${code}&${client_id}&${client_secret}`
-      ));
-
-    console.log("Im in fetch", response);
+      (await axios(`${url}slack?code=${code}&${client_id}&${client_secret}`));
   };
+  //response.message === "success"{다음페이지로 푸쉬}
+  //response.message !== "success"{404로 푸쉬}
 
   // componentDidMount() {
   // axios(
