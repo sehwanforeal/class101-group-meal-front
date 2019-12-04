@@ -35,7 +35,10 @@ class Cell extends Component {
   };
 
   fetchCells = async () => {
-    const response = await fetch(`${config.url}cell`).then(res => res.json());
+    const access_token = sessionStorage.getItem("access_token");
+    const response = await fetch(`${config.url}cell`, {
+      headers: { authorization: access_token }
+    }).then(res => res.json());
 
     const cells = response.map(res => {
       return res;
@@ -81,12 +84,14 @@ class Cell extends Component {
     const { selectedCell, inputVal } = this.state;
     const cellId = this.getCellId(selectedCell);
     const url = config.url + "cell/" + cellId;
+    const access_token = sessionStorage.getItem("access_token");
 
     fetch(url, {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        authorization: access_token
       },
       body: JSON.stringify({ name: inputVal })
     }).then(res => window.location.reload());
@@ -96,9 +101,13 @@ class Cell extends Component {
     const { inputVal } = this.state;
     const cellId = this.getCellId(inputVal);
     const url = config.url + "cell/" + cellId;
+    const access_token = sessionStorage.getItem("access_token");
 
     fetch(url, {
-      method: "DELETE"
+      method: "DELETE",
+      headers: {
+        authorization: access_token
+      }
     }).then(res => window.location.reload());
   };
 

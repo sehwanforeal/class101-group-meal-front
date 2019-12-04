@@ -31,39 +31,41 @@ class Roulette extends Component {
   }
 
   componentDidMount() {
+    const access_token = sessionStorage.getItem("access_token");
     fetch(`${url}groupMeal/history`, {
-      method: "get"
+      method: "get",
+      headers: { authorization: access_token }
     })
       .then(function(res) {
         return res.json();
       })
       .then(res => {
-        console.log(res);
         this.setState({ historyData: res, isDataCame: true, isLoading: false });
-        console.log(this.state.historyData);
       });
   }
 
   runRoulette = () => {
+    const access_token = sessionStorage.getItem("access_token");
     this.setState({ isLoading: true });
     fetch(`${url}groupMeal`, {
-      method: "get"
+      method: "get",
+      headers: { authorization: access_token }
     })
       .then(function(res) {
         return res.json();
       })
       .then(res => {
-        console.log(res);
         this.setState({ isClicked: true, rouletteMock: res, isLoading: false });
-        console.log(this.state.rouletteMock);
       });
   };
 
   sendAndReturn = () => {
+    const access_token = sessionStorage.getItem("access_token");
     fetch(`${url}groupMeal`, {
       method: "post",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        authorization: access_token
       },
       body: JSON.stringify({
         groupMeals: this.state.rouletteMock
@@ -73,12 +75,12 @@ class Roulette extends Component {
         return res.json();
       })
       .then(res => {
-        console.log("respons", res);
         alert("점술판이 반영되었습니다");
         this.setState({
           isClicked: false
           // historyData: this.state.rouletteMock
         });
+        window.location.reload();
       });
 
     // const {
@@ -129,7 +131,7 @@ class Roulette extends Component {
       isDataCame,
       isLoading
     } = this.state;
-    console.log(historyData);
+
     return (
       <>
         <Nav />
