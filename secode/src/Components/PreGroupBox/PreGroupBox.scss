@@ -1,0 +1,17 @@
+@import "../../Styles/index.scss";
+
+.gb-wrapper {
+  margin: 10px;
+
+  div {
+    width: 130px;
+    text-align: center;
+    font-size: 13px;
+    background-color: $theme-color;
+    padding: 10px;
+  }
+
+  .gb-leader {
+    background-color: #dddddd;
+  }
+}
