@@ -31,8 +31,10 @@ class Roulette extends Component {
   }
 
   componentDidMount() {
+    const access_token = sessionStorage.getItem("access_token");
     fetch(`${url}groupMeal/history`, {
-      method: "get"
+      method: "get",
+      headers: { authorization: access_token }
     })
       .then(function(res) {
         return res.json();
@@ -45,9 +47,11 @@ class Roulette extends Component {
   }
 
   runRoulette = () => {
+    const access_token = sessionStorage.getItem("access_token");
     this.setState({ isLoading: true });
     fetch(`${url}groupMeal`, {
-      method: "get"
+      method: "get",
+      headers: { authorization: access_token }
     })
       .then(function(res) {
         return res.json();
@@ -60,10 +64,12 @@ class Roulette extends Component {
   };
 
   sendAndReturn = () => {
+    const access_token = sessionStorage.getItem("access_token");
     fetch(`${url}groupMeal`, {
       method: "post",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        authorization: access_token
       },
       body: JSON.stringify({
         groupMeals: this.state.rouletteMock

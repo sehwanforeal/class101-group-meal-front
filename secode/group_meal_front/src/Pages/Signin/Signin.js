@@ -31,6 +31,14 @@ export class Signin extends Component {
     const response =
       code &&
       (await axios(`${url}slack?code=${code}&${client_id}&${client_secret}`));
+    console.log(response);
+
+    const access_token = response && response.data.access_token;
+
+    sessionStorage.setItem("access_token", access_token);
+    if (sessionStorage.getItem("access_token").length > 0) {
+      this.props.history.push("/roulette");
+    }
   };
   //response.message === "success"{다음페이지로 푸쉬}
   //response.message !== "success"{404로 푸쉬}

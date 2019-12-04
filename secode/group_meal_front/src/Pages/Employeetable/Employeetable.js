@@ -25,7 +25,13 @@ class EmployeeTable extends Component {
   fetchMembers = async () => {
     const url = config.url + "member";
 
-    const list = await fetch(url).then(res => res.json());
+    const access_token = sessionStorage.getItem("access_token");
+
+    const list = await fetch(url, {
+      headers: {
+        authorization: access_token
+      }
+    }).then(res => res.json());
 
     this.setState({
       members: list
@@ -35,7 +41,13 @@ class EmployeeTable extends Component {
   fetchCells = async () => {
     const url = config.url + "cell";
 
-    let cells = await fetch(url).then(res => res.json());
+    const access_token = sessionStorage.getItem("access_token");
+
+    let cells = await fetch(url, {
+      headers: {
+        authorization: access_token
+      }
+    }).then(res => res.json());
 
     cells.unshift("셀을 선택해주세요");
 
@@ -76,10 +88,13 @@ class EmployeeTable extends Component {
     if (this.verifyNewMember(memberData)) {
       const data = JSON.stringify(memberData);
 
+      const access_token = sessionStorage.getItem("access_token");
+
       fetch(url, {
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          authorization: access_token
         },
         method: "POST",
         body: data

@@ -18,17 +18,86 @@ $font-weight-thin: 300;
       font-weight: 500;
     }
     .body-container {
-      margin-top: 60px;
+      margin-top: 55px;
       height: 60vh;
-      border: 1px solid black;
+      //   border: 1px solid black;
       display: flex;
       .body-left {
         width: 60%;
-        border: 1px solid black;
+        // border: 1px solid black;
+        padding: 50px;
+        .body-title {
+          margin-top: 8px;
+          font-size: 23px;
+          margin-bottom: 50px;
+          display: flex;
+          justify-content: center;
+        }
+        .user-row {
+          margin-bottom: 10px;
+          display: flex;
+          justify-content: center;
+          .user {
+            height: 40px;
+            border-radius: 10px;
+            background-color: #e6e6e6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 50px;
+          }
+          .user-name {
+            width: 180px;
+          }
+          .user-email {
+            width: 400px;
+          }
+          .user-delete {
+            width: 100px;
+            background-color: #838383;
+            color: white;
+            font-weight: 600;
+            &:hover {
+              cursor: pointer;
+              background-color: #a5a5a5;
+            }
+          }
+        }
       }
       .body-right {
         width: 40%;
-        border: 1px solid black;
+        // border: 1px solid black;
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+
+        .input-title {
+          margin-top: 8px;
+          font-size: 23px;
+          margin-bottom: 52px;
+          margin-left: 45px;
+        }
+        input {
+          width: 200px;
+          background-color: #e6e6e6;
+          margin-bottom: 20px;
+          height: 40px;
+          border-radius: 10px;
+          text-align: center;
+          font-size: 14px;
+        }
+        .submit-inputs {
+          background-color: #838383;
+          height: 37px;
+          width: 51px;
+          margin-left: 72px;
+          color: white;
+          border-radius: 10px;
+          &:hover {
+            cursor: pointer;
+            background-color: #a5a5a5;
+          }
+        }
       }
     }
   }
