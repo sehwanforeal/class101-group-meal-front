@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import "./Signin.scss";
-import notfound from "Img/404.png";
 import Icon from "Components/Nav/Icon";
 import axios from "axios";
-import { client_id, client_secret, url } from "config";
+import { url, client_id, client_secret } from "config";
 
 export class Signin extends Component {
   constructor() {
