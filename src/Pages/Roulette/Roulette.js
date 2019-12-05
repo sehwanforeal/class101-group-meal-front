@@ -31,6 +31,9 @@ class Roulette extends Component {
 
   componentDidMount() {
     const access_token = sessionStorage.getItem("access_token");
+    if (access_token === null) {
+      this.props.history.push("/");
+    }
     fetch(`${url}groupMeal/history`, {
       method: "get",
       headers: { authorization: access_token }

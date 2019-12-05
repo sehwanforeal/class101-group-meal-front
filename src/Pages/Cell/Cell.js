@@ -22,6 +22,10 @@ class Cell extends Component {
   }
 
   componentDidMount() {
+    const access_token = sessionStorage.getItem("access_token");
+    if (access_token === null) {
+      this.props.history.push("/");
+    }
     this.fetchCells();
     window.addEventListener("keypress", this.handleKeypress);
   }
