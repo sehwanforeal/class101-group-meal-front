@@ -122,12 +122,14 @@ class Cell extends Component {
   createCell = () => {
     const { inputVal } = this.state;
     const url = config.url + "cell";
+    const access_token = sessionStorage.getItem("access_token");
 
     fetch(url, {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        authorization: access_token
       },
       body: JSON.stringify({ name: inputVal })
     }).then(res => window.location.reload());
