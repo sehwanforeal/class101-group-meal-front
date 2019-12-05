@@ -31,9 +31,8 @@ export class Signin extends Component {
       (await axios(`${url}slack?code=${code}&${client_id}&${client_secret}`));
 
     const access_token = response && response.data.access_token;
-    sessionStorage.setItem("access_token", access_token);
-
-    if (sessionStorage.getItem("access_token").length > 10) {
+    if (access_token !== null) {
+      sessionStorage.setItem("access_token", access_token);
       this.props.history.push("/roulette");
     }
   };
