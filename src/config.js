@@ -3,4 +3,4 @@
 exports.client_id = "client_id=2877224790.859064433381";
 exports.client_secret = "client_secret=a8a3140b7dd976601be6c52ffab797c2";
 exports.url =
-  "https://86ds5kfejd.execute-api.ap-northeast-2.amazonaws.com/prod";
+  " https://86ds5kfejd.execute-api.ap-northeast-2.amazonaws.com/prod/";

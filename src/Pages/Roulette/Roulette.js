@@ -4,7 +4,11 @@ import Result from "./Result";
 import Nav from "Components/Nav";
 import PreGroupBox from "Components/PreGroupBox";
 import "./Roulette.scss";
+<<<<<<< HEAD
 import { url } from "config";
+=======
+import { client_id, client_secret, url } from "config";
+>>>>>>> 75ebaf7b69cbe423fcf0013845f568b041261da5
 // import roulettemock from "Data/roulettemock.js";
 // import roulettemock2 from "Data/roulettemock2.js";
 // import roulettegif from "Img/roulette.gif";
