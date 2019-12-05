@@ -10,7 +10,7 @@ export class Nav extends Component {
     this.state = {
       roulette: false,
       employees: false,
-      admin: false,
+      // admin: false,
       cell: false
     };
   }
@@ -62,13 +62,13 @@ export class Nav extends Component {
               }}
               isActive={employees}
             />
-            <NavTemplate
+            {/* <NavTemplate
               text="관리자"
               onClick={() => {
                 this.handleNav("admin");
               }}
               isActive={admin}
-            />
+            /> */}
             <NavTemplate
               text="셀 관리"
               onClick={() => {
