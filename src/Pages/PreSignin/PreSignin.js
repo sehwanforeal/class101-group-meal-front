@@ -43,7 +43,6 @@ export class Signin extends Component {
 
   handleInput = e => {
     this.setState({ KeyValue: e.target.value, WrongKey: false });
-    console.log(this.state.KeyValue);
   };
 
   render() {
