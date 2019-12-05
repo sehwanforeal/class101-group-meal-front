@@ -15,7 +15,6 @@ class Roulette extends Component {
     this.state = {
       isClicked: false,
       rouletteMock: [],
-      // rouletteMockList: roulettemock.groupMeals.flat(),
       historyData: [],
       history2: [
         [2, 3],

@@ -20,8 +20,6 @@ export class Signin extends Component {
     return query;
   };
 
-  //50ca812413faf339cd2848f42b8762dd
-  //client_id=854668779588.857346823878
   componentDidMount() {
     this.fetchAuth();
   }
