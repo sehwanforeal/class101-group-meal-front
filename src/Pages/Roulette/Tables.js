@@ -18,6 +18,7 @@ export default function Tables(props) {
       return <div className="group">{members}</div>;
     });
   };
+  console.log(typeof []);
 
   return renderTables(list);
 }
