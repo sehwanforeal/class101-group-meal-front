@@ -78,13 +78,18 @@
         width: 120px;
       }
     }
-
+    .inputs-warning {
+      justify-self: center;
+      opacity: 0.4;
+      font-weight: 600;
+      color: red;
+      font-size: 25px;
+    }
     .rl-inputs-container {
       display: flex;
       flex-wrap: wrap;
       width: 70vw;
-      margin-bottom: 400px;
-
+      position: relative;
       .group {
         display: flex;
         flex-direction: column;
@@ -104,6 +109,17 @@
         &:hover {
           background-color: #e7e7e7;
         }
+      }
+      .inputs-warning {
+        justify-self: center;
+        opacity: 0.3;
+        font-weight: 600;
+        color: red;
+        font-size: 30px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%);
       }
 
       .driver {

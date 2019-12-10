@@ -38,8 +38,10 @@ export default function Result(props) {
               확인
             </button>
           </div>
+
           <div className="rl-inputs-container">
             <Tables list={rouletteMock} />
+            <div className="inputs-warning">확인을 누른후 캡쳐해주세요</div>
           </div>
         </div>
       );
