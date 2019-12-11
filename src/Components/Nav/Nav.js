@@ -29,9 +29,12 @@ export class Nav extends Component {
     this.setState({
       [nav]: true
     });
-    if (nav === "roulette" || "employees" || "admin" || "cell") {
-      this.setState({ isOpened: false });
-    }
+    nav === "roulette" ||
+    nav === "employees" ||
+    nav === "admin" ||
+    nav === "cell"
+      ? this.setState({ isOpened: false })
+      : this.setState({ isOpened: true });
   }
 
   handleNav = nav => {
