@@ -29,6 +29,9 @@ export class Nav extends Component {
     this.setState({
       [nav]: true
     });
+    if (nav === "roulette" || "employees" || "admin" || "cell") {
+      this.setState({ isOpened: false });
+    }
   }
 
   handleNav = nav => {
