@@ -33,7 +33,7 @@ export class Signin extends Component {
     const access_token = response && response.data.access_token;
     if (access_token !== null) {
       sessionStorage.setItem("access_token", access_token);
-      this.props.history.push("/roulette");
+      this.props.history.push("/entireitems");
     }
   };
 
