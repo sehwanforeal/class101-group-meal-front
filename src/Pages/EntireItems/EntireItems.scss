@@ -13,15 +13,15 @@
       justify-content: space-between;
       .title-right {
         display: flex;
-        font-size: 15px;
+        font-size: 13px;
         margin-right: 60px;
         margin-top: 10px;
         .button {
-          margin-right: 30px;
+          margin-right: 17px;
           border-radius: 5px;
           background-color: rgb(219, 219, 219);
           color: rgb(133, 133, 133);
-          padding: 0px 10px;
+          padding: 0px 8px;
           height: 30px;
           display: flex;
           align-items: center;
@@ -29,6 +29,17 @@
           &:hover {
             background-color: rgb(138, 138, 138);
             color: rgb(255, 255, 255);
+          }
+          label {
+            cursor: pointer;
+            &:hover {
+              color: white;
+            }
+          }
+          input {
+            position: absolute;
+            height: 1px;
+            clip: rect(0, 0, 0, 0);
           }
         }
       }

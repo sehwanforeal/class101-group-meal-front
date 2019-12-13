@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "Components/Nav";
 import something from "Img/something.csv";
 import "./EntireItems.scss";
@@ -7,10 +7,15 @@ import Row from "./Row";
 
 function EntireItems() {
   const [selectedSpec, setSelectedSpec] = useState(null);
+  const [selectedCsv, setSelectedCsv] = useState(null);
 
   const sepcHandler = idx => {
     setSelectedSpec(idx);
   };
+
+  useEffect(() => {
+    console.log("didMount");
+  }, []);
 
   const make = () => {
     let array = [];
@@ -27,9 +32,14 @@ function EntireItems() {
     return array;
   };
 
+  const handleUpload = e => {
+    e.preventDefault();
+    let csvFile = e.target.files[0];
+    setSelectedCsv(csvFile);
+  };
+
   const arr = make();
   const img = something;
-  console.log(img);
   return (
     <div>
       <Nav />
@@ -38,6 +48,15 @@ function EntireItems() {
           <div className="article-title">
             <span>전체비품</span>
             <div className="title-right">
+              <div className="button">
+                <label for="uploadCsv">csv로 업로드</label>
+                <input
+                  onChange={e => handleUpload(e)}
+                  id="uploadCsv"
+                  accept=".csv, .xlsx, .xls"
+                  type="file"
+                ></input>
+              </div>
               <div className="button">
                 <a href={img} download>
                   csv로 다운로드
@@ -48,29 +67,6 @@ function EntireItems() {
           </div>
           <div className="entire-table">
             <FirstRow />
-            {/* <div className="table-row">
-              <div className="cell">macbook-000122</div>
-              <div className="cell">크리에이터셀</div>
-              <div className="cell">철이</div>
-              <div className="cell">맥북</div>
-              <div className="cell">mac-a2312a34</div>
-              <div className="cell">개발자용</div>
-              <div className="cell">{(213123213).toLocaleString()} 원</div>
-              <div
-                className="cell bigo"
-                onMouseEnter={() => console.log("in!!")}
-                onMouseOut={() => console.log("out!!")}
-              >
-                RAM : 16GB
-                <div className="spec">
-                  RAM : 16GB <br /> SSD : samsug 1TB <br /> GPU : GTX1080TI
-                </div>
-              </div>
-              <div className="cell">대여중</div>
-              <div className="cell last">
-                <div>수정</div>
-              </div>
-            </div> */}
             {arr}
           </div>
         </div>
