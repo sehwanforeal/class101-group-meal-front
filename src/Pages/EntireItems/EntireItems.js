@@ -8,6 +8,7 @@ import Row from "./Row";
 function EntireItems() {
   const [selectedSpec, setSelectedSpec] = useState(null);
   const [selectedCsv, setSelectedCsv] = useState(null);
+  const [selectedTalbe, setSelectedTable] = useState(null);
 
   const sepcHandler = idx => {
     setSelectedSpec(idx);
@@ -15,6 +16,17 @@ function EntireItems() {
 
   useEffect(() => {
     console.log("didMount");
+    // fetch("")
+    //   .then(response => {
+    //     return response.json();
+    //   })
+    //   .then(response => {
+    //     setSelectedTable(response)
+    //   })
+
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   }, []);
 
   const make = () => {
