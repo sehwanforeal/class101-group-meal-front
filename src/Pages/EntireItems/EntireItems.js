@@ -5,7 +5,7 @@ import "./EntireItems.scss";
 import FirstRow from "./FirstRow";
 import Row from "./Row";
 
-function EntireItems() {
+function EntireItems(props) {
   const [selectedSpec, setSelectedSpec] = useState(null);
   const [selectedCsv, setSelectedCsv] = useState(null);
   const [selectedTalbe, setSelectedTable] = useState(null);
@@ -76,7 +76,14 @@ function EntireItems() {
                   csv로 다운로드
                 </a>
               </div>
-              <div className="button">새로운 비품 추가</div>
+              <div
+                onClick={() => {
+                  props.history.push("/additem");
+                }}
+                className="button"
+              >
+                새로운 비품 추가
+              </div>
             </div>
           </div>
           <div className="entire-table">
