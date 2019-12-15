@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 
 function Row(props) {
   return (
@@ -22,10 +23,16 @@ function Row(props) {
       </div>
       <div className="cell">대여중</div>
       <div className="cell last">
-        <div>수정</div>
+        <div
+          onClick={() => {
+            props.history.push("/modifyitem", props.myObject);
+          }}
+        >
+          수정
+        </div>
       </div>
     </div>
   );
 }
 
-export default Row;
+export default withRouter(Row);

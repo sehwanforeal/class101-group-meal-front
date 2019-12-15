@@ -31,6 +31,7 @@ function EntireItems() {
 
   const make = () => {
     let array = [];
+    let myObject = { hi: "hello", hola: "como estas" };
     for (let i = 0; i < 70; i++) {
       array.push(
         <Row
@@ -38,6 +39,7 @@ function EntireItems() {
           idx={i}
           spec={selectedSpec}
           specHandle={sepcHandler}
+          myObject={myObject}
         />
       );
     }
