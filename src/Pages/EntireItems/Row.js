@@ -36,3 +36,5 @@ function Row(props) {
 }
 
 export default withRouter(Row);
+
+//모델명과 태그 사이에 취득일

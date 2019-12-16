@@ -13,6 +13,8 @@ import StockStatus from "Pages/StockStatus";
 import WastedItems from "Pages/WastedItems";
 import AddItem from "Pages/AddItem";
 import ModifyItem from "Pages/ModifyItem";
+import AddType from "Pages/AddType";
+import ModifyType from "Pages/ModifyType";
 
 class Routes extends React.Component {
   render() {
@@ -30,7 +32,9 @@ class Routes extends React.Component {
           <Route exact path="/stockstatus" component={StockStatus} />
           <Route exact path="/wasteditems" component={WastedItems} />
           <Route exact path="/additem" component={AddItem} />
-          <Route exact path="/ModifyItem" component={ModifyItem} />
+          <Route exact path="/modifyitem" component={ModifyItem} />
+          <Route exact path="/addtype" component={AddType} />
+          <Route exact path="/modifytype" component={ModifyType} />
         </Switch>
       </Router>
     );
