@@ -15,36 +15,10 @@ function EntireItems(props) {
   };
 
   useEffect(() => {
-    console.log("didMount");
-    // fetch("")
-    //   .then(response => {
-    //     return response.json();
-    //   })
-    //   .then(response => {
-    //     setSelectedTable(response)
-    //   })
-
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
+    fetch("http://10.0.4.124:3030/item")
+      .then(res => res.json())
+      .then(res => setSelectedTable(res.message));
   }, []);
-
-  const make = () => {
-    let array = [];
-    let myObject = { hi: "hello", hola: "como estas" };
-    for (let i = 0; i < 70; i++) {
-      array.push(
-        <Row
-          cost={2320020}
-          idx={i}
-          spec={selectedSpec}
-          specHandle={sepcHandler}
-          myObject={myObject}
-        />
-      );
-    }
-    return array;
-  };
 
   const handleUpload = e => {
     e.preventDefault();
@@ -52,7 +26,12 @@ function EntireItems(props) {
     setSelectedCsv(csvFile);
   };
 
-  const arr = make();
+  const handleSorting = (target, ms) => {
+    fetch(`http://10.0.4.124:3030/item?sort=${target}`)
+      .then(res => res.json())
+      .then(res => setSelectedTable(res.message));
+  };
+
   const img = something;
   return (
     <div>
@@ -72,7 +51,7 @@ function EntireItems(props) {
                 ></input>
               </div>
               <div className="button">
-                <a href={img} download>
+                <a href={selectedCsv} download>
                   csv로 다운로드
                 </a>
               </div>
@@ -87,8 +66,45 @@ function EntireItems(props) {
             </div>
           </div>
           <div className="entire-table">
-            <FirstRow />
-            {arr}
+            <FirstRow handleSorting={handleSorting} />
+            {selectedTalbe &&
+              selectedTalbe.map((el, idx) => {
+                return (
+                  <Row
+                    info={el}
+                    idx={idx}
+                    spec={selectedSpec}
+                    specHandler={sepcHandler}
+                  />
+                );
+              })}
+          </div>
+          <div
+            onClick={() => {
+              fetch("http://10.0.1.88:3030/csv")
+                .then(resp => resp.blob())
+                .then(blob => {
+                  const url = window.URL.createObjectURL(blob);
+                  const a = document.createElement("a");
+                  a.style.display = "none";
+                  a.href = url;
+                  // the filename you want
+                  a.download = "전체비품목록.csv";
+                  document.body.appendChild(a);
+                  a.click();
+                  window.URL.revokeObjectURL(url);
+                  // or you know, something with better UX...
+                })
+                .catch(() => alert("oh no!"));
+              // .then(res => setSelectedCsv(res))
+              // .then(blob => console.log("res", blob))
+              // // .then(console.log("done"))
+              // .then(console.log("state", selectedCsv));
+            }}
+          >
+            asdasd
+            <br />
+            asdsadas
           </div>
         </div>
       </div>
@@ -97,3 +113,19 @@ function EntireItems(props) {
 }
 
 export default EntireItems;
+
+// const make = () => {
+//   let array = [];
+//   for (let i = 0; i < 70; i++) {
+//     array.push(
+//       <Row
+//         cost={2320020}
+//         idx={i}
+//         spec={selectedSpec}
+//         specHandle={sepcHandler}
+//         myObject={myObject}
+//       />
+//     );
+//   }
+//   return array;
+// };

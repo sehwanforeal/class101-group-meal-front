@@ -2,30 +2,43 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 
 function Row(props) {
+  const info = props.info;
   return (
     <div className="table-row">
-      <div className="cell">macbook-000122</div>
-      <div className="cell">크리에이터셀</div>
-      <div className="cell">철이</div>
-      <div className="cell">맥북</div>
-      <div className="cell">mac-a2312a34</div>
-      <div className="cell">개발자용</div>
-      <div className="cell">{props.cost.toLocaleString()} 원</div>
+      <div className="cell">
+        {info.itemType.name}_{info.uniqueNumberForCilent}
+      </div>
+      <div className="cell">{info.owner === null ? null : "소속셀"}</div>
+      <div className="cell">{info.owner}</div>
+      <div className="cell">{info.itemType.name}</div>
+      <div className="cell">{info.model.name}</div>
+      <div className="cell">{info.acquiredDate}</div>
+      <div className="cell">
+        {info.tag.map((el, i) => {
+          return (
+            <span>
+              {i !== 0 && <span>,</span>}
+              {el}
+            </span>
+          );
+        })}
+      </div>
+      <div className="cell">{info.price.toLocaleString()} 원</div>
       <div
         className="cell bigo"
-        onMouseOver={() => props.specHandle(props.idx)}
-        onMouseOut={() => props.specHandle(null)}
+        onMouseOver={() => props.specHandler(props.idx)}
+        onMouseOut={() => props.specHandler(null)}
       >
-        RAM : 16GB
+        {info.memo}
         <div className={props.spec === props.idx ? "spec" : "no"}>
-          RAM : 16GB , SSD : samsug 1TB, GPU : GTX1080TI
+          {info.memo}
         </div>
       </div>
-      <div className="cell">대여중</div>
+      <div className="cell">{info.usageType}</div>
       <div className="cell last">
         <div
           onClick={() => {
-            props.history.push("/modifyitem", props.myObject);
+            props.history.push("/modifyitem", info);
           }}
         >
           수정

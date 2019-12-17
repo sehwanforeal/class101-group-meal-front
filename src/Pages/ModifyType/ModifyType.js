@@ -8,7 +8,7 @@ function ModifyType(props) {
   const [model, setModel] = useState(props.location.state.itemname);
   const [warning, setWarning] = useState(false);
 
-  const { itemid, itemname, typeid, typename } = props.location.state;
+  const { itemid, typeid } = props.location.state;
 
   const handleInput = (e, t) => {
     t(e.target.value);
