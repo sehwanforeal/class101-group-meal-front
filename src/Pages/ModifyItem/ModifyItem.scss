@@ -1,0 +1,208 @@
+.modify-body {
+  padding-left: 300px;
+  .article {
+    width: 85%;
+    margin: auto;
+    .title {
+      margin: 0;
+      padding-top: 60px;
+      font-size: 39px;
+      font-weight: 600;
+      color: rgb(65, 65, 65);
+      display: flex;
+      justify-content: space-between;
+    }
+    .table-firstrow {
+      height: 30px;
+      // background-color: rgb(241, 241, 241);
+      display: flex;
+      margin-top: 40px;
+      justify-content: space-between;
+
+      .cell {
+        border-right: 1px solid rgb(161, 161, 161);
+        border-bottom: 2px solid rgb(161, 161, 161);
+        border-top: 2px solid rgb(161, 161, 161);
+        width: 11%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        color: rgb(73, 73, 73);
+        img {
+          width: 10px;
+          cursor: pointer;
+        }
+        .none {
+          display: none;
+        }
+      }
+      .last {
+        border: none;
+        width: 8%;
+        justify-content: flex-start;
+        align-items: center;
+      }
+      .status {
+        border-right: none;
+      }
+    }
+    .table-row {
+      height: 30px;
+
+      display: flex;
+      font-size: 12px;
+      // justify-content: space-between;
+
+      .cell {
+        border: 1px solid rgb(209, 209, 209);
+        border-left: none;
+
+        width: 11%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: rgb(73, 73, 73);
+        background-color: rgb(245, 245, 245);
+        input {
+          width: 90%;
+          font-size: 12px;
+          color: rgb(73, 73, 73);
+          text-align: center;
+          height: 100%;
+        }
+        textarea {
+          width: 90%;
+          font-size: 10px;
+          color: rgb(73, 73, 73);
+          text-align: center;
+          background-color: inherit;
+          outline: none;
+          border: none;
+          overflow: auto;
+          height: 100%;
+          resize: none;
+        }
+        select {
+        }
+      }
+      .status {
+        border-right: none;
+      }
+      .last {
+        border: none;
+        width: 8%;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: inherit;
+      }
+      .change {
+        background-color: white;
+      }
+      .bigo {
+        position: relative;
+        cursor: zoom-in;
+        .spec {
+          position: absolute;
+          background-color: inherit;
+          text-align: center;
+          width: 120%;
+          font-size: 11px;
+          line-height: 1.4em;
+          padding: 7px;
+          z-index: 2;
+          border-radius: 4px;
+          border: 1px solid rgb(158, 158, 158);
+          height: 300%;
+        }
+        .no {
+          display: none;
+        }
+      }
+    }
+    .actions {
+      margin-top: 15px;
+      width: 92%;
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      font-weight: 600;
+      color: rgb(83, 83, 83);
+      .action-left {
+        display: flex;
+        align-items: center;
+
+        .delete {
+          margin-left: 10px;
+          background-color: rgb(255, 203, 203);
+          &:hover {
+            color: white;
+            background-color: rgb(255, 0, 0);
+          }
+        }
+        .areyousure {
+          display: flex;
+          align-items: center;
+          margin-left: 7px;
+          button {
+            margin-left: 7px;
+            height: 20px;
+            padding: 1px 6px;
+          }
+          .sure {
+            background-color: rgb(255, 203, 203);
+            &:hover {
+              color: white;
+              background-color: rgb(255, 0, 0);
+            }
+          }
+        }
+        .norender {
+          display: none;
+        }
+      }
+
+      button {
+        background-color: rgb(218, 218, 218);
+        padding: 8px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        &:hover {
+          color: white;
+          background-color: rgb(146, 146, 146);
+        }
+      }
+    }
+    .history-title {
+      margin-top: 60px;
+      font-size: 30px;
+      font-weight: 600;
+      color: rgb(97, 97, 97);
+    }
+    .history-table {
+      width: 60%;
+      .cell {
+        width: 25%;
+        background-color: rgb(236, 236, 236);
+      }
+      .first {
+        border-left: 2px solid rgb(161, 161, 161);
+      }
+      .final {
+        border-right: 2px solid rgb(161, 161, 161);
+      }
+    }
+    .history-row {
+      margin: 0;
+      .cell {
+        font-size: 10px;
+        background-color: inherit;
+        border: 0;
+        border-right: 1px solid rgb(161, 161, 161);
+        border-bottom: 1px solid rgb(161, 161, 161);
+      }
+      .first {
+        border-left: 1px solid rgb(161, 161, 161);
+      }
+    }
+  }
+}

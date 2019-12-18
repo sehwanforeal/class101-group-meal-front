@@ -1,53 +1,106 @@
-import React from "react";
-import sorting from "Img/sorting.jpg";
+import React, { useState } from "react";
+import sortingimg from "Img/sorting.jpg";
 
-function FirstRow() {
+function FirstRow(props) {
+  const [isMinus, setIsMinus] = useState(null);
+
+  const handleSorting = t => {
+    isMinus === null ? setIsMinus("-") : setIsMinus(null);
+    props.handleSorting(isMinus === "-" ? isMinus + t : t);
+    console.log(isMinus + t);
+  };
+
   return (
     <div className="table-firstrow">
       <div className="cell">
-        <div />
+        {!props.sorting && <div />}
         고유번호
-        <img src={sorting} alt="" />
+        <img
+          onClick={() => handleSorting("itemType,uniqueNumber")}
+          className={props.sorting}
+          src={sortingimg}
+          alt=""
+        />
       </div>
       <div className="cell">
-        <div />
+        {!props.sorting && <div />}
         소속
-        <img src={sorting} alt="" />
+        <img className={props.sorting} src={sortingimg} alt="" />
       </div>
       <div className="cell">
-        <div />
+        {!props.sorting && <div />}
         사용자
-        <img src={sorting} alt="" />
+        <img className={props.sorting} src={sortingimg} alt="" />
       </div>
       <div className="cell">
-        <div />
+        {!props.sorting && <div />}
         비품종류
-        <img src={sorting} alt="" />
+        <img
+          onClick={() => handleSorting("itemType,uniqueNumber")}
+          className={props.sorting}
+          src={sortingimg}
+          alt=""
+        />
       </div>
       <div className="cell">
-        <div />
+        {!props.sorting && <div />}
         모델명
-        <img src={sorting} alt="" />
+        <img
+          onClick={() => handleSorting("model")}
+          className={props.sorting}
+          src={sortingimg}
+          alt=""
+        />
       </div>
       <div className="cell">
-        <div />
+        {!props.sorting && <div />}
+        취득일
+        <img
+          onClick={() => handleSorting("acquiredDate")}
+          className={props.sorting}
+          src={sortingimg}
+          alt=""
+        />
+      </div>
+      <div className="cell">
+        {!props.sorting && <div />}
         태그
-        <img src={sorting} alt="" />
+        <img
+          onClick={() => handleSorting("tag")}
+          className={props.sorting}
+          src={sortingimg}
+          alt=""
+        />
       </div>
       <div className="cell">
-        <div />
+        {!props.sorting && <div />}
         가격
-        <img src={sorting} alt="" />
+        <img
+          onClick={() => handleSorting("price")}
+          className={props.sorting}
+          src={sortingimg}
+          alt=""
+        />
       </div>
       <div className="cell">
-        <div />
+        {!props.sorting && <div />}
         비고
-        <img src={sorting} alt="" />
+        <img
+          onClick={() => handleSorting("memo")}
+          className={props.sorting}
+          src={sortingimg}
+          alt=""
+        />
       </div>
-      <div className="cell">
-        <div />
+      <div className="cell status">
+        {!props.sorting && <div />}
         상태
-        <img src={sorting} alt="" />
+        <img
+          onClick={() => handleSorting("usageType")}
+          className={props.sorting}
+          src={sortingimg}
+          alt=""
+        />
       </div>
       <div className="cell last"></div>
     </div>
