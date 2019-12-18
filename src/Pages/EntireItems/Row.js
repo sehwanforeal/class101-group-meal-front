@@ -3,18 +3,19 @@ import { withRouter } from "react-router-dom";
 
 function Row(props) {
   const info = props.info;
+
   return (
     <div className="table-row">
       <div className="cell">
         {info.itemType.name}_{info.uniqueNumberForCilent}
       </div>
-      <div className="cell">{info.owner === null ? null : "소속셀"}</div>
+      <div className="cell"> {props.idx}</div>
       <div className="cell">{info.owner}</div>
       <div className="cell">{info.itemType.name}</div>
       <div className="cell">{info.model.name}</div>
       <div className="cell">{info.acquiredDate}</div>
       <div className="cell">
-        {info.tag.map((el, i) => {
+        {info.tags.map((el, i) => {
           return (
             <span>
               {i !== 0 && <span>,</span>}

@@ -15,15 +15,20 @@ function EntireItems(props) {
   };
 
   useEffect(() => {
-    fetch("http://10.0.4.124:3030/item")
+    fetch("http://10.58.7.215:3030/item")
       .then(res => res.json())
       .then(res => setSelectedTable(res.message));
   }, []);
 
   const handleUpload = e => {
-    e.preventDefault();
-    let csvFile = e.target.files[0];
-    setSelectedCsv(csvFile);
+    const files = e.target.files;
+    const formData = new FormData();
+    formData.append("data", files[0]);
+    fetch("http://10.58.7.215:3030/csv", {
+      method: "post",
+      body: formData
+    }).then(res => console.log(res));
+    // .then(window.location.reload());
   };
 
   const handleSorting = (target, ms) => {
@@ -42,18 +47,34 @@ function EntireItems(props) {
             <span>전체비품</span>
             <div className="title-right">
               <div className="button">
-                <label for="uploadCsv">csv로 업로드</label>
+                <label for="fileUpload">csv로 업로드</label>
                 <input
                   onChange={e => handleUpload(e)}
-                  id="uploadCsv"
-                  accept=".csv, .xlsx, .xls"
                   type="file"
+                  id="fileUpload"
                 ></input>
               </div>
               <div className="button">
-                <a href={selectedCsv} download>
+                <div
+                  onClick={() => {
+                    fetch("http://10.58.7.215:3030/csv")
+                      .then(resp => resp.blob())
+                      .then(blob => {
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement("a");
+                        a.style.display = "none";
+                        a.href = url;
+
+                        a.download = "전체비품목록.csv";
+                        document.body.appendChild(a);
+                        a.click();
+                        window.URL.revokeObjectURL(url);
+                      })
+                      .catch(() => alert("oh no!"));
+                  }}
+                >
                   csv로 다운로드
-                </a>
+                </div>
               </div>
               <div
                 onClick={() => {
@@ -79,33 +100,6 @@ function EntireItems(props) {
                 );
               })}
           </div>
-          <div
-            onClick={() => {
-              fetch("http://10.0.1.88:3030/csv")
-                .then(resp => resp.blob())
-                .then(blob => {
-                  const url = window.URL.createObjectURL(blob);
-                  const a = document.createElement("a");
-                  a.style.display = "none";
-                  a.href = url;
-                  // the filename you want
-                  a.download = "전체비품목록.csv";
-                  document.body.appendChild(a);
-                  a.click();
-                  window.URL.revokeObjectURL(url);
-                  // or you know, something with better UX...
-                })
-                .catch(() => alert("oh no!"));
-              // .then(res => setSelectedCsv(res))
-              // .then(blob => console.log("res", blob))
-              // // .then(console.log("done"))
-              // .then(console.log("state", selectedCsv));
-            }}
-          >
-            asdasd
-            <br />
-            asdsadas
-          </div>
         </div>
       </div>
     </div>
@@ -113,19 +107,3 @@ function EntireItems(props) {
 }
 
 export default EntireItems;
-
-// const make = () => {
-//   let array = [];
-//   for (let i = 0; i < 70; i++) {
-//     array.push(
-//       <Row
-//         cost={2320020}
-//         idx={i}
-//         spec={selectedSpec}
-//         specHandle={sepcHandler}
-//         myObject={myObject}
-//       />
-//     );
-//   }
-//   return array;
-// };
