@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Nav from "Components/Nav";
 import "./WastedItems.scss";
 import TableRow from "./TableRow";
 
 function WastedItems(props) {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetch("http://10.0.6.233:3030/item?isArchived=true")
+      .then(res => res.json())
+      .then(res => setData(res.message));
+  }, []);
+
+  console.log(data);
+
   return (
     <div>
       <Nav />
@@ -19,9 +29,10 @@ function WastedItems(props) {
             <div className="cell status">비고</div>
             <div className="cell last"></div>
           </div>
-          <TableRow />
-          <TableRow />
-          <TableRow />
+          {data &&
+            data.map(el => {
+              return <TableRow info={el} />;
+            })}
         </div>
       </div>
     </div>
