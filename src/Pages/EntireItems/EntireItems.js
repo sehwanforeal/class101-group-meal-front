@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Nav from "Components/Nav";
-import something from "Img/something.csv";
 import "./EntireItems.scss";
 import FirstRow from "./FirstRow";
 import Row from "./Row";
@@ -9,13 +8,14 @@ function EntireItems(props) {
   const [selectedSpec, setSelectedSpec] = useState(null);
   const [selectedCsv, setSelectedCsv] = useState(null);
   const [selectedTalbe, setSelectedTable] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const sepcHandler = idx => {
     setSelectedSpec(idx);
   };
 
   useEffect(() => {
-    fetch("http://10.58.7.215:3030/item")
+    fetch("http://10.0.6.233:3030/item")
       .then(res => res.json())
       .then(res => setSelectedTable(res.message));
   }, []);
@@ -23,21 +23,23 @@ function EntireItems(props) {
   const handleUpload = e => {
     const files = e.target.files;
     const formData = new FormData();
+    setIsLoading(true);
     formData.append("data", files[0]);
     fetch("http://10.58.7.215:3030/csv", {
       method: "post",
       body: formData
-    }).then(res => console.log(res));
+    })
+      .then(res => console.log(res))
+      .then(res => setIsLoading(true));
     // .then(window.location.reload());
   };
 
   const handleSorting = (target, ms) => {
-    fetch(`http://10.0.4.124:3030/item?sort=${target}`)
+    fetch(`http://10.0.6.233:3030/item?sort=${target}`)
       .then(res => res.json())
       .then(res => setSelectedTable(res.message));
   };
 
-  const img = something;
   return (
     <div>
       <Nav />
@@ -70,7 +72,7 @@ function EntireItems(props) {
                         a.click();
                         window.URL.revokeObjectURL(url);
                       })
-                      .catch(() => alert("oh no!"));
+                      .catch(() => alert("다운로드실패"));
                   }}
                 >
                   csv로 다운로드

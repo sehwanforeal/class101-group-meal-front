@@ -55,27 +55,52 @@ function FirstRow(props) {
       <div className="cell">
         {!props.sorting && <div />}
         취득일
-        <img className={props.sorting} src={sortingimg} alt="" />
+        <img
+          onClick={() => handleSorting("acquiredDate")}
+          className={props.sorting}
+          src={sortingimg}
+          alt=""
+        />
       </div>
       <div className="cell">
         {!props.sorting && <div />}
         태그
-        <img className={props.sorting} src={sortingimg} alt="" />
+        <img
+          onClick={() => handleSorting("tag")}
+          className={props.sorting}
+          src={sortingimg}
+          alt=""
+        />
       </div>
       <div className="cell">
         {!props.sorting && <div />}
         가격
-        <img className={props.sorting} src={sortingimg} alt="" />
+        <img
+          onClick={() => handleSorting("price")}
+          className={props.sorting}
+          src={sortingimg}
+          alt=""
+        />
       </div>
       <div className="cell">
         {!props.sorting && <div />}
         비고
-        <img className={props.sorting} src={sortingimg} alt="" />
+        <img
+          onClick={() => handleSorting("memo")}
+          className={props.sorting}
+          src={sortingimg}
+          alt=""
+        />
       </div>
       <div className="cell status">
         {!props.sorting && <div />}
         상태
-        <img className={props.sorting} src={sortingimg} alt="" />
+        <img
+          onClick={() => handleSorting("usageType")}
+          className={props.sorting}
+          src={sortingimg}
+          alt=""
+        />
       </div>
       <div className="cell last"></div>
     </div>

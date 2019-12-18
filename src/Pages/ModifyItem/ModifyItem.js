@@ -7,23 +7,49 @@ import HistoryRow from "./HistoryRow";
 function ModifyItem(props) {
   const [data, setData] = useState(null);
   const [spec, setSpec] = useState(false);
-  const [date, setDate] = useState(props.location.state.date);
+  const [acquiredDate, setDate] = useState(props.location.state.date);
   const [tag, setTag] = useState(props.location.state.tag);
   const [price, setPrice] = useState(props.location.state.price);
-  const [bigo, setBigo] = useState(props.location.state.memo);
-  const [status, setStatus] = useState(props.location.state.usageType);
+  const [memo, setBigo] = useState(props.location.state.memo);
+  const [usageType, setStatus] = useState(props.location.state.usageType);
   const [areyousure, setAreyousure] = useState(false);
 
   const info = props.location.state;
+  const itemID = info.id;
 
   useEffect(() => {
     console.log("didMount");
-    fetch(`http://10.0.4.124:3030/item/${info.id}`)
+    fetch(`http://10.0.6.233:3030/item/${itemID}`)
       .then(res => res.json())
       .then(res => setData(res.message));
-  }, [info.id]);
+  }, [itemID]);
 
-  console.log(tag);
+  const handlePatch = () => {
+    const body = {
+      item: {
+        tag,
+        price,
+        memo,
+        usageType
+      }
+    };
+    fetch(`http://10.0.6.233:3030/item/${itemID}`, {
+      method: "post",
+      body: JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => res.json())
+      .then(res => {
+        const { tag, price, memo, usageType } = res.message;
+        setTag(tag);
+        setPrice(price);
+        setBigo(memo);
+        setStatus(usageType);
+        console.log(res);
+      });
+  };
 
   const specHandle = b => {
     b ? setSpec(true) : setSpec(false);
@@ -36,7 +62,6 @@ function ModifyItem(props) {
   const toggleSure = () => {
     setAreyousure(areyousure ? false : true);
   };
-  console.log(status);
 
   return (
     <>
@@ -57,7 +82,7 @@ function ModifyItem(props) {
               <input
                 onChange={e => handleInput(e, setDate)}
                 type="text"
-                value={date}
+                value={acquiredDate}
               ></input>
             </div>
             <div className="cell change">
@@ -70,9 +95,10 @@ function ModifyItem(props) {
             <div className="cell change">
               <input
                 onChange={e => handleInput(e, setPrice)}
-                type="text"
-                value={price && price.toLocaleString() + "원"}
+                // type="number"
+                value={price}
               ></input>
+              원
             </div>
             <div
               className="cell bigo change"
@@ -84,15 +110,22 @@ function ModifyItem(props) {
                 <textarea
                   onChange={e => handleInput(e, setBigo)}
                   type="text"
-                  value={bigo}
+                  value={memo}
                 ></textarea>
               </div>
             </div>
             <div className="cell status change">
-              <select value={status} onChange={e => handleInput(e, setStatus)}>
-                <option value="대여">대여</option>
-                <option value="지급">지급</option>
-                <option value="지급">재고</option>
+              <select onChange={e => handleInput(e, setStatus)}>
+                {usageType === "재고" ? (
+                  <option value="재고">재고</option>
+                ) : (
+                  <>
+                    <option value={usageType}>{usageType}</option>
+                    <option value={usageType === "대여" ? "지급" : "대여"}>
+                      {usageType === "대여" ? "지급" : "대여"}
+                    </option>
+                  </>
+                )}
               </select>
             </div>
             <div className="cell last" />
@@ -111,16 +144,23 @@ function ModifyItem(props) {
                 <button className="sure">정말로 삭제</button>
               </div>
             </div>
-            <button className="save">저장하기</button>
+            <button onClick={() => handlePatch()} className="save">
+              저장하기
+            </button>
           </div>
           <div className="history-title">지급/반납 히스토리</div>
           <div className="table-firstrow history-table">
             <div className="cell first">지급/ 대여 날짜</div>
+            <div className="cell">지급/대여</div>
             <div className="cell">반납날짜</div>
             <div className="cell">사용자</div>
             <div className="cell final">소속 셀</div>
           </div>
-          <HistoryRow />
+          {data &&
+            data.provisionHistory.map(el => {
+              return <HistoryRow info={el} />;
+            })}
+          {/* <HistoryRow /> */}
         </div>
       </div>
     </>

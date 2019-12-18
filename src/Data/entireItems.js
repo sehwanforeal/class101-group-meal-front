@@ -348,3 +348,60 @@ const entireItems = {
     }
   ]
 };
+
+const asd = {
+  status: "success",
+  message: {
+    provisionHistory: [
+      {
+        _id: "5df99a321cdd5a1efe0f19e1",
+        usageType: "대여",
+        givenDate: "2018-01-21T15:00:00.000Z",
+        returnDate: "2019-03-28T15:00:00.000Z",
+        memberId: {
+          _id: "5df99a04c26dcf1e3efaf88c",
+          nickName: "존",
+          cell: {
+            _id: "5df999ff48730c1df8376d98",
+            name: "EX 셀"
+          }
+        },
+        __v: 0
+      },
+      {
+        _id: "5df99a321cdd5a1efe0f19e0",
+        usageType: "지급",
+        givenDate: "2019-11-10T15:00:00.000Z",
+        memberId: {
+          _id: "5df99a04c26dcf1e3efaf866",
+          nickName: "큐",
+          cell: {
+            _id: "5df999ff48730c1df8376d98",
+            name: "EX 셀"
+          }
+        },
+        __v: 0
+      }
+    ],
+    owner: null,
+    acquiredDate: null,
+    tag: ["개발자용"],
+    isArchived: false,
+    usageType: "재고",
+    _id: "5df99a321cdd5a1efe0f1a02",
+    itemType: {
+      _id: "5df99a321cdd5a1efe0f19d1",
+      name: "아이맥"
+    },
+    model: {
+      _id: "5df99a321cdd5a1efe0f19d5",
+      name: "iMac A2115"
+    },
+    price: 190000,
+    memo: "this is memo",
+    uniqueNumber: 1,
+    __v: 0,
+    uniqueNumberForCilent: "00001",
+    id: "5df99a321cdd5a1efe0f1a02"
+  }
+};
