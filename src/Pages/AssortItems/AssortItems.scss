@@ -1,3 +1,100 @@
 .assort-body {
   padding-left: 300px;
+  .article {
+    margin: auto;
+    width: 90%;
+    .article-title {
+      padding-top: 60px;
+      font-size: 39px;
+      font-weight: 600;
+      color: rgb(65, 65, 65);
+      display: flex;
+      justify-content: space-between;
+    }
+    .buttons {
+      width: 25%;
+      display: flex;
+      justify-content: flex-end;
+      width: 31%;
+      button {
+        font-size: 10px;
+        border-radius: 5px;
+        background-color: rgb(219, 219, 219);
+        color: rgb(133, 133, 133);
+        padding: 0px 7px;
+        height: 25px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        &:hover {
+          background-color: rgb(138, 138, 138);
+          color: rgb(255, 255, 255);
+        }
+      }
+    }
+    .table-firstrow {
+      margin-top: 20px;
+      height: 34px;
+      // background-color: rgb(241, 241, 241);
+      display: flex;
+      justify-content: space-between;
+      width: 36%;
+
+      .cell {
+        border-right: 1px solid rgb(161, 161, 161);
+        border-bottom: 2px solid rgb(161, 161, 161);
+        border-top: 2px solid rgb(161, 161, 161);
+        width: 47%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        color: rgb(73, 73, 73);
+        font-weight: 600;
+        img {
+          width: 10px;
+          cursor: pointer;
+        }
+      }
+      .status {
+        border-right: none;
+      }
+      .last {
+        border: none;
+        width: 15%;
+        justify-content: flex-start;
+        align-items: center;
+      }
+      .second {
+        border-right: 0;
+      }
+    }
+    .normal-row {
+      margin-top: 0;
+      .cell {
+        border-top: 0;
+        border-bottom: 1px solid rgb(161, 161, 161);
+        font-weight: 500;
+        font-size: 11px;
+      }
+      .last {
+        border: none;
+        button {
+          margin-left: 10px;
+          font-size: 9px;
+          border-radius: 2px;
+          background-color: rgb(219, 219, 219);
+          color: rgb(133, 133, 133);
+          padding: 0px 6px;
+          height: 22px;
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          &:hover {
+            background-color: rgb(138, 138, 138);
+            color: rgb(255, 255, 255);
+          }
+        }
+      }
+    }
+  }
 }

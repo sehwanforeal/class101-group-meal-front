@@ -25,7 +25,6 @@ export class Nav extends Component {
 
   componentDidMount() {
     const nav = this.props.match.path.slice(1);
-    console.log(nav);
     this.setState({
       [nav]: true
     });
@@ -71,7 +70,7 @@ export class Nav extends Component {
       stockstatus,
       wasteditems
     } = this.state;
-    console.log(this.state.isOpened);
+
     return (
       <div className="navigation-bigger-wrapper">
         <div className="navigation-wrapper">
