@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { withRouter } from "react-router-dom";
 import Nav from "Components/Nav";
 import "./ModifyItem.scss";
 import FirstRow from "Pages/EntireItems/FirstRow";
@@ -16,7 +17,7 @@ function ModifyItem(props) {
 
   const info = props.location.state;
   const itemID = info.id;
-
+  console.log(info.isArchived);
   useEffect(() => {
     console.log("didMount");
     fetch(`http://10.0.6.233:3030/item/${itemID}`)
@@ -61,6 +62,44 @@ function ModifyItem(props) {
 
   const toggleSure = () => {
     setAreyousure(areyousure ? false : true);
+  };
+
+  const handleWaste = () => {
+    const body = {
+      item: { isArchived: true }
+    };
+    fetch(`http://10.0.6.233:3030/item/${itemID}`, {
+      method: "post",
+      body: JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.status === "success") {
+          props.history.push("/entireitems");
+        }
+      });
+  };
+
+  const handleUnWaste = () => {
+    const body = {
+      item: { isArchived: false }
+    };
+    fetch(`http://10.0.6.233:3030/item/${itemID}`, {
+      method: "post",
+      body: JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.status === "success") {
+          props.history.push("/entireitems");
+        }
+      });
   };
 
   return (
@@ -132,7 +171,16 @@ function ModifyItem(props) {
           </div>
           <div className="actions">
             <div className="action-left">
-              <button className="disposal">폐기하기</button>
+              {info.isArchived ? (
+                <button onClick={() => handleUnWaste()} className="disposal">
+                  복구하기
+                </button>
+              ) : (
+                <button onClick={() => handleWaste()} className="disposal">
+                  폐기하기
+                </button>
+              )}
+
               <button onClick={() => toggleSure()} className="delete">
                 삭제하기
               </button>
@@ -167,4 +215,4 @@ function ModifyItem(props) {
   );
 }
 
-export default ModifyItem;
+export default withRouter(ModifyItem);

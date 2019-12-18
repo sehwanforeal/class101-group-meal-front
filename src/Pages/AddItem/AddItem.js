@@ -6,10 +6,22 @@ function AddItem() {
   const [price, setPrice] = useState(null);
   const [tag, setTag] = useState(null);
   const [bigo, setBigo] = useState(null);
+  const [rowData, setRowData] = useState(null);
+
+  useEffect(() => {
+    fetch("http://10.0.4.225:3030/itemType")
+      .then(res => res.json())
+      .then(res => {
+        setRowData(res.itemTypes);
+      });
+  }, []);
 
   const handleInput = (e, t) => {
     t(e.target.value);
   };
+
+  const handleSelect = e => {};
+
   return (
     <>
       <Nav />
@@ -28,11 +40,10 @@ function AddItem() {
             <div className="cell first">
               <select>
                 <option value="">종류선택</option>
-                <option value="학생">맥북</option>
-                <option value="회사원">모니터</option>
-                <option value="기타">그램</option>
-                <option value="기타">아이맥</option>
-                <option value="기타">뭐야</option>
+                {rowData &&
+                  rowData.map(el => {
+                    return <option value={el.itemType}>{el.itemType}</option>;
+                  })}
               </select>
             </div>
             <div className="cell">
