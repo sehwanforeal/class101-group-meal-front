@@ -1,6 +1,8 @@
-@import "../../Styles/index.scss";
-$table-height: 45px;
-$font-weight-thin: 300;
+@import "styles/index.scss";
+
+.rental-body {
+  padding-left: 300px;
+}
 
 .modal {
   position: fixed;

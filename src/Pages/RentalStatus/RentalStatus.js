@@ -9,7 +9,7 @@ function RentalStatus(props) {
   const [selectedSpec, setSelectedSpec] = useState(null);
   const [selectedCsv, setSelectedCsv] = useState(null);
   const [selectedTalbe, setSelectedTable] = useState(null);
-  const [isModalOn, setIsModalOn] = useState(false);
+  const [isModelOn, setModal] = useState(false);
 
   useEffect(() => {
     fetch("http://10.0.6.233:3030/item")
@@ -23,13 +23,21 @@ function RentalStatus(props) {
       .then(res => setSelectedTable(res.message));
   };
 
+  const handleClick = () => {
+    setModal(!isModelOn);
+  };
+
   return (
     <div>
-      {isModalOn && (
+      <div className="rental-body" onClick={handleClick}>
+        RentalStatus
+      </div>
+      {isModelOn && (
         <Modal
-        // cells={cells}
-        // cancelModal={this.cancelModal}
-        // memberInfo={memberInfo}
+          onClick={handleClick}
+          givenDate={"19.10.01"}
+          memberName={"박!세환"}
+          itemId={"sample"}
         />
       )}
       <Nav />

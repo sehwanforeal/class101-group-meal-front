@@ -1,92 +1,88 @@
-import React, { Component } from "react";
+import React, { useState, createRef } from "react";
+import { renderDate, verifyDateString } from "utils";
 
-class Modal extends Component {
-  constructor(props) {
-    super();
+const defaultDate = renderDate(Date.now());
 
-    this.state = {};
-  }
+function Modal(props) {
+  const { onClick, givenDate, memberName, itemId } = props;
 
-  handleClickConfirm = () => {
-    fetch(`url`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: "mola"
-    })
-      .then(res => res.json())
-      .then(res => {
-        console.log(res);
-        if (res.message === "success") {
-          console.log(res);
-        }
-      });
+  const [isWrongDate, setWrongDate] = useState(false);
+  const [modalOff, setModal] = useState(false);
+  const [returnDateVal, setReturnDate] = useState(defaultDate);
+  const card = createRef();
+
+  const handleClickCancel = () => {
+    onClick();
   };
 
-  handleClickCancel = () => {
-    const { cancelModal } = this.props;
-
-    cancelModal();
+  const handleClickBg = e => {
+    e.target.contains(card.current) && onClick();
   };
 
-  handleClickBg = e => {
-    const { cancelModal } = this.props;
-    e.target.contains(this.card.current) && cancelModal();
+  const handleChange = e => {
+    const value = e.target.value;
+    setReturnDate(value);
+
+    if (!verifyDateString(value)) {
+      setWrongDate(true);
+    } else {
+      setWrongDate(false);
+    }
   };
 
-  render() {
-    const { nickName, enrolledIn, cell, isWrongCell, isWrongDate } = this.state;
+  const handleClickConfirm = async () => {
+    // isWrongDate 가 false 라면 반납 fetch
+    const data = { returnDate: returnDateVal };
+    const access_token = sessionStorage.getItem("access_token");
 
-    return (
-      <div className="modal">
-        <div
-          onClick={this.handleClickBg}
-          className="background"
-          ref={this.card}
-        >
-          <div className="card">
-            <span onClick={this.handleClickCancel} className="cancel"></span>
-            <div className="row">
-              <div className="key">닉네임</div>
-              <input
-                name="nickName"
-                onChange={this.handleChange}
-                value={nickName}
-                className="value"
-              />
-            </div>
-            <div className="row">
-              <div className="key">소속</div>
-              <input
-                name="cell"
-                onChange={this.handleChange}
-                value={cell}
-                className={isWrongCell ? "wrong" : "value"}
-              />
-            </div>
-            <div className="row">
-              <div className="key">입사일</div>
-              <input
-                name="enrolledIn"
-                onChange={this.handleChange}
-                value={enrolledIn}
-                className={isWrongDate ? "wrong" : "value"}
-              />
-            </div>
-            <div className="button-wrapper">
-              <button onClick={this.handleClickConfirm} className="change">
-                확인
-              </button>
-              <button onClick={this.handleClickDelete} className="delete">
-                삭제
-              </button>
-            </div>
+    if (!isWrongDate) {
+      const response = await fetch(`http://localhost:3030/provision${itemId}`, {
+        headers: {
+          "Content-Type": "application/json"
+          // Authorization: access_token
+        },
+        method: "POST",
+        body: JSON.stringify(data)
+      }).then(res => res.json());
+
+      response.status === "success" && onClick();
+    }
+  };
+
+  return (
+    <div className="modal">
+      <div onClick={handleClickBg} className="background" ref={card}>
+        <div className="card">
+          <span onClick={handleClickCancel} className="cancel"></span>
+          <div className="row">
+            <div className="key">사용자</div>
+            <input value={memberName} className="value" />
+          </div>
+          <div className="row">
+            <div className="key">지급일</div>
+            <input value={givenDate} className={"value"} />
+          </div>
+          <div className="row">
+            <div className="key">반납일</div>
+            <input
+              name="enrolledIn"
+              onChange={handleChange}
+              value={returnDateVal}
+              className={isWrongDate ? "wrong" : "value"}
+            />
+          </div>
+          <div className="button-wrapper">
+            <button onClick={handleClickConfirm} className="change">
+              반납
+            </button>
+            <button onClick={handleClickCancel} className="delete">
+              취소
+            </button>
           </div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default Modal;
