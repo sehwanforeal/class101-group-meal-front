@@ -2,20 +2,18 @@ import React, { useState, useEffect } from "react";
 import Nav from "Components/Nav";
 import "./AssortItems.scss";
 import Row from "./Row";
-import itemTypes from "Data/itemType";
 
 function AssortItems(props) {
   const [rowData, setRowData] = useState(null);
 
   useEffect(() => {
-    fetch("http://10.0.1.88:3030/itemType")
+    fetch("http://10.0.4.225:3030/itemType")
       .then(res => res.json())
       .then(res => {
         setRowData(res.itemTypes);
       });
   }, []);
   console.log(rowData);
-  console.log(itemTypes);
   return (
     <>
       <Nav />

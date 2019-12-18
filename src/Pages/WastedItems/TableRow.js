@@ -1,19 +1,29 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 
 function TableRow(props) {
+  const info = props.info;
   return (
     <div className="table-row">
-      <div className="cell">macbook-0009</div>
-      <div className="cell">맥북</div>
-      <div className="cell">mac-a341342</div>
-      <div className="cell">개발자용</div>
-      <div className="cell">{(2032300).toLocaleString()}원</div>
-      <div className="cell status">RAM : 16GB</div>
+      <div className="cell">
+        {info.itemType.name + "_" + info.uniqueNumberForCilent}
+      </div>
+      <div className="cell">{info.itemType.name}</div>
+      <div className="cell">{info.model.name}</div>
+      <div className="cell">{info.tag}</div>
+      <div className="cell">{info.price.toLocaleString()}원</div>
+      <div className="cell status">{info.memo}</div>
       <div className="cell last">
-        <button>수정</button>
+        <button
+          onClick={() => {
+            props.history.push("/modifyitem", info);
+          }}
+        >
+          수정
+        </button>
       </div>
     </div>
   );
 }
 
-export default TableRow;
+export default withRouter(TableRow);
