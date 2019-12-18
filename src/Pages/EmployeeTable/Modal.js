@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { renderDate } from "utils";
 import { url } from "config";
+
 class Modal extends Component {
   constructor(props) {
     super();

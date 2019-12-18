@@ -22,16 +22,7 @@ function FirstRow(props) {
           alt=""
         />
       </div>
-      <div className="cell">
-        {!props.sorting && <div />}
-        소속
-        <img className={props.sorting} src={sortingimg} alt="" />
-      </div>
-      <div className="cell">
-        {!props.sorting && <div />}
-        사용자
-        <img className={props.sorting} src={sortingimg} alt="" />
-      </div>
+
       <div className="cell">
         {!props.sorting && <div />}
         비품종류
@@ -92,16 +83,7 @@ function FirstRow(props) {
           alt=""
         />
       </div>
-      <div className="cell status">
-        {!props.sorting && <div />}
-        상태
-        <img
-          onClick={() => handleSorting("usageType")}
-          className={props.sorting}
-          src={sortingimg}
-          alt=""
-        />
-      </div>
+
       <div className="cell last"></div>
     </div>
   );

@@ -19,8 +19,6 @@ function Row(props) {
       <div className="cell">
         {info.itemType.name}_{info.uniqueNumberForCilent}
       </div>
-      <div className="cell"> </div>
-      <div className="cell">{info.owner}</div>
       <div className="cell">{info.itemType.name}</div>
       <div className="cell">{info.model.name}</div>
       <div className="cell">{convertDateToString(info.acquiredDate)}</div>
@@ -41,7 +39,6 @@ function Row(props) {
           {info.memo}
         </div>
       </div>
-      <div className="cell">{info.usageType}</div>
       <div className="cell last">
         <div
           onClick={() => {
