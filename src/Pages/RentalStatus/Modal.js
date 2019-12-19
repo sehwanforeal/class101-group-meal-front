@@ -11,6 +11,8 @@ function Modal(props) {
   const [returnDateVal, setReturnDate] = useState(defaultDate);
   const card = createRef();
 
+  console.log(itemId);
+
   const handleClickCancel = () => {
     onClick();
   };

@@ -10,6 +10,9 @@ function RentalStatus(props) {
   const [selectedCsv, setSelectedCsv] = useState(null);
   const [selectedTalbe, setSelectedTable] = useState(null);
   const [isModelOn, setModal] = useState(false);
+  const [id, setId] = useState(null);
+  const [owner, setOwner] = useState(null);
+  const [date, setDate] = useState(null);
 
   useEffect(() => {
     fetch("http://10.0.6.233:3030/item")
@@ -27,6 +30,11 @@ function RentalStatus(props) {
     setModal(!isModelOn);
   };
 
+  const handleReturn = id => {
+    setId(id);
+    handleClick();
+  };
+
   return (
     <div>
       <div className="rental-body" onClick={handleClick}>
@@ -35,9 +43,9 @@ function RentalStatus(props) {
       {isModelOn && (
         <Modal
           onClick={handleClick}
-          givenDate={"19.10.01"}
-          memberName={"박!세환"}
-          itemId={"sample"}
+          // givenDate={}
+          memberName={owner}
+          itemId={id}
         />
       )}
       <Nav />
@@ -50,7 +58,14 @@ function RentalStatus(props) {
             <FirstRow handleSorting={handleSorting} />
             {selectedTalbe &&
               selectedTalbe.map((el, idx) => {
-                return <Row info={el} idx={idx} spec={selectedSpec} />;
+                return (
+                  <Row
+                    info={el}
+                    idx={idx}
+                    spec={selectedSpec}
+                    handleReturn={handleReturn}
+                  />
+                );
               })}
           </div>
         </div>

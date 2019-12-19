@@ -20,21 +20,22 @@ function ModifyItem(props) {
   console.log(info.isArchived);
   useEffect(() => {
     console.log("didMount");
-    fetch(`http://10.0.6.233:3030/item/${itemID}`)
+    fetch(`http://10.0.7.163:3030/item/${itemID}`)
       .then(res => res.json())
       .then(res => setData(res.message));
   }, [itemID]);
+  console.log(data && data.provisionHistory);
 
   const handlePatch = () => {
     const body = {
       item: {
-        tag,
+        tags: [tag],
         price,
         memo,
         usageType
       }
     };
-    fetch(`http://10.0.6.233:3030/item/${itemID}`, {
+    fetch(`http://10.0.7.163:3030/item/${itemID}`, {
       method: "post",
       body: JSON.stringify(body),
       headers: {
@@ -48,6 +49,7 @@ function ModifyItem(props) {
         setPrice(price);
         setBigo(memo);
         setStatus(usageType);
+        alert("저장이 완료되었습니다.");
         console.log(res);
       });
   };
@@ -68,7 +70,7 @@ function ModifyItem(props) {
     const body = {
       item: { isArchived: true }
     };
-    fetch(`http://10.0.6.233:3030/item/${itemID}`, {
+    fetch(`http://10.0.7.163:3030/item/${itemID}`, {
       method: "post",
       body: JSON.stringify(body),
       headers: {
@@ -87,7 +89,7 @@ function ModifyItem(props) {
     const body = {
       item: { isArchived: false }
     };
-    fetch(`http://10.0.6.233:3030/item/${itemID}`, {
+    fetch(`http://10.0.7.163:3030/item/${itemID}`, {
       method: "post",
       body: JSON.stringify(body),
       headers: {
@@ -97,6 +99,22 @@ function ModifyItem(props) {
       .then(res => res.json())
       .then(res => {
         if (res.status === "success") {
+          props.history.push("/entireitems");
+        }
+      });
+  };
+
+  const handleDelete = () => {
+    fetch(`http://10.0.7.163:3030/item/${itemID}`, {
+      method: "delete",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.status === "success") {
+          console.log(res);
           props.history.push("/entireitems");
         }
       });
@@ -189,7 +207,9 @@ function ModifyItem(props) {
                 <button onClick={() => toggleSure()} className="cancle">
                   취소
                 </button>
-                <button className="sure">정말로 삭제</button>
+                <button onClick={() => handleDelete()} className="sure">
+                  정말로 삭제
+                </button>
               </div>
             </div>
             <button onClick={() => handlePatch()} className="save">

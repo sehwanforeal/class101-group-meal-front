@@ -16,10 +16,11 @@ function AddType(props) {
   //     .then(res => {
   //       setRowData(res.itemTypes);
   //     });
-  // }, []);
+  // }, []);10.0.7.163
+
   const sendHttp = () => {
     const data = { itemType: type, itemModel: model };
-    fetch("http://10.0.1.88:3030/itemType", {
+    fetch("http://10.0.7.163:3030/itemType", {
       method: "post",
       headers: {
         "Content-Type": "application/json"
