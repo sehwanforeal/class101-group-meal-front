@@ -3,7 +3,6 @@ import { withRouter } from "react-router-dom";
 
 function Row(props) {
   const info = props.info;
-
   return (
     <div className="table-row">
       <div className="cell">
@@ -40,13 +39,7 @@ function Row(props) {
         >
           수정
         </div>
-        <div
-        // onClick={() => {
-        //   props.history.push("/modifyitem", info);
-        // }}
-        >
-          반납
-        </div>
+        <div onClick={() => props.handleReturn(info.id)}>반납</div>
       </div>
     </div>
   );

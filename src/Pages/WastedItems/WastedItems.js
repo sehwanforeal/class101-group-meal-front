@@ -7,7 +7,7 @@ function WastedItems(props) {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    fetch("http://10.0.6.233:3030/item?isArchived=true")
+    fetch("http://10.0.7.163:3030/item?isArchived=true")
       .then(res => res.json())
       .then(res => setData(res.message));
   }, []);

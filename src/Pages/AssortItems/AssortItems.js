@@ -7,7 +7,7 @@ function AssortItems(props) {
   const [rowData, setRowData] = useState(null);
 
   useEffect(() => {
-    fetch("http://10.0.4.225:3030/itemType")
+    fetch("http://10.0.7.163:3030/itemType")
       .then(res => res.json())
       .then(res => {
         setRowData(res.itemTypes);

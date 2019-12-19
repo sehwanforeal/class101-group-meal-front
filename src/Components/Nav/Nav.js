@@ -76,7 +76,7 @@ export class Nav extends Component {
         <div className="navigation-wrapper">
           <Icon />
           <div className="navigation">
-            {/* <div className="open-asset-container">
+            <div className="open-asset-container">
               <div onClick={this.openAsset} className="asset-title">
                 비품관리
               </div>
@@ -117,7 +117,7 @@ export class Nav extends Component {
                   isActive={assortitems}
                 />
               </div>
-            </div> */}
+            </div>
             <NavTemplate
               text="점술판"
               onClick={() => {
