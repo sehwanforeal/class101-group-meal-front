@@ -15,7 +15,7 @@ function EntireItems(props) {
   };
 
   useEffect(() => {
-    fetch("http://10.0.6.233:3030/item")
+    fetch("http://10.0.7.163:3030/item")
       .then(res => res.json())
       .then(res => setSelectedTable(res.message));
   }, []);
@@ -25,7 +25,7 @@ function EntireItems(props) {
     const formData = new FormData();
     setIsLoading(true);
     formData.append("data", files[0]);
-    fetch("http://10.58.7.215:3030/csv", {
+    fetch("http://10.0.5.179:3030/csv", {
       method: "post",
       body: formData
     })
@@ -35,7 +35,7 @@ function EntireItems(props) {
   };
 
   const handleSorting = (target, ms) => {
-    fetch(`http://10.0.6.233:3030/item?sort=${target}`)
+    fetch(`http://10.0.7.163:3030/item?sort=${target}`)
       .then(res => res.json())
       .then(res => setSelectedTable(res.message));
   };
@@ -59,7 +59,7 @@ function EntireItems(props) {
               <div className="button">
                 <div
                   onClick={() => {
-                    fetch("http://10.58.7.215:3030/csv")
+                    fetch("http://10.0.5.179:3030/csv")
                       .then(resp => resp.blob())
                       .then(blob => {
                         const url = window.URL.createObjectURL(blob);

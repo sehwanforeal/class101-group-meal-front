@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from "react";
+import { withRouter } from "react-router-dom";
 import Nav from "Components/Nav";
 import "./AddItem.scss";
 
-function AddItem() {
+function AddItem(props) {
   const [price, setPrice] = useState(null);
   const [tag, setTag] = useState(null);
   const [bigo, setBigo] = useState(null);
-  const [rowData, setRowData] = useState(null);
+  const [option, setOption] = useState(null);
+  const [optionValueIdx, setOptionValueIdx] = useState(null);
+  const [optionValue, setOptionValue] = useState(null);
+  const [modelValue, setModelValue] = useState(null);
+  const [id, setId] = useState(null);
+  const [postId, setPostId] = useState(null);
 
   useEffect(() => {
-    fetch("http://10.0.4.225:3030/itemType")
+    fetch("http://10.0.7.163:3030/item/iteminfo")
       .then(res => res.json())
       .then(res => {
-        setRowData(res.itemTypes);
+        setOption(res.results);
       });
   }, []);
 
@@ -20,7 +26,55 @@ function AddItem() {
     t(e.target.value);
   };
 
-  const handleSelect = e => {};
+  const handleSelect = e => {
+    setOptionValueIdx(e.target.value);
+    e.target.value !== "default" &&
+      setOptionValue(option[e.target.value].itemType);
+    e.target.value !== "default" &&
+      setId(option[e.target.value].uniqueNumberForClient);
+    e.target.value !== "default" &&
+      setPostId(option[e.target.value].uniqueNumber);
+  };
+
+  const handleModel = e => {
+    setModelValue(e.target.value);
+  };
+
+  const handlePost = () => {
+    const data = {
+      item: {
+        itemType: optionValue,
+        model: modelValue,
+        uniqueNumber: postId,
+        price: price,
+        tags: [tag],
+        memo: bigo
+      }
+    };
+    fetch("http://10.0.7.163:3030/item", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(res => console.log(res));
+    // .then(res =>
+    //   res.status === "success"
+    //     ? props.history.push("/entireitems")
+    //     : alert(res)
+    // );
+  };
+
+  console.log(
+    "종류:" + optionValue,
+    "모델:" + modelValue,
+    "고유번호:" + postId,
+    "가격:" + price,
+    "태그:" + tag,
+    "비고:" + bigo
+  );
 
   return (
     <>
@@ -38,23 +92,37 @@ function AddItem() {
           </div>
           <div className="table-firstrow table-row">
             <div className="cell first">
-              <select>
-                <option value="">종류선택</option>
-                {rowData &&
-                  rowData.map(el => {
-                    return <option value={el.itemType}>{el.itemType}</option>;
+              <select value={optionValueIdx} onChange={e => handleSelect(e)}>
+                <option value={"default"}>종류선택</option>
+                {option &&
+                  option.map((el, idx) => {
+                    return (
+                      <option value={idx} name="sd">
+                        {el.itemType}
+                      </option>
+                    );
                   })}
               </select>
             </div>
             <div className="cell">
-              <select>
-                <option value="">모델명선택</option>
-                <option value="학생">MAC-343243</option>
-                <option value="회사원">MOC-A3146</option>
-                <option value="기타">MIC-S35234</option>
-              </select>
+              {optionValueIdx && optionValueIdx !== "default" && (
+                <select value={modelValue} onChange={e => handleModel(e)}>
+                  <option value="undefined">모델선택</option>
+                  {option[optionValueIdx].itemModels.map((el, idx) => {
+                    return (
+                      <option value={el.name} name="sd">
+                        {el.name}
+                      </option>
+                    );
+                  })}
+                </select>
+              )}
             </div>
-            <div className="cell id"></div>
+            <div className="cell id">
+              {optionValueIdx &&
+                optionValueIdx !== "default" &&
+                optionValue + "_" + id}
+            </div>
             <div className="cell price">
               <input
                 onChange={e => handleInput(e, setPrice)}
@@ -81,7 +149,7 @@ function AddItem() {
             </div>
           </div>
           <div className="actions">
-            <button>비품 추가</button>
+            <button onClick={() => handlePost()}>비품 추가</button>
           </div>
         </div>
       </div>
@@ -89,4 +157,4 @@ function AddItem() {
   );
 }
 
-export default AddItem;
+export default withRouter(AddItem);

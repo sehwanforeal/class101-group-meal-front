@@ -3,6 +3,7 @@ import Nav from "Components/Nav";
 import "./StockStatus.scss";
 import FirstRow from "./FirstRow";
 import Row from "./Row";
+import Modal from "./Modal";
 
 function StockStatus(props) {
   const [selectedSpec, setSelectedSpec] = useState(null);
@@ -22,11 +23,24 @@ function StockStatus(props) {
       .then(res => setSelectedTable(res.message));
   };
 
+  const handleModal = () => {
+    setIsModalOn(!isModalOn);
+  };
+
   return (
     <div>
       <Nav />
+      {isModalOn && (
+        <Modal
+          onClick={handleModal}
+          givenDate={"19.10.01"}
+          memberName={"박!세환"}
+          itemId={"sample"}
+        />
+      )}
       <div className="stock-body">
         <div className="article">
+          <div onClick={handleModal}>모달 버튼</div>
           <div className="article-title">
             <span>재고현황</span>
           </div>

@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 
 function Row(props) {
   const info = props.info;
-
+  console.log(info.tag);
   const convertDateToString = datetime => {
     const date = new Date(datetime);
     const year = String(date.getFullYear());
@@ -25,14 +25,15 @@ function Row(props) {
       <div className="cell">{info.model.name}</div>
       <div className="cell">{convertDateToString(info.acquiredDate)}</div>
       <div className="cell">
-        {info.tag.map((el, i) => {
-          return (
-            <span>
-              {i !== 0 && <span>,</span>}
-              {el}
-            </span>
-          );
-        })}
+        {info.tags &&
+          info.tags.map((el, i) => {
+            return (
+              <span>
+                {i !== 0 && <span>,</span>}
+                {el}
+              </span>
+            );
+          })}
       </div>
       <div className="cell">{info.price.toLocaleString()} 원</div>
       <div className="cell bigo">
