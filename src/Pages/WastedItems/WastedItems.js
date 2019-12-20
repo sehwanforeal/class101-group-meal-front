@@ -2,15 +2,21 @@ import React, { useEffect, useState } from "react";
 import Nav from "Components/Nav";
 import "./WastedItems.scss";
 import TableRow from "./TableRow";
+import { url_j, url } from "config";
 
 function WastedItems(props) {
   const [data, setData] = useState(null);
+  const token = sessionStorage.getItem("access_token");
+  const headers = {
+    "Content-Type": "application/json",
+    authorization: token
+  };
 
   useEffect(() => {
-    fetch("http://10.0.7.163:3030/item?isArchived=true")
+    fetch(url_j + "item?isArchived=true", { headers })
       .then(res => res.json())
       .then(res => setData(res.message));
-  }, []);
+  }, [headers]);
 
   console.log(data);
 
@@ -30,7 +36,7 @@ function WastedItems(props) {
             <div className="cell last"></div>
           </div>
           {data &&
-            data.map(el => {
+            data.items.map(el => {
               return <TableRow info={el} />;
             })}
         </div>

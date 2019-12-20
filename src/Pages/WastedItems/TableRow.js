@@ -6,11 +6,11 @@ function TableRow(props) {
   return (
     <div className="table-row">
       <div className="cell">
-        {info.itemType.name + "_" + info.uniqueNumberForCilent}
+        {info.itemType.name + "_" + info.uniqueNumberForClient}
       </div>
       <div className="cell">{info.itemType.name}</div>
       <div className="cell">{info.model.name}</div>
-      <div className="cell">{info.tag}</div>
+      <div className="cell">{info.tags}</div>
       <div className="cell">{info.price.toLocaleString()}원</div>
       <div className="cell status">{info.memo}</div>
       <div className="cell last">

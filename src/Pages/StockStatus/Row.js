@@ -1,29 +1,20 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import { convertDateToString } from "utils";
 
 function Row(props) {
   const info = props.info;
 
-  const convertDateToString = datetime => {
-    const date = new Date(datetime);
-    const year = String(date.getFullYear());
-    const month = String(date.getMonth() + 1);
-    const day = String(date.getDate());
-    return `${year.slice(2)}.${month.length === 1 ? "0" + month : month}.${
-      day.length === 1 ? "0" + day : day
-    }`;
-  };
-
   return (
     <div className="table-row">
       <div className="cell">
-        {info.itemType.name}_{info.uniqueNumberForCilent}
+        {info.itemType.name}_{info.uniqueNumberForClient}
       </div>
       <div className="cell">{info.itemType.name}</div>
       <div className="cell">{info.model.name}</div>
       <div className="cell">{convertDateToString(info.acquiredDate)}</div>
       <div className="cell">
-        {info.tag.map((el, i) => {
+        {info.tags.map((el, i) => {
           return (
             <span>
               {i !== 0 && <span>,</span>}
@@ -47,6 +38,7 @@ function Row(props) {
         >
           수정
         </div>
+        <div onClick={() => props.handleReturn(info.id)}>지급</div>
       </div>
     </div>
   );

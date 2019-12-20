@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import Nav from "Components/Nav";
 import "./AddItem.scss";
+import { url_j, url } from "config";
 
 function AddItem(props) {
   const [price, setPrice] = useState(null);
@@ -15,7 +16,11 @@ function AddItem(props) {
   const [postId, setPostId] = useState(null);
 
   useEffect(() => {
-    fetch("http://10.0.7.163:3030/item/iteminfo")
+    const token = sessionStorage.getItem("access_token");
+    const headers = {
+      authorization: token
+    };
+    fetch(url_j + "item/iteminfo", { headers })
       .then(res => res.json())
       .then(res => {
         setOption(res.results);
@@ -51,20 +56,22 @@ function AddItem(props) {
         memo: bigo
       }
     };
-    fetch("http://10.0.7.163:3030/item", {
+    const token = sessionStorage.getItem("access_token");
+    const headers = {
+      "Content-Type": "application/json",
+      authorization: token
+    };
+    fetch(url_j + "item", {
       method: "post",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers,
       body: JSON.stringify(data)
     })
       .then(res => res.json())
-      .then(res => console.log(res));
-    // .then(res =>
-    //   res.status === "success"
-    //     ? props.history.push("/entireitems")
-    //     : alert(res)
-    // );
+      .then(res =>
+        res.status === "success"
+          ? props.history.push("/entireitems")
+          : alert("정보가 올바르지 않습니다!")
+      );
   };
 
   console.log(
@@ -124,12 +131,7 @@ function AddItem(props) {
                 optionValue + "_" + id}
             </div>
             <div className="cell price">
-              <input
-                onChange={e => handleInput(e, setPrice)}
-                type="text"
-                value={price}
-              />
-              원
+              <input onChange={e => handleInput(e, setPrice)} value={price} />원
             </div>
             <div className="cell tag">
               <input

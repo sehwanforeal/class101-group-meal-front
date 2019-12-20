@@ -26,3 +26,16 @@ exports.verifyDateString = string => {
     return true;
   }
 };
+
+exports.convertDateToString = datetime => {
+  if (!datetime) {
+    return "";
+  }
+  const date = new Date(datetime);
+  const year = String(date.getFullYear());
+  const month = String(date.getMonth() + 1);
+  const day = String(date.getDate());
+  return `${year.slice(2)}.${month.length === 1 ? "0" + month : month}.${
+    day.length === 1 ? "0" + day : day
+  }`;
+};
