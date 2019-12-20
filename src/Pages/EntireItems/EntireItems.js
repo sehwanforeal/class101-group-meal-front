@@ -29,7 +29,8 @@ function EntireItems(props) {
     fetch(url_j + "item?isArchived=false&sort=" + target, { headers })
       .then(res => res.json())
       .then(res => setSelectedTable(res.message));
-  }, [target]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleUpload = e => {
     const files = e.target.files;
@@ -102,12 +103,12 @@ function EntireItems(props) {
               <div className="button">
                 <div
                   onClick={() => {
-                    const token = sessionStorage.getItem("access_token");
-                    const headers = {
-                      "Content-Type": "application/json",
-                      authorization: token
-                    };
-                    fetch(url_j + "csv", { headers })
+                    // const token = sessionStorage.getItem("access_token");
+                    // const headers = {
+                    //   "Content-Type": "application/json",
+                    //   authorization: token
+                    // };
+                    fetch(url_j + "csv")
                       .then(resp => resp.blob())
                       .then(blob => {
                         const url = window.URL.createObjectURL(blob);

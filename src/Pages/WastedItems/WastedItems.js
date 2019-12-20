@@ -16,7 +16,8 @@ function WastedItems(props) {
     fetch(url_j + "item?isArchived=true", { headers })
       .then(res => res.json())
       .then(res => setData(res.message));
-  }, [headers]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   console.log(data);
 

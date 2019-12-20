@@ -25,12 +25,7 @@ function FirstRow(props) {
       <div className="cell">
         {!props.sorting && <div />}
         소속
-        <img
-          onClick={() => handleSorting("cell")}
-          className={props.sorting}
-          src={sortingimg}
-          alt=""
-        />
+        <div />
       </div>
       <div className="cell">
         {!props.sorting && <div />}

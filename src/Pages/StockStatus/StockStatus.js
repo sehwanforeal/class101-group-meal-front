@@ -34,7 +34,8 @@ function StockStatus(props) {
     )
       .then(res => res.json())
       .then(res => setSelectedTable(res.message));
-  }, [currentPage, headers, target]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   console.log(selectedTable);
 
