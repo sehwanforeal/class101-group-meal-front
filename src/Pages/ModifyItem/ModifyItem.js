@@ -4,54 +4,77 @@ import Nav from "Components/Nav";
 import "./ModifyItem.scss";
 import FirstRow from "Pages/EntireItems/FirstRow";
 import HistoryRow from "./HistoryRow";
+import { url_j, url } from "config";
+import { convertDateToString, verifyDateString } from "utils";
 
 function ModifyItem(props) {
   const [data, setData] = useState(null);
   const [spec, setSpec] = useState(false);
-  const [acquiredDate, setDate] = useState(props.location.state.date);
-  const [tag, setTag] = useState(props.location.state.tag);
-  const [price, setPrice] = useState(props.location.state.price);
-  const [memo, setBigo] = useState(props.location.state.memo);
-  const [usageType, setStatus] = useState(props.location.state.usageType);
+  const [acquiredDate, setDate] = useState("");
+  const [tag, setTag] = useState("");
+  const [price, setPrice] = useState(null);
+  const [memo, setBigo] = useState(null);
+  const [usageType, setStatus] = useState(null);
   const [areyousure, setAreyousure] = useState(false);
+  const [isDateValid, setIsDateValid] = useState(true);
+
+  console.log(data);
 
   const info = props.location.state;
   const itemID = info.id;
   console.log(info.isArchived);
   useEffect(() => {
-    console.log("didMount");
-    fetch(`http://10.0.7.163:3030/item/${itemID}`)
+    const token = sessionStorage.getItem("access_token");
+    const headers = {
+      "Content-Type": "application/json",
+      authorization: token
+    };
+
+    fetch(url_j + "item/" + itemID, { headers })
       .then(res => res.json())
-      .then(res => setData(res.message));
+      .then(res => {
+        console.log(res);
+        setData(res.message);
+        setDate(convertDateToString(res.message.acquiredDate));
+        setPrice(res.message.price);
+        setTag(res.message.tags === null ? "" : res.message.tags);
+        setBigo(res.message.memo);
+        setStatus(res.message.usageType);
+      });
   }, [itemID]);
   console.log(data && data.provisionHistory);
 
   const handlePatch = () => {
-    const body = {
-      item: {
-        tags: [tag],
-        price,
-        memo,
-        usageType
-      }
-    };
-    fetch(`http://10.0.7.163:3030/item/${itemID}`, {
-      method: "post",
-      body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then(res => res.json())
-      .then(res => {
-        const { tag, price, memo, usageType } = res.message;
-        setTag(tag);
-        setPrice(price);
-        setBigo(memo);
-        setStatus(usageType);
-        alert("저장이 완료되었습니다.");
-        console.log(res);
-      });
+    if (isDateValid) {
+      const body = {
+        item: {
+          tags: tag,
+          price,
+          memo,
+          usageType
+        }
+      };
+      const token = sessionStorage.getItem("access_token");
+      const headers = {
+        "Content-Type": "application/json",
+        authorization: token
+      };
+      fetch(url_j + "item/" + itemID, {
+        method: "post",
+        body: JSON.stringify(body),
+        headers
+      })
+        .then(res => res.json())
+        .then(res => {
+          const { tag, price, memo, usageType } = res.message;
+          setTag(tag);
+          setPrice(price);
+          setBigo(memo);
+          setStatus(usageType);
+          alert("저장이 완료되었습니다.");
+          console.log(res);
+        });
+    }
   };
 
   const specHandle = b => {
@@ -60,6 +83,7 @@ function ModifyItem(props) {
 
   const handleInput = (e, t) => {
     t(e.target.value);
+    console.log(e.target.value);
   };
 
   const toggleSure = () => {
@@ -70,12 +94,15 @@ function ModifyItem(props) {
     const body = {
       item: { isArchived: true }
     };
-    fetch(`http://10.0.7.163:3030/item/${itemID}`, {
+    const token = sessionStorage.getItem("access_token");
+    const headers = {
+      "Content-Type": "application/json",
+      authorization: token
+    };
+    fetch(url_j + "item/" + itemID, {
       method: "post",
       body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json"
-      }
+      headers
     })
       .then(res => res.json())
       .then(res => {
@@ -89,12 +116,15 @@ function ModifyItem(props) {
     const body = {
       item: { isArchived: false }
     };
-    fetch(`http://10.0.7.163:3030/item/${itemID}`, {
+    const token = sessionStorage.getItem("access_token");
+    const headers = {
+      "Content-Type": "application/json",
+      authorization: token
+    };
+    fetch(url_j + "item/" + itemID, {
       method: "post",
       body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json"
-      }
+      headers
     })
       .then(res => res.json())
       .then(res => {
@@ -105,11 +135,14 @@ function ModifyItem(props) {
   };
 
   const handleDelete = () => {
-    fetch(`http://10.0.7.163:3030/item/${itemID}`, {
+    const token = sessionStorage.getItem("access_token");
+    const headers = {
+      "Content-Type": "application/json",
+      authorization: token
+    };
+    fetch(url_j + "item/" + itemID, {
       method: "delete",
-      headers: {
-        "Content-Type": "application/json"
-      }
+      headers
     })
       .then(res => res.json())
       .then(res => {
@@ -129,17 +162,18 @@ function ModifyItem(props) {
           <FirstRow sorting={"none"} />
           <div className="table-row">
             <div className="cell">
-              {info.itemType.name}_{info.uniqueNumberForCilent}
+              {info.itemType.name}_{info.uniqueNumberForClient}
             </div>
-            <div className="cell">없음</div>
-            <div className="cell">{info.owner}</div>
+            <div className="cell">{info.owner && info.owner.cell.name}</div>
+            <div className="cell">
+              {info.owner === null ? "" : info.owner.nickName}
+            </div>
             <div className="cell">{info.itemType.name}</div>
             <div className="cell">{info.model.name}</div>
-            <div className="cell change">
+            <div className="cell">
               <input
-                onChange={e => handleInput(e, setDate)}
                 type="text"
-                value={acquiredDate}
+                value={data && convertDateToString(data.acquiredDate)}
               ></input>
             </div>
             <div className="cell change">
@@ -172,7 +206,10 @@ function ModifyItem(props) {
               </div>
             </div>
             <div className="cell status change">
-              <select onChange={e => handleInput(e, setStatus)}>
+              <select
+                value={usageType}
+                onChange={e => handleInput(e, setStatus)}
+              >
                 {usageType === "재고" ? (
                   <option value="재고">재고</option>
                 ) : (
@@ -225,10 +262,9 @@ function ModifyItem(props) {
             <div className="cell final">소속 셀</div>
           </div>
           {data &&
-            data.provisionHistory.map(el => {
+            data.provisionHistories.map(el => {
               return <HistoryRow info={el} />;
             })}
-          {/* <HistoryRow /> */}
         </div>
       </div>
     </>

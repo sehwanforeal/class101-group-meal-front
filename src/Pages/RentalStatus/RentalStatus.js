@@ -4,30 +4,62 @@ import "./RentalStatus.scss";
 import FirstRow from "../EntireItems/FirstRow";
 import Row from "./Row";
 import Modal from "./Modal";
+import { url_j, url } from "config";
+import Pagination from "Components/Pagination";
 
 function RentalStatus(props) {
   const [selectedSpec, setSelectedSpec] = useState(null);
   const [selectedCsv, setSelectedCsv] = useState(null);
-  const [selectedTalbe, setSelectedTable] = useState(null);
+  const [selectedTable, setSelectedTable] = useState(null);
   const [isModelOn, setModal] = useState(false);
   const [id, setId] = useState(null);
   const [owner, setOwner] = useState(null);
   const [date, setDate] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [target, setTarget] = useState("itemType,uniqueNumber");
+  const token = sessionStorage.getItem("access_token");
+  const headers = {
+    "Content-Type": "application/json",
+    authorization: token
+  };
 
   useEffect(() => {
-    fetch("http://10.0.6.233:3030/item")
+    fetch(
+      url_j +
+        "item?isArchived=false&sort=" +
+        target +
+        "&page=" +
+        currentPage +
+        "&limit=100" +
+        `&usageType="지급"`,
+      { headers }
+    )
       .then(res => res.json())
       .then(res => setSelectedTable(res.message));
-  }, []);
+  }, [currentPage, headers, target]);
 
-  const handleSorting = target => {
-    fetch(`http://10.0.6.233:3030/item?sort=${target}`)
+  const handleSorting = (sortBy = target, pageNumber) => {
+    setTarget(sortBy);
+
+    fetch(
+      url_j +
+        "item?isArchived=false&sort=" +
+        sortBy +
+        "&page=" +
+        pageNumber +
+        "&limit=100" +
+        `&usageType="지급"`,
+      { headers }
+    )
       .then(res => res.json())
       .then(res => setSelectedTable(res.message));
   };
 
   const handleClick = () => {
     setModal(!isModelOn);
+    fetch(`${url_j}item?isArchived=false&usageType="지급"`, { headers })
+      .then(res => res.json())
+      .then(res => setSelectedTable(res.message));
   };
 
   const handleReturn = id => {
@@ -35,11 +67,17 @@ function RentalStatus(props) {
     handleClick();
   };
 
+  const changePage = pageNumber => {
+    pageNumber > 0 && setCurrentPage(pageNumber);
+
+    handleSorting(target, pageNumber);
+  };
+
   return (
     <div>
-      <div className="rental-body" onClick={handleClick}>
+      {/* <div className="rental-body" onClick={handleClick}>
         RentalStatus
-      </div>
+      </div> */}
       {isModelOn && (
         <Modal
           onClick={handleClick}
@@ -56,8 +94,8 @@ function RentalStatus(props) {
           </div>
           <div className="entire-table">
             <FirstRow handleSorting={handleSorting} />
-            {selectedTalbe &&
-              selectedTalbe.map((el, idx) => {
+            {selectedTable &&
+              selectedTable.items.map((el, idx) => {
                 return (
                   <Row
                     info={el}
@@ -68,6 +106,13 @@ function RentalStatus(props) {
                 );
               })}
           </div>
+          <Pagination
+            pageCount={
+              selectedTable && Math.ceil(selectedTable.itemTotalNum / 100)
+            }
+            currentPage={currentPage}
+            changePage={changePage}
+          />
         </div>
       </div>
     </div>

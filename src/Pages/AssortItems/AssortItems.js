@@ -2,12 +2,18 @@ import React, { useState, useEffect } from "react";
 import Nav from "Components/Nav";
 import "./AssortItems.scss";
 import Row from "./Row";
+import { url_j, url } from "config";
 
 function AssortItems(props) {
   const [rowData, setRowData] = useState(null);
 
   useEffect(() => {
-    fetch("http://10.0.7.163:3030/itemType")
+    const token = sessionStorage.getItem("access_token");
+    const headers = {
+      "Content-Type": "application/json",
+      authorization: token
+    };
+    fetch(url_j + "itemtype", { headers })
       .then(res => res.json())
       .then(res => {
         setRowData(res.itemTypes);

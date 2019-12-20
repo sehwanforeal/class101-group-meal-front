@@ -12,14 +12,18 @@ function HistoryRow(props) {
   };
 
   const info = props.info;
-
+  console.log(info);
   return (
     <div className="table-firstrow history-table history-row">
       <div className="cell first">{convertDateToString(info.givenDate)}</div>
       <div className="cell">{info.usageType}</div>
-      <div className="cell">{convertDateToString(info.returnDate)}</div>
+      <div className="cell">
+        {info.returnDate && convertDateToString(info.returnDate)}
+      </div>
       <div className="cell">{info.memberId.nickName}</div>
-      <div className="cell">{info.memberId.cell.name}</div>
+      <div className="cell">
+        {info.memberId.cell && info.memberId.cell.name}
+      </div>
     </div>
   );
 }

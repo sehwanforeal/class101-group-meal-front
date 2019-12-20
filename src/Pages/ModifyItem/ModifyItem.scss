@@ -97,7 +97,11 @@
       }
       .change {
         background-color: white;
+        .red-font {
+          color: red;
+        }
       }
+
       .bigo {
         position: relative;
         cursor: zoom-in;

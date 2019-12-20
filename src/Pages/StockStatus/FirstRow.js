@@ -57,7 +57,7 @@ function FirstRow(props) {
         {!props.sorting && <div />}
         태그
         <img
-          onClick={() => handleSorting("tag")}
+          onClick={() => handleSorting("tags")}
           className={props.sorting}
           src={sortingimg}
           alt=""

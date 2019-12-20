@@ -1,20 +1,24 @@
 import React from "react";
+import { convertDateToString } from "utils";
 import { withRouter } from "react-router-dom";
+import { url_j, url } from "config";
 
 function Row(props) {
   const info = props.info;
   return (
     <div className="table-row">
       <div className="cell">
-        {info.itemType.name}_{info.uniqueNumberForCilent}
+        {info.itemType.name}_{info.uniqueNumberForClient}
       </div>
-      <div className="cell"></div>
-      <div className="cell">{info.owner}</div>
+      <div className="cell">
+        {info.owner && info.owner.cell && info.owner.cell.name}
+      </div>
+      <div className="cell">{info.owner && info.owner.nickName}</div>
       <div className="cell">{info.itemType.name}</div>
       <div className="cell">{info.model.name}</div>
-      <div className="cell">{info.acquiredDate}</div>
+      <div className="cell">{convertDateToString(info.acquiredDate)}</div>
       <div className="cell">
-        {info.tag.map((el, i) => {
+        {info.tags.map((el, i) => {
           return (
             <span>
               {i !== 0 && <span>,</span>}
