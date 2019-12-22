@@ -36,7 +36,9 @@ function RentalStatus(props) {
     )
       .then(res => res.json())
       .then(res => setSelectedTable(res.message));
-  }, [currentPage, headers, target]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSorting = (sortBy = target, pageNumber) => {
     setTarget(sortBy);
