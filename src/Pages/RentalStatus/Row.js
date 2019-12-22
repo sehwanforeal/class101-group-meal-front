@@ -15,7 +15,7 @@ function Row(props) {
       </div>
       <div className="cell">{info.owner && info.owner.nickName}</div>
       <div className="cell">{info.itemType.name}</div>
-      <div className="cell">{info.model.name}</div>
+      <div className="cell">{info.model.name || ""}</div>
       <div className="cell">{convertDateToString(info.acquiredDate)}</div>
       <div className="cell">
         {info.tags.map((el, i) => {
