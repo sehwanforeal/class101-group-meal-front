@@ -24,7 +24,8 @@ function Modal(props) {
     fetch(url_j + "provision/" + id, { headers })
       .then(res => res.json())
       .then(res => setItemData(res.data));
-  }, [headers, itemId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [itemId]);
 
   console.log(itemData);
 

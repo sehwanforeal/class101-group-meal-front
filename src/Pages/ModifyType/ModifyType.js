@@ -41,14 +41,14 @@ function ModifyType(props) {
 
   const deleteHttp = theUrl => {
     fetch(theUrl, {
-      method: "DELETE",
-      headers
+      method: "DELETE"
+      // headers
     })
       .then(res => res.json())
       .then(res =>
         res.status === "success"
           ? props.history.push("/assortitems")
-          : console.log(res)
+          : alert("사용중인 비품 종류, 모델명입니다.")
       );
   };
 
