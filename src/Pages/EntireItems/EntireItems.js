@@ -20,7 +20,7 @@ function EntireItems(props) {
     setSelectedSpec(idx);
   };
 
-  useEffect(() => {
+  const getAllItems = () => {
     const token = sessionStorage.getItem("access_token");
     const headers = {
       "Content-Type": "application/json",
@@ -29,6 +29,10 @@ function EntireItems(props) {
     fetch(url_j + "item?isArchived=false&sort=" + target, { headers })
       .then(res => res.json())
       .then(res => setSelectedTable(res.message));
+  };
+
+  useEffect(() => {
+    getAllItems();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -39,7 +43,6 @@ function EntireItems(props) {
     formData.append("data", files[0]);
     const token = sessionStorage.getItem("access_token");
     const headers = {
-      "Content-Type": "application/json",
       authorization: token
     };
     fetch(url_j + "csv", {
@@ -50,7 +53,14 @@ function EntireItems(props) {
       .then(res => res.json())
       .then(res => {
         console.log(res);
-        res.status === "success" && setIsLoading(false);
+        if (res.status === "success") {
+          setIsLoading(false);
+          alert("csv파일이 업로드되었습니다.");
+          getAllItems();
+        } else {
+          alert("csv파일 업로드 실패");
+        }
+        // res.status === "success" && setIsLoading(false);
       });
   };
 

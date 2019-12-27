@@ -71,6 +71,10 @@
             width: 10px;
             cursor: pointer;
           }
+          &:nth-child(2)::after {
+            content: "";
+            width: 3px;
+          }
         }
         .last {
           border: none;

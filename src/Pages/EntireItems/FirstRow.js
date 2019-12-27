@@ -25,7 +25,6 @@ function FirstRow(props) {
       <div className="cell">
         {!props.sorting && <div />}
         소속
-        <div />
       </div>
       <div className="cell">
         {!props.sorting && <div />}

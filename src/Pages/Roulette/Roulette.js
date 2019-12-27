@@ -31,9 +31,9 @@ class Roulette extends Component {
 
   componentDidMount() {
     const access_token = sessionStorage.getItem("access_token");
-    if (access_token === null) {
-      this.props.history.push("/");
-    }
+    // if (access_token === null) {
+    //   this.props.history.push("/");
+    // }
     fetch(`${url}groupMeal/history`, {
       method: "get",
       headers: { authorization: access_token }
@@ -133,7 +133,7 @@ class Roulette extends Component {
       isDataCame,
       isLoading
     } = this.state;
-
+    console.log(historyData);
     return (
       <>
         <Nav />
@@ -149,12 +149,12 @@ class Roulette extends Component {
             <Title title={"현재 점술판"} />
 
             <div className="rl-groupcontainer">
-              {isDataCame ? (
+              {historyData.length !== 0 ? (
                 historyData[0].history.map((el, idx) => {
                   return <PreGroupBox info={el} index={idx} />;
                 })
               ) : (
-                <div>loading</div>
+                <div></div>
               )}
             </div>
           </div>
