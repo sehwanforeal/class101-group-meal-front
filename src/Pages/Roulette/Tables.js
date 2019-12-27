@@ -2,6 +2,7 @@ import React from "react";
 
 export default function Tables(props) {
   const { list } = props;
+  console.log(list);
 
   const renderTables = list => {
     return list.map((group, i) => {
@@ -18,7 +19,6 @@ export default function Tables(props) {
       return <div className="group">{members}</div>;
     });
   };
-  console.log(typeof []);
 
   return renderTables(list);
 }

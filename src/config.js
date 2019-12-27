@@ -16,6 +16,7 @@ exports.url = "https://ex-manager2.class101.net/";
 // " https://86ds5kfejd.execute-api.ap-northeast-2.amazonaws.com/prod/";
 
 // http -------------------
-exports.url = "https://ex-manager2.class101.net/"; // AWS
-exports.url_j = "http://10.58.4.118:3030/"; // 웅조
+// exports.url = "https://ex-manager2.class101.net/";
+exports.url = "http://10.58.3.0:3030/"; // AWS
+exports.url_j = "http://10.58.6.107:3030/"; // 웅조
 exports.url_q = "http://10.0.7.163:3030/"; // 새글

@@ -26,9 +26,9 @@ class EmployeeTable extends Component {
     const url = config.url + "member";
 
     const access_token = sessionStorage.getItem("access_token");
-    if (access_token === null) {
-      this.props.history.push("/");
-    }
+    // if (access_token === null) {
+    //   this.props.history.push("/");
+    // }
 
     const list = await fetch(url, {
       headers: {

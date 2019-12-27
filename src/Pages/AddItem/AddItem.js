@@ -23,6 +23,7 @@ function AddItem(props) {
     fetch(url_j + "item/iteminfo", { headers })
       .then(res => res.json())
       .then(res => {
+        console.log(res.results);
         setOption(res.results);
       });
   }, []);
@@ -33,12 +34,21 @@ function AddItem(props) {
 
   const handleSelect = e => {
     setOptionValueIdx(e.target.value);
+    // console.log(option[option.length - 1].formattedUniqueNumberFornewItemType);
     e.target.value !== "default" &&
       setOptionValue(option[e.target.value].itemType);
     e.target.value !== "default" &&
-      setId(option[e.target.value].uniqueNumberForClient);
+      setId(
+        option[e.target.value].uniqueNumberForClient !== undefined
+          ? option[e.target.value].uniqueNumberForClient
+          : option[option.length - 1].formattedUniqueNumberFornewItemType
+      );
     e.target.value !== "default" &&
-      setPostId(option[e.target.value].uniqueNumber);
+      setPostId(
+        option[e.target.value].uniqueNumber !== undefined
+          ? option[e.target.value].uniqueNumber
+          : option[option.length - 1].uniqueNumberFornewItemType
+      );
   };
 
   const handleModel = e => {
