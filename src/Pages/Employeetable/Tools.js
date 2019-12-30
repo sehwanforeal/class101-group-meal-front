@@ -42,7 +42,7 @@ class Tools extends Component {
     const { handleConfirm } = this.props;
     const { name, cell, enrolledIn } = this.state;
 
-    const date = new Date(enrolledIn);
+    const date = new Date(Date(enrolledIn)).toISOString(); //바꿔
 
     const memberData = {
       nickName: name,
@@ -95,7 +95,7 @@ class Tools extends Component {
                 name="enrolledIn"
                 onChange={this.handleChange}
                 value={enrolledIn}
-                placeholder="1999.01.01"
+                placeholder="99.01.01"
               />
             </div>
             <div className="button-wrapper">

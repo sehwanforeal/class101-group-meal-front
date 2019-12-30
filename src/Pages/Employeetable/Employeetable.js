@@ -79,7 +79,7 @@ class EmployeeTable extends Component {
     const { nickName, cell, enrolledIn } = memberData;
 
     if (nickName.length > 0 && cell.length > 0) {
-      return enrolledIn.toDateString() !== "Invalid Date";
+      return enrolledIn !== "Invalid Date";
     } else {
       return false;
     }
@@ -87,7 +87,7 @@ class EmployeeTable extends Component {
 
   handleConfirm = memberData => {
     const url = config.url + "member";
-
+    console.log(memberData);
     if (this.verifyNewMember(memberData)) {
       const data = JSON.stringify(memberData);
 
@@ -101,9 +101,18 @@ class EmployeeTable extends Component {
         },
         method: "POST",
         body: data
-      }).then(res => window.location.reload());
+      }).then(async res => {
+        console.log(await res.json());
+        if (res.status === 200) {
+          // this.fetchMembers();
+          // this.cancelModal();
+        } else {
+          alert("내용을 정확히 입력해주세요");
+        }
+      });
     }
   };
+  // 여기바꾸기 ㅁ너아ㅓㅁ나엄나ㅣ어ㅏㅣㅁ너아ㅣㅁㄴ어ㅣㅏㄴㅁ어ㅣㅏㅁ넝ㅁ
 
   render() {
     const { members, memberInfo, isModalOn, cells, createMember } = this.state;

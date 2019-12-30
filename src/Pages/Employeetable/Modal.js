@@ -88,12 +88,12 @@ class Modal extends Component {
     const value = e.target.value;
     this.setState({ [key]: value }, () => {
       const { cell, enrolledIn: datetime, cells } = this.state;
-      const enrolledIn = new Date(datetime);
-
+      const enrolledIn = datetime;
+      console.log(enrolledIn);
       let cellVerification = false;
       let dateVerification = false;
 
-      if (enrolledIn.toDateString() !== "Invalid Date") {
+      if (enrolledIn !== "Invalid Date") {
         dateVerification = true;
       } else {
         dateVerification = false;
