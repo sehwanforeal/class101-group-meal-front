@@ -49,6 +49,13 @@ function AssortItems(props) {
                 );
               });
             })}
+          {rowData &&
+            rowData.map(el => {
+              console.log(el);
+              if (el.itemModels.length === 0) {
+                return <Row itemType={el.itemType} typeID={el._id} />;
+              }
+            })}
           {/* {itemTypes.itemTypes.map(el1 => {
             return el1.itemModels.map(el2 => {
               return (
