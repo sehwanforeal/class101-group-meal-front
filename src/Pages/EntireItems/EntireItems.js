@@ -43,7 +43,7 @@ function EntireItems(props) {
     formData.append("data", files[0]);
     const token = sessionStorage.getItem("access_token");
     const headers = {
-      authorization: token
+      Authorization: token
     };
     fetch(url_j + "csv", {
       headers,
@@ -69,7 +69,7 @@ function EntireItems(props) {
     const token = sessionStorage.getItem("access_token");
     const headers = {
       "Content-Type": "application/json",
-      authorization: token
+      Authorization: token
     };
     fetch(
       url_j +

@@ -53,7 +53,7 @@ class Modal extends Component {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: access_token
+        authorization: access_token
       },
       body: data
     })
