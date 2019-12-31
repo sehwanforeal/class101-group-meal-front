@@ -10,6 +10,7 @@ exports.client_secret = "client_secret=781f7b365def4744355ff1d6a30d4fd1";
 // exports.client_id = "client_id=2877224790.859064433381";
 // exports.client_secret = "client_secret=a8a3140b7dd976601be6c52ffab797c2";
 // exports.url = "https://ex-manager2.class101.net/";
+// exports.url = "https://ex-manager.class101.net/v1/";
 
 //--------------------
 // "http://54.180.92.87:3030/";
@@ -17,7 +18,15 @@ exports.client_secret = "client_secret=781f7b365def4744355ff1d6a30d4fd1";
 
 // http -------------------
 // exports.url = "https://ex-manager2.class101.net/";
-exports.url = "https://ex-manager.class101.net/v1/"; // AWS
-exports.url_j = "https://ex-manager.class101.net/v1/"; // 웅조
-exports.url_q = "https://ex-manager.class101.net/v1/"; // 새글
+// exports.url = "https://ex-manager2.class101.net/"; // AWS
+// exports.url_j = "https://ex-manager2.class101.net/"; // 웅조
+// exports.url_q = "https://ex-manager2.class101.net/"; // 새글
+// exports.url_me = "http://localhost:3030/";
+
+exports.url = "https://ex-manager2.class101.net/"; // AWS
+exports.url_j = "https://ex-manager2.class101.net/"; // 웅조
+exports.url_q = "https://ex-manager2.class101.net/"; // 새글
 exports.url_me = "http://localhost:3030/";
+
+// 10.58.2.197//wj
+// 10.58.6.107//sg

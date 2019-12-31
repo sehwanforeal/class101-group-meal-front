@@ -88,21 +88,28 @@ class EmployeeTable extends Component {
   handleConfirm = memberData => {
     const url = config.url + "member";
 
-    if (this.verifyNewMember(memberData)) {
-      const data = JSON.stringify(memberData);
+    // if (this.verifyNewMember(memberData)) {
+    const data = JSON.stringify(memberData);
 
-      const access_token = sessionStorage.getItem("access_token");
-
-      fetch(url, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          authorization: access_token
-        },
-        method: "POST",
-        body: data
-      }).then(res => window.location.reload());
-    }
+    const access_token = sessionStorage.getItem("access_token");
+    console.log(data);
+    fetch(url, {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        authorization: access_token
+      },
+      method: "POST",
+      body: data
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.message === "Success") {
+          this.fetchMembers();
+          this.cancelModal();
+        }
+      });
+    // }
   };
 
   render() {
@@ -115,6 +122,7 @@ class EmployeeTable extends Component {
             cells={cells}
             cancelModal={this.cancelModal}
             memberInfo={memberInfo}
+            reFetch={this.fetchMembers}
           />
         )}
         {createMember && (

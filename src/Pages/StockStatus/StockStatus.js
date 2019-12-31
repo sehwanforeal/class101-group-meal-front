@@ -58,9 +58,7 @@ function StockStatus(props) {
 
   const handleModal = () => {
     setIsModalOn(!isModalOn);
-    fetch(`${url_j}item?isArchived=false&usageType="재고"`, { headers })
-      .then(res => res.json())
-      .then(res => setSelectedTable(res.message));
+    handleSorting();
   };
 
   const handleReturn = id => {

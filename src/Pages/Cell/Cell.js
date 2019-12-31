@@ -98,7 +98,16 @@ class Cell extends Component {
         authorization: access_token
       },
       body: JSON.stringify({ name: inputVal })
-    }).then(res => window.location.reload());
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.message === "success") {
+          this.fetchCells();
+          this.cancelModal();
+        } else {
+          alert("잠시 후에 다시 시도해주세요");
+        }
+      });
   };
 
   deleteCell = () => {
@@ -112,7 +121,16 @@ class Cell extends Component {
       headers: {
         authorization: access_token
       }
-    }).then(res => window.location.reload());
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.message === "success") {
+          this.fetchCells();
+          this.cancelModal();
+        } else {
+          alert("잠시 후에 다시 시도해주세요");
+        }
+      });
   };
 
   handleClickTool = () => {
@@ -132,7 +150,16 @@ class Cell extends Component {
         authorization: access_token
       },
       body: JSON.stringify({ name: inputVal })
-    }).then(res => window.location.reload());
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.message === "success") {
+          this.fetchCells();
+          this.cancelModal();
+        } else {
+          alert("잠시 후에 다시 시도해주세요");
+        }
+      });
   };
 
   render() {

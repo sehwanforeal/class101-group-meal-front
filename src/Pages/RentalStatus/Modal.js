@@ -19,7 +19,6 @@ function Modal(props) {
   };
 
   useEffect(() => {
-    console.log("mount");
     const id = itemId;
     fetch(url_j + "provision/" + id, { headers })
       .then(res => res.json())

@@ -59,14 +59,12 @@ function RentalStatus(props) {
 
   const handleClick = () => {
     setModal(!isModelOn);
-    fetch(`${url_j}item?isArchived=false&usageType="지급"`, { headers })
-      .then(res => res.json())
-      .then(res => setSelectedTable(res.message));
+    handleSorting();
   };
 
   const handleReturn = id => {
     setId(id);
-    handleClick();
+    setModal(!isModelOn);
   };
 
   const changePage = pageNumber => {

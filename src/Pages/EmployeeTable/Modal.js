@@ -43,27 +43,31 @@ class Modal extends Component {
       isWrongDate
     } = this.state;
 
-    const enrolledIn = new Date(datetime);
+    const enrolledIn = this.convertStringToISOString(datetime);
+    if (enrolledIn !== "!DATETIME") {
+      const data = JSON.stringify({ nickName, cell, enrolledIn });
 
-    const data = JSON.stringify({ nickName, cell, enrolledIn });
-
-    const access_token = sessionStorage.getItem("access_token");
-
-    fetch(`${url}member/${_id}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: access_token
-      },
-      body: data
-    })
-      .then(res => res.json())
-      .then(res => {
-        console.log(res);
-        if (res.message === "success") {
-          window.location.reload();
-        }
-      });
+      const access_token = sessionStorage.getItem("access_token");
+      console.log(enrolledIn);
+      fetch(`${url}member/${_id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: access_token
+        },
+        body: data
+      })
+        .then(res => res.json())
+        .then(res => {
+          console.log(res);
+          if (res.message === "success") {
+            this.props.cancelModal();
+            this.props.reFetch();
+          }
+        });
+    } else {
+      alert("날짜를 정확히 입력해주세요");
+    }
   };
 
   handleClickDelete = () => {
@@ -74,7 +78,16 @@ class Modal extends Component {
     fetch(`${url}member/${_id}`, {
       method: "DELETE",
       headers: { authorization: access_token }
-    }).then(res => window.location.reload());
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.message === "success") {
+          this.props.cancelModal();
+          this.props.reFetch();
+        } else {
+          alert("잠시 후에 다시 시도해주세요");
+        }
+      });
   };
 
   handleClickCancel = () => {
@@ -83,17 +96,32 @@ class Modal extends Component {
     cancelModal();
   };
 
+  isValidDate = d => {
+    return d instanceof Date && !isNaN(d);
+  };
+
+  convertStringToISOString = string => {
+    const dateString = "20" + string;
+    const datetime = new Date(dateString);
+
+    if (!this.isValidDate(datetime)) {
+      return "!DATETIME";
+    } else {
+      return datetime.toISOString();
+    }
+  };
+
   handleChange = e => {
     const key = e.target.name;
     const value = e.target.value;
     this.setState({ [key]: value }, () => {
       const { cell, enrolledIn: datetime, cells } = this.state;
-      const enrolledIn = new Date(datetime);
+      const enrolledIn = this.convertStringToISOString(datetime);
 
-      let cellVerification = false;
-      let dateVerification = false;
+      let cellVerification = true;
+      let dateVerification = true;
 
-      if (enrolledIn.toDateString() !== "Invalid Date") {
+      if (enrolledIn !== "!DATETIME") {
         dateVerification = true;
       } else {
         dateVerification = false;
