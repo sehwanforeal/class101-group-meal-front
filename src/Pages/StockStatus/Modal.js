@@ -1,5 +1,6 @@
 import React, { useState, createRef } from "react";
 import { renderDate, verifyDateString } from "utils";
+import { url_j, url } from "config";
 
 const defaultDate = renderDate(Date.now());
 
@@ -11,6 +12,12 @@ function Modal(props) {
   const [givenDate, setGivenDate] = useState(defaultDate);
   const [memberName, setMemberName] = useState("");
   const card = createRef();
+
+  const token = sessionStorage.getItem("access_token");
+  const headers = {
+    "Content-Type": "application/json",
+    authorization: token
+  };
 
   const handleClickCancel = () => {
     onClick();
@@ -35,17 +42,26 @@ function Modal(props) {
     // isWrongDate 가 false 라면 반납 fetch
     const usageType = e.target.textContent;
     const data = { givenDate, memberName, usageType };
-    const access_token = sessionStorage.getItem("access_token");
 
     if (!isWrongDate) {
-      const response = await fetch(`http://localhost:3030/provision${itemId}`, {
-        headers: {
-          "Content-Type": "application/json"
-          // Authorization: access_token
-        },
+      const response = await fetch(`${url_j}provision/${itemId}`, {
+        headers,
         method: "POST",
         body: JSON.stringify(data)
-      }).then(res => res.json());
+      })
+        .then(res => res.json())
+        .then(res => {
+          console.log(res);
+          // res.status === "success"
+          //   ? onClick()
+          //   : alert("이름이 올바르지 않습니다");
+
+          if (res.status === "success") {
+            onClick();
+          } else {
+            alert("이름이 올바르지 않습니다");
+          }
+        });
 
       // response의 메시지에 따라 결과를 다르게 해야함. 예를 들어 존재하지 않는 사용자 이름일 경우, 사용자 이름을 확인하세요 같은 메시지를 띄워야 함.
       // response.status === "success" && onClick();

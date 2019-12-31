@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import Nav from "Components/Nav";
 import "./ModifyType.scss";
+import { url_j, url } from "config";
 
 function ModifyType(props) {
   const [type, setType] = useState(props.location.state.typename);
@@ -9,6 +10,11 @@ function ModifyType(props) {
   const [warning, setWarning] = useState(false);
 
   const { itemid, typeid } = props.location.state;
+  const token = sessionStorage.getItem("access_token");
+  const headers = {
+    "Content-Type": "application/json",
+    authorization: token
+  };
 
   const handleInput = (e, t) => {
     t(e.target.value);
@@ -20,30 +26,29 @@ function ModifyType(props) {
 
   const modifyHttp = () => {
     const data = { itemType: type, itemModel: model };
-    fetch(`http://10.0.1.88:3030/itemType/${typeid}?modelId=${itemid}`, {
+    fetch(url_j + `itemtype/${typeid}?modelId=${itemid}`, {
       method: "post",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers,
       body: JSON.stringify(data)
     })
       .then(res => res.json())
       .then(res =>
         res.status === "success"
           ? props.history.push("/assortitems")
-          : alert(res)
+          : alert("중복된 모델명입니다.")
       );
   };
 
-  const deleteHttp = url => {
-    fetch(url, {
-      method: "DELETE"
+  const deleteHttp = theUrl => {
+    fetch(theUrl, {
+      method: "DELETE",
+      headers
     })
       .then(res => res.json())
       .then(res =>
         res.status === "success"
           ? props.history.push("/assortitems")
-          : console.log(res)
+          : alert("사용중인 비품 종류, 모델명입니다.")
       );
   };
 
@@ -90,9 +95,7 @@ function ModifyType(props) {
                   취소
                 </button>
                 <button
-                  onClick={() =>
-                    deleteHttp(`http://10.0.1.88:3030/itemType/${typeid}`)
-                  }
+                  onClick={() => deleteHttp(url_j + `itemtype/${typeid}`)}
                   className="button redbtn"
                 >
                   삭제
@@ -101,9 +104,7 @@ function ModifyType(props) {
             </div>
             <button
               onClick={() =>
-                deleteHttp(
-                  `http://10.0.1.88:3030/itemType/${typeid}?modelId=${itemid}`
-                )
+                deleteHttp(url_j + `itemtype/${typeid}?modelId=${itemid}`)
               }
               className="button redbtn lessred"
             >

@@ -1,17 +1,32 @@
-import React, { useState, createRef } from "react";
-import { renderDate, verifyDateString } from "utils";
+import React, { useState, createRef, useEffect } from "react";
+import { renderDate, verifyDateString, convertDateToString } from "utils";
+import { url_j, url } from "config";
 
 const defaultDate = renderDate(Date.now());
 
 function Modal(props) {
   const { onClick, givenDate, memberName, itemId } = props;
-
   const [isWrongDate, setWrongDate] = useState(false);
   const [modalOff, setModal] = useState(false);
   const [returnDateVal, setReturnDate] = useState(defaultDate);
+  const [itemData, setItemData] = useState(null);
   const card = createRef();
 
-  console.log(itemId);
+  const token = sessionStorage.getItem("access_token");
+  const headers = {
+    "Content-Type": "application/json",
+    authorization: token
+  };
+
+  useEffect(() => {
+    const id = itemId;
+    fetch(url_j + "provision/" + id, { headers })
+      .then(res => res.json())
+      .then(res => setItemData(res.data));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [itemId]);
+
+  console.log(itemData);
 
   const handleClickCancel = () => {
     onClick();
@@ -35,19 +50,17 @@ function Modal(props) {
   const handleClickConfirm = async () => {
     // isWrongDate 가 false 라면 반납 fetch
     const data = { returnDate: returnDateVal };
-    const access_token = sessionStorage.getItem("access_token");
 
     if (!isWrongDate) {
-      const response = await fetch(`http://localhost:3030/provision${itemId}`, {
-        headers: {
-          "Content-Type": "application/json"
-          // Authorization: access_token
-        },
+      const response = await fetch(`${url_j}provision/${itemId}`, {
+        headers,
         method: "POST",
         body: JSON.stringify(data)
-      }).then(res => res.json());
-
-      response.status === "success" && onClick();
+      })
+        .then(res => res.json())
+        .then(res => {
+          res.status === "success" && onClick();
+        });
     }
   };
 
@@ -58,11 +71,14 @@ function Modal(props) {
           <span onClick={handleClickCancel} className="cancel"></span>
           <div className="row">
             <div className="key">사용자</div>
-            <input value={memberName} className="value" />
+            <input value={itemData && itemData.owner} className="value" />
           </div>
           <div className="row">
             <div className="key">지급일</div>
-            <input value={givenDate} className={"value"} />
+            <input
+              value={itemData && convertDateToString(itemData.givenDate)}
+              className={"value"}
+            />
           </div>
           <div className="row">
             <div className="key">반납일</div>

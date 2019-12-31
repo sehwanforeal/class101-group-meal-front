@@ -38,19 +38,38 @@ class Tools extends Component {
     cancelModal();
   };
 
+  isValidDate = d => {
+    return d instanceof Date && !isNaN(d);
+  };
+
+  convertStringToISOString = string => {
+    const dateString = "20" + string;
+    const datetime = new Date(dateString);
+
+    if (!this.isValidDate(datetime)) {
+      return "!DATETIME";
+    } else {
+      return datetime.toISOString();
+    }
+  };
+
   handleConfirm = () => {
     const { handleConfirm } = this.props;
     const { name, cell, enrolledIn } = this.state;
 
-    const date = new Date(enrolledIn);
+    const date = this.convertStringToISOString(enrolledIn);
 
-    const memberData = {
-      nickName: name,
-      cell,
-      enrolledIn: date
-    };
+    if (date !== "!DATETIME") {
+      const memberData = {
+        nickName: name,
+        cell,
+        enrolledIn: date
+      };
 
-    handleConfirm(memberData);
+      handleConfirm(memberData);
+    } else {
+      alert("날짜를 올바르게 적어주세요");
+    }
   };
 
   handleSelect = e => {

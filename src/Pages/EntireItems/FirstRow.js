@@ -25,12 +25,16 @@ function FirstRow(props) {
       <div className="cell">
         {!props.sorting && <div />}
         소속
-        <img className={props.sorting} src={sortingimg} alt="" />
       </div>
       <div className="cell">
         {!props.sorting && <div />}
         사용자
-        <img className={props.sorting} src={sortingimg} alt="" />
+        <img
+          onClick={() => handleSorting("owner")}
+          className={props.sorting}
+          src={sortingimg}
+          alt=""
+        />
       </div>
       <div className="cell">
         {!props.sorting && <div />}
@@ -66,7 +70,7 @@ function FirstRow(props) {
         {!props.sorting && <div />}
         태그
         <img
-          onClick={() => handleSorting("tag")}
+          onClick={() => handleSorting("tags")}
           className={props.sorting}
           src={sortingimg}
           alt=""

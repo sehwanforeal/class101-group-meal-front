@@ -1,0 +1,13 @@
+.pagination {
+  width: 40%;
+  display: flex;
+  margin: auto;
+  justify-content: space-between;
+  cursor: pointer;
+  margin-top: 20px;
+  font-weight: 500;
+  font-size: 15px;
+  .bold {
+    color: red;
+  }
+}

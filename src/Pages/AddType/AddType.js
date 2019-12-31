@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { url_j, url } from "config";
 import Nav from "Components/Nav";
 import "./AddType.scss";
 
@@ -10,28 +11,23 @@ function AddType(props) {
     t(e.target.value);
   };
 
-  // useEffect(() => {
-  //   fetch("http://10.0.1.88:3030/itemType")
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       setRowData(res.itemTypes);
-  //     });
-  // }, []);10.0.7.163
-
   const sendHttp = () => {
     const data = { itemType: type, itemModel: model };
-    fetch("http://10.0.7.163:3030/itemType", {
+    const token = sessionStorage.getItem("access_token");
+    const headers = {
+      "Content-Type": "application/json",
+      authorization: token
+    };
+    fetch(url_j + "itemtype", {
       method: "post",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers,
       body: JSON.stringify(data)
     })
       .then(res => res.json())
       .then(res =>
         res.status === "success"
           ? props.history.push("/assortitems")
-          : alert(res)
+          : alert("중복된 모델명입니다.")
       );
   };
 
