@@ -41,8 +41,8 @@ function ModifyType(props) {
 
   const deleteHttp = theUrl => {
     fetch(theUrl, {
-      method: "DELETE"
-      // headers
+      method: "DELETE",
+      headers
     })
       .then(res => res.json())
       .then(res =>
