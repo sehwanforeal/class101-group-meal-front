@@ -23,9 +23,9 @@ exports.client_secret = "client_secret=781f7b365def4744355ff1d6a30d4fd1";
 // exports.url_q = "https://ex-manager2.class101.net/"; // 새글
 // exports.url_me = "http://localhost:3030/";
 
-exports.url = "https://ex-manager2.class101.net/"; // AWS
-exports.url_j = "https://ex-manager2.class101.net/"; // 웅조
-exports.url_q = "https://ex-manager2.class101.net/"; // 새글
+exports.url = "http://10.58.5.167:3030/"; // AWS
+exports.url_j = "http://10.58.5.167:3030/"; // 웅조
+exports.url_q = "http://10.58.5.167:3030/"; // 새글
 exports.url_me = "http://localhost:3030/";
 
 // 10.58.2.197//wj
