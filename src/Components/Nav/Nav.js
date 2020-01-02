@@ -140,13 +140,13 @@ export class Nav extends Component {
               }}
               isActive={cell}
             />
-            <NavTemplate
+            {/* <NavTemplate
               text="관리자"
               onClick={() => {
                 this.handleNav("admin");
               }}
               isActive={admin}
-            />
+            /> */}
           </div>
         </div>
       </div>
