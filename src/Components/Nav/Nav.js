@@ -25,7 +25,6 @@ export class Nav extends Component {
 
   componentDidMount() {
     const nav = this.props.match.path.slice(1);
-    console.log(nav);
     this.setState({
       [nav]: true
     });
@@ -71,13 +70,13 @@ export class Nav extends Component {
       stockstatus,
       wasteditems
     } = this.state;
-    console.log(this.state.isOpened);
+
     return (
       <div className="navigation-bigger-wrapper">
         <div className="navigation-wrapper">
           <Icon />
           <div className="navigation">
-            {/* <div className="open-asset-container">
+            <div className="open-asset-container">
               <div onClick={this.openAsset} className="asset-title">
                 비품관리
               </div>
@@ -118,7 +117,7 @@ export class Nav extends Component {
                   isActive={assortitems}
                 />
               </div>
-            </div> */}
+            </div>
             <NavTemplate
               text="점술판"
               onClick={() => {
@@ -133,13 +132,7 @@ export class Nav extends Component {
               }}
               isActive={employees}
             />
-            <NavTemplate
-              text="관리자"
-              onClick={() => {
-                this.handleNav("admin");
-              }}
-              isActive={admin}
-            />
+
             <NavTemplate
               text="셀 관리"
               onClick={() => {
@@ -147,6 +140,13 @@ export class Nav extends Component {
               }}
               isActive={cell}
             />
+            {/* <NavTemplate
+              text="관리자"
+              onClick={() => {
+                this.handleNav("admin");
+              }}
+              isActive={admin}
+            /> */}
           </div>
         </div>
       </div>

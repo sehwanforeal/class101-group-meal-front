@@ -5,11 +5,6 @@ import axios from "axios";
 import { url, client_id, client_secret } from "config";
 
 export class Signin extends Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-
   getQueryString = url => {
     const startIndex = url.indexOf("=") + 1;
     const endIndex = url.indexOf("&");
@@ -22,6 +17,7 @@ export class Signin extends Component {
 
   componentDidMount() {
     this.fetchAuth();
+    console.log("didmount");
   }
 
   fetchAuth = async () => {
@@ -29,11 +25,12 @@ export class Signin extends Component {
     const response =
       code &&
       (await axios(`${url}slack?code=${code}&${client_id}&${client_secret}`));
-
     const access_token = response && response.data.access_token;
     if (access_token !== null) {
       sessionStorage.setItem("access_token", access_token);
       this.props.history.push("/roulette");
+    } else {
+      console.log(code, response);
     }
   };
 
