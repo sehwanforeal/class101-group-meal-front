@@ -5,9 +5,6 @@ import Nav from "Components/Nav";
 import PreGroupBox from "Components/PreGroupBox";
 import "./Roulette.scss";
 import { client_id, client_secret, url } from "config";
-// import roulettemock from "Data/roulettemock.js";
-// import roulettemock2 from "Data/roulettemock2.js";
-// import roulettegif from "Img/roulette.gif";
 
 class Roulette extends Component {
   constructor() {
@@ -31,9 +28,9 @@ class Roulette extends Component {
 
   componentDidMount() {
     const access_token = sessionStorage.getItem("access_token");
-    if (access_token === null) {
-      this.props.history.push("/");
-    }
+    // if (access_token === null) {
+    //   this.props.history.push("/");
+    // }
     fetch(`${url}groupMeal/history`, {
       method: "get",
       headers: { authorization: access_token }
@@ -80,49 +77,10 @@ class Roulette extends Component {
         alert("점술판이 반영되었습니다");
         this.setState({
           isClicked: false
-          // historyData: this.state.rouletteMock
         });
         window.location.reload();
       });
-
-    // const {
-    //   isAvailable,
-    //   isOverlapped,
-    //   rouletteMock,
-    //   OverlappedName,
-    //   unAvailableName
-    // } = this.state;
-
-    // if (isAvailable && !isOverlapped) {
-    //   this.setState({
-    //     isClicked: false,
-    //     previousData: rouletteMock
-    //   });
-    // } else if (isOverlapped) {
-    //   alert("(" + OverlappedName + ")가 중복되었습니다!!");
-    // } else {
-    //   alert("(" + unAvailableName + ")는 없는 이름입니다!!");
-    // }
   };
-
-  // identifierMethod = (e, i, j) => {
-  //   const { rouletteMock, rouletteMockList } = this.state;
-
-  //   const value = e.target.value;
-  //   const rouletteMockArr = rouletteMock.slice();
-  //   const rl = rouletteMockList.slice();
-
-  //   rouletteMockArr[i][j] = value;
-
-  //   this.setState({ rouletteMock: rouletteMockArr });
-
-  //   rl.indexOf(value) === -1
-  //     ? this.setState({
-  //         isAvailable: false,
-  //         unAvailableName: value
-  //       })
-  //     : this.setState({ isAvailable: true });
-  // };
 
   render() {
     const {
@@ -133,7 +91,7 @@ class Roulette extends Component {
       isDataCame,
       isLoading
     } = this.state;
-
+    console.log(historyData);
     return (
       <>
         <Nav />
@@ -149,12 +107,12 @@ class Roulette extends Component {
             <Title title={"현재 점술판"} />
 
             <div className="rl-groupcontainer">
-              {isDataCame ? (
+              {historyData.length !== 0 ? (
                 historyData[0].history.map((el, idx) => {
                   return <PreGroupBox info={el} index={idx} />;
                 })
               ) : (
-                <div>loading</div>
+                <div></div>
               )}
             </div>
           </div>

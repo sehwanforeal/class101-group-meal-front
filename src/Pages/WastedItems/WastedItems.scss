@@ -1,3 +1,91 @@
 .wasted-body {
   padding-left: 300px;
+  .article {
+    margin: auto;
+    width: 90%;
+    .article-title {
+      padding-top: 60px;
+      font-size: 35px;
+      font-weight: 600;
+      color: rgb(65, 65, 65);
+      display: flex;
+      justify-content: space-between;
+    }
+    .table-firstrow {
+      margin-top: 30px;
+      height: 34px;
+      // background-color: rgb(241, 241, 241);
+      display: flex;
+      justify-content: space-between;
+      width: 90%;
+
+      .cell {
+        border-right: 1px solid rgb(161, 161, 161);
+        border-bottom: 2px solid rgb(161, 161, 161);
+        border-top: 2px solid rgb(161, 161, 161);
+        width: 16%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        color: rgb(73, 73, 73);
+        img {
+          width: 10px;
+          cursor: pointer;
+        }
+      }
+      .status {
+        border-right: none;
+      }
+      .last {
+        border: none;
+        width: 11%;
+        justify-content: flex-start;
+        align-items: center;
+      }
+    }
+    .table-row {
+      height: 34px;
+      // background-color: rgb(241, 241, 241);
+      display: flex;
+      justify-content: space-between;
+      width: 90%;
+
+      .cell {
+        border-right: 1px solid rgb(172, 172, 172);
+        border-bottom: 1px solid rgb(172, 172, 172);
+        font-size: 12px;
+        width: 16%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        color: rgb(73, 73, 73);
+        img {
+          width: 10px;
+          cursor: pointer;
+        }
+      }
+      .status {
+        border-right: none;
+      }
+      .last {
+        border: none;
+        width: 11%;
+        justify-content: flex-start;
+        align-items: center;
+        button {
+          margin-left: 16px;
+          background-color: rgb(170, 170, 170);
+          padding: 5px 7px;
+          font-weight: 600;
+          border-radius: 5px;
+          color: rgb(82, 82, 82);
+          cursor: pointer;
+          &:hover {
+            background-color: rgb(138, 138, 138);
+            color: rgb(255, 255, 255);
+          }
+        }
+      }
+    }
+  }
 }
