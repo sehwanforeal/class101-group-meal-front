@@ -13,24 +13,14 @@ class Roulette extends Component {
       isClicked: false,
       rouletteMock: [],
       historyData: [],
-      history2: [
-        [2, 3],
-        [4, 5]
-      ],
-      isAvailable: true,
-      unAvailableName: "",
-      isOverlapped: false,
-      OverlappedName: "",
       isDataCame: false,
-      isLoading: false
+      isLoading: false,
+      driverHistory: []
     };
   }
 
   componentDidMount() {
     const access_token = sessionStorage.getItem("access_token");
-    // if (access_token === null) {
-    //   this.props.history.push("/");
-    // }
     fetch(`${url}groupMeal/history`, {
       method: "get",
       headers: { authorization: access_token }
@@ -39,7 +29,12 @@ class Roulette extends Component {
         return res.json();
       })
       .then(res => {
-        this.setState({ historyData: res, isDataCame: true, isLoading: false });
+        this.setState({
+          historyData: res,
+          isDataCame: true,
+          isLoading: false,
+          driverHistory: res[0].history.map(el => el.group[3].nickName)
+        });
       });
   }
 
@@ -55,6 +50,7 @@ class Roulette extends Component {
       })
       .then(res => {
         this.setState({ isClicked: true, rouletteMock: res, isLoading: false });
+        console.log(res.map(el => el[1]));
       });
   };
 
@@ -87,11 +83,10 @@ class Roulette extends Component {
       rouletteMock,
       isClicked,
       historyData,
-      history2,
-      isDataCame,
-      isLoading
+      isLoading,
+      driverHistory
     } = this.state;
-    console.log(historyData);
+    driverHistory && console.log(driverHistory);
     return (
       <>
         <Nav />
@@ -116,6 +111,7 @@ class Roulette extends Component {
               )}
             </div>
           </div>
+          {}
         </div>
       </>
     );

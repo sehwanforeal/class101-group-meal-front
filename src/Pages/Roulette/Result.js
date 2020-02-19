@@ -10,10 +10,6 @@ export default function Result(props) {
     onClick();
   };
 
-  // const isLoading = () => {
-  //   if()
-  // };
-
   const renderByClick = isClicked => {
     if (isLoading) {
       return (

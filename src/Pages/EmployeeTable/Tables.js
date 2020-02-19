@@ -9,7 +9,7 @@ function Tables(props) {
 
   return (
     <>
-      {listData.map(data => {
+      {listData.map((data, idx) => {
         return (
           <span
             key={data._id}
@@ -18,7 +18,7 @@ function Tables(props) {
             }}
             className="table"
           >
-            {data.nickName}
+            {idx + 1 + ".    " + data.nickName}
           </span>
         );
       })}
