@@ -2,7 +2,6 @@ import React from "react";
 
 export default function Tables(props) {
   const { list } = props;
-  console.log(list);
 
   const renderTables = list => {
     return list.map((group, i) => {

@@ -15,6 +15,7 @@ import AddItem from "Pages/AddItem";
 import ModifyItem from "Pages/ModifyItem";
 import AddType from "Pages/AddType";
 import ModifyType from "Pages/ModifyType";
+import Test from "Pages/Test";
 
 class Routes extends React.Component {
   render() {
@@ -35,6 +36,7 @@ class Routes extends React.Component {
           <Route exact path="/modifyitem" component={ModifyItem} />
           <Route exact path="/addtype" component={AddType} />
           <Route exact path="/modifytype" component={ModifyType} />
+          <Route exact path="/test" component={Test} />
         </Switch>
       </Router>
     );
