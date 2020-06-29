@@ -1,20 +1,23 @@
-### 점술판 요구사항
+## Overview
+클래스101 EX팀 어드민 대시보드 개발
+- 개발 기간 : 19.11.25 ~ 19.12.20
+- Team : 백엔드 개발자(이새글, 유웅조), 프론트엔드 개발자(박세환)
 
-1. 점술판은 2주에 1번씩 최신화 한다.
-2. 신규 입사자는 처음 2주동안 기관사에서 제외한다.
-3. 저번 점술판 기관사였던 사람은 이번주 기관사에서 제외한다.
-4. 지금까지 진행된 점술판 히스토리는 무시하고 새로 히스토리를 쌓는다.
-5. 점술판 기존의 로직을 참고하여 새로 로직을 만든다.
-6. 이번에 새로 만든 로직부터 점술조 히스토리를 쌓고 이를 반영하여 다음 새로운 점술조를 생성한다.
-7. 셀이 바뀌는 경우는 고려하지 않는다.
-8. 신규 개발자는 1달동안 Dev Chapter에 넣는다.
-9. 신규 입사자가 들어왔을 경우 웹 대시보드에서 명단에 추가하고 이를 반영하여 점술조를 생성한다.
-10. 퇴사자는 웹 대시보드에서 전체 직원 명단에서 뺼 수 있도록 구성한다.
-11. 특정 사람에 대한 상세 정보 업데이트 할 수 있도록 구성한다. (ex)셀변경)
+## Features
+- 클래스101 사내 친목조 생성 기능 구현
+- 클래스101 사내 셀 C.R.U.D 구현
+- 클래스101 사내 구성원 C.R.U.D 구현
+- 슬랙 소셜 로그인 구현 
+- JWT를 사용한 인증, 인가 기능 구현
+- 사내 비품(노트북, 모니터 등) 관리 기능 구현
+- AWS를 통한 클라우드 서버 구축(EC2, DocumentDB)
 
-### 점술판 구현방법
+## Ex-admin API 문서
+https://github.com/saegeullee/groupmeal/wiki/API-Documentation
 
-1. 존, 알렉스가 사용할 수 있는 웹 대시보드 구축
-2. 슬랙 로그인 api로 인증, 인가
-3. 대시보드에서 점술판 생성 및 업데이트 할 수 있도록 구축
-4. 기술 스택 (react, nodejs, mongodb), 배포환경 aws ec2, amazon documentDB
+## Full video
+[![Watch full video](https://img.youtube.com/vi/mdrhlrZpZHo/maxresdefault.jpg)](https://www.youtube.com/watch?v=mdrhlrZpZHo)
+
+
+## Ex-admin ERD
+![Ex-admin ERD](https://github.com/saegeullee/groupmeal/blob/master/ex-admin-erd.png)
